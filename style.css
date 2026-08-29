@@ -795,7 +795,6 @@ video {
 
 .business-video {
     position: absolute;
-
     inset: 0;
 
     width: 100%;
@@ -811,25 +810,64 @@ video {
 
     pointer-events: none;
 
+    transform: scale(1);
+
     transition:
-        opacity 0.4s ease,
+        opacity 0.35s ease,
         transform 0.7s ease;
 }
 
 
-/* Desktop hover */
+/* Desktop:
+   video appears when hovering */
 
 .business-card:hover .business-video {
     opacity: 1;
-
     transform: scale(1.04);
 }
 
 
-/* Hide thumbnail while video is playing */
+/* Thumbnail disappears on hover */
 
 .business-card:hover .business-thumbnail {
     opacity: 0;
+}
+
+
+/* Mobile:
+   video appears after tapping */
+
+.business-card.video-playing .business-video {
+    opacity: 1;
+    transform: scale(1.02);
+}
+
+.business-card.video-playing .business-thumbnail {
+    opacity: 0;
+}
+
+
+/* Keep video hidden on touch devices
+   until user taps */
+
+@media (max-width: 700px) {
+
+    .business-card:hover .business-video {
+        opacity: 0;
+    }
+
+    .business-card:hover .business-thumbnail {
+        opacity: 1;
+    }
+
+    .business-card.video-playing .business-video {
+        opacity: 1;
+    }
+
+    .business-card.video-playing .business-thumbnail {
+        opacity: 0;
+    }
+
 }
 
 
@@ -928,25 +966,9 @@ video {
     opacity: 0;
 }
 
-
-/* =========================================================
-   BUSINESS VIDEO PLAYING — MOBILE
-========================================================= */
-
-.business-card.video-playing .business-video {
-    opacity: 1;
-
-    transform: scale(1.02);
-}
-
-.business-card.video-playing .business-thumbnail {
-    opacity: 0;
-}
-
 .business-card.video-playing .business-play {
     opacity: 0;
 }
-
 
 /* =========================================================
    CONTACT
