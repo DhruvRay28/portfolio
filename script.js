@@ -98,6 +98,42 @@ if (
 
 
 // ========================================
+// VIDEO HELPER
+// Stop every other portfolio video
+// ========================================
+
+function stopOtherVideos(currentVideo) {
+
+    document
+        .querySelectorAll(
+            ".business-video, .wedding-video"
+        )
+        .forEach((video) => {
+
+            if (video === currentVideo) return;
+
+            video.pause();
+
+            video.currentTime = 0;
+
+            const card = video.closest(
+                ".business-card, .reel-card"
+            );
+
+            if (card) {
+
+                card.classList.remove(
+                    "video-playing"
+                );
+
+            }
+
+        });
+
+}
+
+
+// ========================================
 // BUSINESS VIDEO
 // DESKTOP HOVER + MOBILE TAP
 // ========================================
@@ -112,7 +148,6 @@ businessCards.forEach((card) => {
         ".business-video"
     );
 
-    // Ignore cards without a video
     if (!video) return;
 
 
@@ -124,16 +159,15 @@ businessCards.forEach((card) => {
 
         if (window.innerWidth <= 700) return;
 
+        stopOtherVideos(video);
+
         video.currentTime = 0;
 
         const playPromise = video.play();
 
         if (playPromise !== undefined) {
 
-            playPromise.catch(() => {
-                // Browser prevented playback.
-                // Nothing else needed.
-            });
+            playPromise.catch(() => {});
 
         }
 
@@ -164,7 +198,13 @@ businessCards.forEach((card) => {
         if (window.innerWidth > 700) return;
 
 
+        // ------------------------------------
+        // START VIDEO
+        // ------------------------------------
+
         if (video.paused) {
+
+            stopOtherVideos(video);
 
             video.currentTime = 0;
 
@@ -184,7 +224,134 @@ businessCards.forEach((card) => {
 
                 });
 
-        } else {
+        }
+
+
+        // ------------------------------------
+        // STOP VIDEO
+        // ------------------------------------
+
+        else {
+
+            video.pause();
+
+            video.currentTime = 0;
+
+            card.classList.remove(
+                "video-playing"
+            );
+
+        }
+
+    });
+
+});
+
+
+// ========================================
+// WEDDING VIDEO
+// DESKTOP HOVER + MOBILE TAP
+// ========================================
+
+const weddingCards = document.querySelectorAll(
+    ".reel-card"
+);
+
+weddingCards.forEach((card) => {
+
+    const video = card.querySelector(
+        ".wedding-video"
+    );
+
+    if (!video) return;
+
+
+    // ----------------------------------------
+    // DESKTOP — MOUSE ENTER
+    // ----------------------------------------
+
+    card.addEventListener("mouseenter", () => {
+
+        if (window.innerWidth <= 700) return;
+
+        stopOtherVideos(video);
+
+        video.currentTime = 0;
+
+        const playPromise = video.play();
+
+        if (playPromise !== undefined) {
+
+            playPromise.catch(() => {});
+
+        }
+
+    });
+
+
+    // ----------------------------------------
+    // DESKTOP — MOUSE LEAVE
+    // ----------------------------------------
+
+    card.addEventListener("mouseleave", () => {
+
+        if (window.innerWidth <= 700) return;
+
+        video.pause();
+
+        video.currentTime = 0;
+
+    });
+
+
+    // ----------------------------------------
+    // MOBILE — TAP
+    // ----------------------------------------
+
+    card.addEventListener("click", (event) => {
+
+        if (window.innerWidth > 700) return;
+
+
+        // Prevent the Instagram link
+        // from opening on mobile
+        event.preventDefault();
+
+
+        // ------------------------------------
+        // START VIDEO
+        // ------------------------------------
+
+        if (video.paused) {
+
+            stopOtherVideos(video);
+
+            video.currentTime = 0;
+
+            video.play()
+                .then(() => {
+
+                    card.classList.add(
+                        "video-playing"
+                    );
+
+                })
+                .catch(() => {
+
+                    card.classList.remove(
+                        "video-playing"
+                    );
+
+                });
+
+        }
+
+
+        // ------------------------------------
+        // STOP VIDEO
+        // ------------------------------------
+
+        else {
 
             video.pause();
 

@@ -469,6 +469,95 @@ video {
     opacity: 1;
 }
 
+/* =========================================================
+   WEDDING VIDEO
+========================================================= */
+
+.wedding-thumbnail {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    z-index: 0;
+
+    transition:
+        transform 0.7s ease,
+        opacity 0.4s ease;
+}
+
+
+/* Wedding video */
+
+.wedding-video {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+
+    opacity: 0;
+
+    z-index: 1;
+
+    pointer-events: none;
+
+    transform: scale(1);
+
+    transition:
+        opacity 0.35s ease,
+        transform 0.7s ease;
+}
+
+
+/* Desktop hover */
+
+.reel-card:hover .wedding-video {
+    opacity: 1;
+
+    transform: scale(1.04);
+}
+
+
+/* Hide thumbnail on hover */
+
+.reel-card:hover .wedding-thumbnail {
+    opacity: 0;
+}
+
+
+/* Mobile */
+
+@media (max-width: 700px) {
+
+    .reel-card:hover .wedding-video {
+        opacity: 0;
+    }
+
+    .reel-card:hover .wedding-thumbnail {
+        opacity: 1;
+    }
+
+    .reel-card.video-playing .wedding-video {
+        opacity: 1;
+        transform: scale(1.02);
+    }
+
+    .reel-card.video-playing .wedding-thumbnail {
+        opacity: 0;
+    }
+
+}
+
 
 /* Wedding backgrounds */
 
