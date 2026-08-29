@@ -1,9 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&display=swap');
 
 
-/* =========================
+/* =========================================================
    RESET
-========================= */
+========================================================= */
 
 * {
     margin: 0;
@@ -19,6 +19,7 @@ body {
     background: #0b0b0b;
     color: #f5f1eb;
     font-family: "DM Sans", sans-serif;
+    overflow-x: hidden;
 }
 
 a {
@@ -26,15 +27,16 @@ a {
     text-decoration: none;
 }
 
-img {
+img,
+video {
     max-width: 100%;
     display: block;
 }
 
 
-/* =========================
+/* =========================================================
    VARIABLES
-========================= */
+========================================================= */
 
 :root {
     --background: #0b0b0b;
@@ -45,9 +47,9 @@ img {
 }
 
 
-/* =========================
+/* =========================================================
    NAVIGATION
-========================= */
+========================================================= */
 
 .navbar {
     position: absolute;
@@ -62,31 +64,39 @@ img {
     align-items: center;
     justify-content: space-between;
 
-    z-index: 10;
+    z-index: 20;
 }
 
 .logo {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+
     text-decoration: none;
 }
 
 .logo strong {
     color: #fff;
+
     font-size: 26px;
     font-weight: 600;
+
     letter-spacing: 3px;
     line-height: 1;
+
     white-space: nowrap;
 }
 
 .logo span {
     color: var(--gold);
+
     font-size: 9px;
     font-weight: 400;
+
     letter-spacing: 1.8px;
+
     margin-top: 7px;
+
     white-space: nowrap;
 }
 
@@ -103,13 +113,54 @@ img {
 }
 
 .navbar nav a:hover {
-    color: white;
+    color: #fff;
 }
 
 
-/* =========================
+/* =========================================================
    HERO
-========================= */
+========================================================= */
+
+.hero {
+    min-height: 100vh;
+
+    padding: 150px 5% 80px;
+
+    display: flex;
+    align-items: center;
+
+    position: relative;
+
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at 70% 40%,
+            rgba(120, 95, 65, 0.18),
+            transparent 35%
+        ),
+        #0b0b0b;
+}
+
+.hero-content {
+    max-width: 1100px;
+
+    position: relative;
+    z-index: 2;
+
+    opacity: 0;
+    transform: translateY(15px);
+
+    transition:
+        opacity 0.6s ease,
+        transform 0.6s ease;
+}
+
+.hero-content.hero-loaded {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 .hero-image {
     position: absolute;
 
@@ -141,8 +192,6 @@ img {
         contrast(1.05)
         brightness(0.8);
 
-    display: block;
-
     transform: scale(1.03);
 
     transition: transform 1.2s ease;
@@ -156,7 +205,6 @@ img {
     content: "";
 
     position: absolute;
-
     inset: 0;
 
     background:
@@ -172,37 +220,9 @@ img {
         );
 }
 
-.hero {
-    min-height: 100vh;
-
-    padding: 150px 5% 80px;
-
-    display: flex;
-    align-items: center;
-
-    position: relative;
-
-    overflow: hidden;
-
-    background:
-        radial-gradient(
-            circle at 70% 40%,
-            rgba(120, 95, 65, 0.18),
-            transparent 35%
-        ),
-        #0b0b0b;
-}
-
-.hero-content {
-    max-width: 1100px;
-
-    position: relative;
-
-    z-index: 2;
-}
-
 .eyebrow {
     font-size: 11px;
+
     letter-spacing: 3px;
 
     color: var(--gold);
@@ -280,18 +300,17 @@ img {
 
     letter-spacing: 1px;
 
-    transition: color 0.3s;
+    transition: color 0.3s ease;
 }
 
 .text-link:hover {
-    color: white;
+    color: #fff;
 }
 
 .scroll-indicator {
     position: absolute;
 
     bottom: 30px;
-
     right: 5%;
 
     font-size: 10px;
@@ -302,9 +321,9 @@ img {
 }
 
 
-/* =========================
+/* =========================================================
    GENERAL SECTIONS
-========================= */
+========================================================= */
 
 .section {
     padding: 140px 5%;
@@ -314,7 +333,6 @@ img {
     display: flex;
 
     justify-content: space-between;
-
     align-items: flex-end;
 
     margin-bottom: 80px;
@@ -359,9 +377,9 @@ img {
 }
 
 
-/* =========================
-   WORK
-========================= */
+/* =========================================================
+   WEDDING WORK
+========================================================= */
 
 .work {
     border-top: 1px solid var(--line);
@@ -425,8 +443,6 @@ img {
 
     object-fit: cover;
 
-    display: block;
-
     transition: transform 0.7s ease;
 }
 
@@ -454,7 +470,7 @@ img {
 }
 
 
-/* Placeholder wedding backgrounds */
+/* Wedding backgrounds */
 
 .wedding-one {
     background:
@@ -484,14 +500,14 @@ img {
 }
 
 
-/* Play button */
+/* Wedding play button */
 
 .play-button {
     position: absolute;
 
     top: 50%;
     left: 50%;
-    
+
     z-index: 3;
 
     transform: translate(-50%, -50%);
@@ -527,14 +543,13 @@ img {
         scale(1.12);
 
     box-shadow:
-        0 0 0 8px rgba(255, 255, 255, 0.08);
+        0 0 0 8px rgba(255,255,255,0.08);
 }
 
 .reel-info {
     display: flex;
 
     justify-content: space-between;
-
     align-items: center;
 
     padding-top: 20px;
@@ -569,9 +584,9 @@ img {
 }
 
 
-/* =========================
+/* =========================================================
    ABOUT
-========================= */
+========================================================= */
 
 .about {
     border-top: 1px solid var(--line);
@@ -600,8 +615,6 @@ img {
     height: 100%;
 
     object-fit: cover;
-
-    display: block;
 }
 
 .photo-placeholder {
@@ -643,9 +656,9 @@ img {
 }
 
 
-/* =========================
+/* =========================================================
    SERVICES
-========================= */
+========================================================= */
 
 .services {
     border-top: 1px solid var(--line);
@@ -698,9 +711,9 @@ img {
 }
 
 
-/* =========================
+/* =========================================================
    BUSINESS
-========================= */
+========================================================= */
 
 .business {
     border-top: 1px solid var(--line);
@@ -714,28 +727,35 @@ img {
     gap: 15px;
 }
 
+
+/* Business card */
+
 .business-card {
+    position: relative;
+
     aspect-ratio: 4 / 5;
+
+    overflow: hidden;
 
     display: flex;
 
-    align-items: center;
-    justify-content: center;
+    align-items: flex-end;
+    justify-content: flex-start;
 
-    background:
-        linear-gradient(
-            145deg,
-            #403b35,
-            #141313
-        );
+    padding: 25px;
 
-    color: #777;
+    background: #171615;
+
+    color: white;
 
     font-size: 10px;
 
     letter-spacing: 2px;
 
-    transition: transform 0.4s ease;
+    cursor: pointer;
+
+    transition:
+        transform 0.4s ease;
 }
 
 .business-card:hover {
@@ -743,9 +763,194 @@ img {
 }
 
 
-/* =========================
+/* =========================================================
+   BUSINESS THUMBNAIL
+========================================================= */
+
+.business-thumbnail {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    z-index: 0;
+
+    transition:
+        transform 0.7s ease,
+        opacity 0.4s ease;
+}
+
+.business-card:hover .business-thumbnail {
+    transform: scale(1.06);
+}
+
+
+/* =========================================================
+   BUSINESS VIDEO
+========================================================= */
+
+.business-video {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+
+    opacity: 0;
+
+    z-index: 1;
+
+    pointer-events: none;
+
+    transition:
+        opacity 0.4s ease,
+        transform 0.7s ease;
+}
+
+
+/* Desktop hover */
+
+.business-card:hover .business-video {
+    opacity: 1;
+
+    transform: scale(1.04);
+}
+
+
+/* Hide thumbnail while video is playing */
+
+.business-card:hover .business-thumbnail {
+    opacity: 0;
+}
+
+
+/* =========================================================
+   BUSINESS OVERLAY
+========================================================= */
+
+.business-card::after {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 2;
+
+    pointer-events: none;
+
+    background:
+        linear-gradient(
+            to top,
+            rgba(0,0,0,0.85),
+            rgba(0,0,0,0.05) 65%
+        );
+}
+
+
+/* =========================================================
+   BUSINESS TITLE
+========================================================= */
+
+.business-card > span {
+    position: relative;
+
+    z-index: 4;
+
+    color: white;
+
+    font-size: 10px;
+
+    letter-spacing: 2px;
+}
+
+
+/* =========================================================
+   BUSINESS PLAY BUTTON
+========================================================= */
+
+.business-play {
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    transform:
+        translate(-50%, -50%);
+
+    width: 65px;
+    height: 65px;
+
+    border: 1px solid rgba(255,255,255,0.6);
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    color: white;
+
+    font-size: 13px;
+
+    z-index: 5;
+
+    transition:
+        all 0.3s ease;
+}
+
+.business-card:hover .business-play {
+    background: white;
+
+    color: black;
+
+    border-color: white;
+
+    transform:
+        translate(-50%, -50%)
+        scale(1.1);
+}
+
+
+/* Hide play button while video plays */
+
+.business-card:hover .business-play {
+    opacity: 0;
+}
+
+
+/* =========================================================
+   BUSINESS VIDEO PLAYING — MOBILE
+========================================================= */
+
+.business-card.video-playing .business-video {
+    opacity: 1;
+
+    transform: scale(1.02);
+}
+
+.business-card.video-playing .business-thumbnail {
+    opacity: 0;
+}
+
+.business-card.video-playing .business-play {
+    opacity: 0;
+}
+
+
+/* =========================================================
    CONTACT
-========================= */
+========================================================= */
 
 .contact {
     min-height: 90vh;
@@ -810,9 +1015,9 @@ img {
 }
 
 
-/* =========================
+/* =========================================================
    FOOTER
-========================= */
+========================================================= */
 
 footer {
     border-top: 1px solid var(--line);
@@ -835,33 +1040,145 @@ footer a {
 }
 
 
-/* =========================
+/* =========================================================
+   SCROLL REVEAL
+========================================================= */
+
+.fade-in {
+    opacity: 0;
+
+    transform: translateY(25px);
+
+    transition:
+        opacity 0.6s ease,
+        transform 0.6s ease;
+}
+
+.fade-in.visible {
+    opacity: 1;
+
+    transform: translateY(0);
+}
+
+
+/* =========================================================
+   SCROLL POSITION
+========================================================= */
+
+section[id] {
+    scroll-margin-top: 0;
+}
+
+
+/* =========================================================
    MOBILE
-========================= */
+========================================================= */
 
 @media (max-width: 700px) {
 
+    /* -------------------------
+       NAVIGATION
+    ------------------------- */
+
     .navbar {
-        padding: 25px 6%;
+        padding: 24px 6%;
     }
 
     .navbar nav {
         display: none;
     }
 
+    .logo strong {
+        font-size: 21px;
+
+        letter-spacing: 2px;
+    }
+
+    .logo span {
+        font-size: 8px;
+
+        letter-spacing: 1.4px;
+
+        margin-top: 6px;
+    }
+
+
+    /* -------------------------
+       HERO
+    ------------------------- */
+
     .hero {
+        min-height: 100svh;
+
         padding: 130px 6% 80px;
+
+        align-items: center;
+    }
+
+    .hero-content {
+        width: 100%;
+    }
+
+    .eyebrow {
+        font-size: 9px;
+
+        letter-spacing: 2px;
+
+        margin-bottom: 25px;
     }
 
     .hero h1 {
-        font-size: 65px;
+        font-size: clamp(52px, 15vw, 72px);
 
-        letter-spacing: -4px;
+        line-height: 0.9;
+
+        letter-spacing: -3px;
     }
 
     .hero-text {
+        max-width: 90%;
+
+        margin-top: 30px;
+
         font-size: 14px;
+
+        line-height: 1.7;
     }
+
+    .hero-buttons {
+        flex-wrap: wrap;
+
+        gap: 18px;
+
+        margin-top: 30px;
+    }
+
+    .button {
+        padding: 14px 20px;
+    }
+
+    .hero-image {
+        right: -25%;
+
+        width: 80vw;
+
+        height: 60vh;
+
+        opacity: 0.25;
+    }
+
+    .scroll-indicator {
+        bottom: 20px;
+
+        right: 6%;
+
+        font-size: 8px;
+    }
+
+
+    /* -------------------------
+       SECTIONS
+    ------------------------- */
 
     .section {
         padding: 90px 6%;
@@ -873,13 +1190,32 @@ footer a {
         margin-bottom: 50px;
     }
 
-    .section-description {
-        margin-top: 30px;
+    .section-number {
+        margin-bottom: 16px;
     }
 
     .section-header h2 {
+        font-size: clamp(48px, 14vw, 72px);
+
+        line-height: 0.92;
+
         letter-spacing: -3px;
     }
+
+    .section-description {
+        max-width: 100%;
+
+        margin-top: 28px;
+
+        font-size: 13px;
+
+        line-height: 1.7;
+    }
+
+
+    /* -------------------------
+       WEDDING WORK
+    ------------------------- */
 
     .reel-grid {
         grid-template-columns: 1fr;
@@ -891,55 +1227,174 @@ footer a {
         grid-column: span 1;
     }
 
+    .reel-image {
+        aspect-ratio: 16 / 10;
+
+        padding: 20px;
+    }
+
+    .play-button {
+        width: 60px;
+        height: 60px;
+
+        font-size: 12px;
+    }
+
     .reel-info {
         display: block;
+
+        padding-top: 16px;
+    }
+
+    .reel-info h3 {
+        font-size: 17px;
+    }
+
+    .reel-info p {
+        font-size: 11px;
     }
 
     .reel-info span {
         display: block;
 
-        margin-top: 15px;
+        margin-top: 12px;
     }
+
+    .center-button {
+        margin-top: 55px;
+    }
+
+
+    /* -------------------------
+       ABOUT
+    ------------------------- */
 
     .about-content {
         grid-template-columns: 1fr;
 
-        gap: 50px;
+        gap: 45px;
     }
 
     .about-photo {
+        width: 100%;
+
         max-width: 500px;
+
+        aspect-ratio: 4 / 5;
     }
 
     .big-text {
-        font-size: 42px !important;
+        font-size: 40px !important;
+
+        line-height: 1.05;
     }
 
+    .about-text p {
+        font-size: 14px;
+
+        line-height: 1.75;
+    }
+
+
+    /* -------------------------
+       SERVICES
+    ------------------------- */
+
     .service {
-        grid-template-columns: 45px 1fr;
+        grid-template-columns: 40px 1fr;
 
         gap: 15px;
+
+        padding: 30px 0;
+    }
+
+    .service:hover {
+        padding-left: 0;
     }
 
     .service h3 {
-        font-size: 22px;
+        font-size: 21px;
+
+        margin-bottom: 8px;
     }
+
+    .service p {
+        font-size: 13px;
+
+        line-height: 1.6;
+    }
+
+
+    /* -------------------------
+       BUSINESS
+    ------------------------- */
 
     .business-grid {
         grid-template-columns: 1fr 1fr;
+
+        gap: 12px;
     }
 
-    .business-card:last-child {
-        display: none;
+    .business-card {
+        aspect-ratio: 4 / 5;
+
+        padding: 18px;
+
+        min-width: 0;
     }
+
+    .business-play {
+        width: 52px;
+        height: 52px;
+
+        font-size: 11px;
+    }
+
+    .business-card > span {
+        font-size: 8px;
+
+        letter-spacing: 1.5px;
+
+        line-height: 1.4;
+    }
+
+
+    /* -------------------------
+       CONTACT
+    ------------------------- */
 
     .contact {
-        min-height: 80vh;
+        min-height: 80svh;
+
+        justify-content: center;
+    }
+
+    .contact-small {
+        font-size: 9px;
+
+        letter-spacing: 2.5px;
+
+        margin-bottom: 25px;
     }
 
     .contact h2 {
+        font-size: clamp(48px, 14vw, 75px);
+
+        line-height: 0.9;
+
         letter-spacing: -4px;
     }
+
+    .contact-button {
+        margin-top: 40px;
+
+        padding: 16px 24px;
+    }
+
+
+    /* -------------------------
+       FOOTER
+    ------------------------- */
 
     footer {
         flex-direction: column;
@@ -947,41 +1402,86 @@ footer a {
         gap: 15px;
 
         padding: 30px 6%;
+
+        font-size: 9px;
     }
 }
 
-.fade-in {
-    opacity: 0;
-    transform: translateY(25px);
 
-    transition:
-        opacity 0.6s ease,
-        transform 0.6s ease;
+/* =========================================================
+   SMALL PHONES
+========================================================= */
+
+@media (max-width: 380px) {
+
+    .logo strong {
+        font-size: 18px;
+    }
+
+    .logo span {
+        font-size: 7px;
+    }
+
+    .hero {
+        padding-top: 120px;
+    }
+
+    .hero h1 {
+        font-size: 50px;
+
+        letter-spacing: -2.5px;
+    }
+
+    .hero-text {
+        font-size: 13px;
+    }
+
+    .section {
+        padding: 80px 6%;
+    }
+
+    .section-header h2 {
+        font-size: 46px;
+    }
+
+    .contact h2 {
+        font-size: 46px;
+    }
+
+    .business-grid {
+        gap: 10px;
+    }
+
+    .business-card {
+        padding: 15px;
+    }
+
+    .business-card > span {
+        font-size: 7px;
+    }
 }
 
-.fade-in.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
 
-section[id] {
-    scroll-margin-top: 0px;
-}
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
 
-/* ========================================
-   CINEMATIC HERO INTRO
-======================================== */
+@media (prefers-reduced-motion: reduce) {
 
-.hero-content {
-    opacity: 0;
-    transform: translateY(15px);
+    html {
+        scroll-behavior: auto;
+    }
 
-    transition:
-        opacity 0.6s ease,
-        transform 0.6s ease;
-}
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
 
-.hero-content.hero-loaded {
-    opacity: 1;
-    transform: translateY(0);
+    .fade-in {
+        opacity: 1;
+        transform: none;
+    }
 }
