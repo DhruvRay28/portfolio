@@ -853,6 +853,7 @@ video {
     content: "";
 
     position: absolute;
+
     inset: 0;
 
     z-index: 2;
@@ -862,8 +863,8 @@ video {
     background:
         linear-gradient(
             to top,
-            rgba(0,0,0,0.85),
-            rgba(0,0,0,0.05) 65%
+            rgba(0, 0, 0, 0.28),
+            rgba(0, 0, 0, 0.02) 60%
         );
 }
 
@@ -873,15 +874,24 @@ video {
 ========================================================= */
 
 .business-card > span {
-    position: relative;
+    position: absolute;
+
+    right: 18px;
+    bottom: 18px;
 
     z-index: 4;
 
-    color: white;
+    color: rgba(255, 255, 255, 0.85);
 
-    font-size: 10px;
+    font-size: 9px;
+
     letter-spacing: 2px;
+
+    text-align: right;
+
+    white-space: nowrap;
 }
+
 
 
 /* =========================================================
@@ -1579,7 +1589,12 @@ section[id] {
     }
 
     .business-card > span {
+        right: 14px;
+        bottom: 14px;
+
         font-size: 7px;
+
+        letter-spacing: 1.5px;
     }
 }
 
@@ -1605,5 +1620,99 @@ section[id] {
     .fade-in {
         opacity: 1;
         transform: none;
+    }
+}
+
+/* =========================================================
+   PORTRAITS — EXPLORE HINT
+========================================================= */
+
+.portraits-explore {
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    z-index: 6;
+
+    padding: 10px 16px;
+
+    border: 1px solid rgba(255, 255, 255, 0.22);
+
+    background: rgba(0, 0, 0, 0.12);
+
+    backdrop-filter: blur(2px);
+
+    color: rgba(255, 255, 255, 0.65);
+
+    font-size: 8px;
+
+    font-weight: 400;
+
+    letter-spacing: 2px;
+
+    white-space: nowrap;
+
+    pointer-events: none;
+
+    transition:
+        opacity 0.35s ease,
+        transform 0.35s ease;
+}
+
+
+/* Desktop — HOVER TO EXPLORE */
+
+.mobile-explore {
+    display: none;
+}
+
+.business-card:hover .portraits-explore {
+    opacity: 0;
+
+    transform:
+        translate(-50%, -50%)
+        scale(0.95);
+}
+
+
+/* =========================================================
+   PORTRAITS — MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+
+    .desktop-explore {
+        display: none;
+    }
+
+    .mobile-explore {
+        display: inline;
+    }
+
+    .portraits-explore {
+        font-size: 7px;
+
+        padding: 9px 13px;
+
+        letter-spacing: 1.5px;
+
+        background: rgba(0, 0, 0, 0.10);
+
+        border-color: rgba(255, 255, 255, 0.18);
+
+        color: rgba(255, 255, 255, 0.60);
+    }
+
+    /* Hide after portrait is tapped/activated */
+
+    .portraits-card.portraits-playing .portraits-explore {
+        opacity: 0;
+
+        transform:
+            translate(-50%, -50%)
+            scale(0.95);
     }
 }
