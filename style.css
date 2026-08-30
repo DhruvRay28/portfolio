@@ -1606,3 +1606,41 @@ section[id] {
         transform: none;
     }
 }
+
+/* =========================================================
+   PORTRAITS SLIDESHOW
+========================================================= */
+
+/* Keep portrait image visible while hovering */
+.portraits-card:hover .portraits-image {
+    opacity: 1;
+    transform: scale(1.04);
+}
+
+
+/* Keep portrait image visible on mobile */
+.portraits-card .portraits-image {
+    opacity: 1;
+}
+
+
+/* Smooth image changes */
+.portraits-image {
+    transition:
+        opacity 0.25s ease,
+        transform 0.7s ease;
+}
+
+
+/* Mobile portrait card */
+@media (max-width: 700px) {
+
+    .portraits-card:hover .portraits-image {
+        opacity: 1;
+    }
+
+    .portraits-card:active .portraits-image {
+        opacity: 1;
+    }
+
+}

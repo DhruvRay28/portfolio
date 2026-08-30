@@ -366,3 +366,214 @@ weddingCards.forEach((card) => {
     });
 
 });
+
+// ========================================
+// PORTRAITS IMAGE SLIDESHOW
+// DESKTOP HOVER + MOBILE TAP
+// ========================================
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const portraitsCard =
+        document.querySelector(".portraits-card");
+
+    const portraitsImage =
+        document.querySelector(".portraits-image");
+
+
+    // ----------------------------------------
+    // CHECK ELEMENTS
+    // ----------------------------------------
+
+    if (!portraitsCard || !portraitsImage) {
+
+        console.error(
+            "PORTRAITS: Card or image not found."
+        );
+
+        return;
+    }
+
+
+    // ----------------------------------------
+    // PORTRAIT IMAGES
+    // ----------------------------------------
+
+    const portraitImages = [
+        "image_6.jpg",
+        "image_7.jpg",
+        "image_8.jpg",
+        "image_9.jpg",
+        "image_10.jpg",
+        "image_11.jpg",
+        "image_12.jpg",
+        "image_13.jpg",
+        "image_14.jpg",
+        "image_15.jpg",
+        "image_16.jpg",
+        "image_17.jpg",
+        "image_18.jpg",
+        "image_19.jpg",
+        "image_20.jpg",
+        "image_21.jpg"
+    ];
+
+
+    let portraitIndex = 0;
+    let portraitInterval = null;
+
+
+    // ----------------------------------------
+    // PRELOAD IMAGES
+    // ----------------------------------------
+
+    portraitImages.forEach((src) => {
+
+        const img = new Image();
+
+        img.src = src;
+
+    });
+
+
+    // ----------------------------------------
+    // SHOW NEXT IMAGE
+    // ----------------------------------------
+
+    function showNextPortrait() {
+
+        portraitIndex =
+            (portraitIndex + 1) %
+            portraitImages.length;
+
+        portraitsImage.src =
+            portraitImages[portraitIndex];
+
+    }
+
+
+    // ----------------------------------------
+    // START SLIDESHOW
+    // ----------------------------------------
+
+    function startPortraitSlideshow() {
+
+        if (portraitInterval !== null) {
+            return;
+        }
+
+
+        // Always begin with image_6.jpg
+        portraitIndex = 0;
+
+        portraitsImage.src =
+            portraitImages[0];
+
+
+        portraitInterval = setInterval(() => {
+
+            showNextPortrait();
+
+        }, 500);
+
+    }
+
+
+    // ----------------------------------------
+    // STOP + RESET
+    // ----------------------------------------
+
+    function stopPortraitSlideshow() {
+
+        if (portraitInterval !== null) {
+
+            clearInterval(portraitInterval);
+
+            portraitInterval = null;
+
+        }
+
+
+        // Always return to image_6.jpg
+        portraitIndex = 0;
+
+        portraitsImage.src =
+            portraitImages[0];
+
+    }
+
+
+    // ========================================
+    // DESKTOP — HOVER
+    // ========================================
+
+    portraitsCard.addEventListener(
+        "mouseenter",
+        () => {
+
+            // Only run hover behavior
+            // on devices that support hover
+            if (!window.matchMedia("(hover: hover)").matches) {
+                return;
+            }
+
+            startPortraitSlideshow();
+
+        }
+    );
+
+
+    portraitsCard.addEventListener(
+        "mouseleave",
+        () => {
+
+            if (!window.matchMedia("(hover: hover)").matches) {
+                return;
+            }
+
+            stopPortraitSlideshow();
+
+        }
+    );
+
+
+    // ========================================
+    // MOBILE / TOUCH — TAP
+    // ========================================
+
+    portraitsCard.addEventListener(
+        "click",
+        () => {
+
+            // Don't run tap behavior
+            // on real mouse/hover devices
+            if (window.matchMedia("(hover: hover)").matches) {
+                return;
+            }
+
+
+            if (portraitInterval !== null) {
+
+                stopPortraitSlideshow();
+
+            } else {
+
+                startPortraitSlideshow();
+
+            }
+
+        }
+    );
+
+
+    // ========================================
+    // RESET ON SCREEN SIZE CHANGE
+    // ========================================
+
+    window.addEventListener("resize", () => {
+
+        stopPortraitSlideshow();
+
+    });
+
+});
