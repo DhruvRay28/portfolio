@@ -27,10 +27,6 @@ const observer = new IntersectionObserver(
 );
 
 
-// ========================================
-// PREPARE SCROLL ANIMATIONS
-// ========================================
-
 revealElements.forEach((element, index) => {
 
     element.classList.add("fade-in");
@@ -98,10 +94,9 @@ if (
 
 // ========================================
 // GLOBAL MEDIA CONTROL
-// Only ONE media item can play
-// at any time.
 //
-// This controls:
+// Only ONE thing can be active at once:
+//
 // - Business Reel 1
 // - Business Reel 2
 // - Wedding videos
@@ -112,7 +107,7 @@ let stopPortraitSlideshowGlobal = null;
 
 
 // ========================================
-// STOP EVERYTHING ELSE
+// STOP ALL MEDIA
 // ========================================
 
 function stopAllMedia(exceptVideo = null) {
@@ -127,8 +122,6 @@ function stopAllMedia(exceptVideo = null) {
         )
         .forEach((video) => {
 
-            // Don't stop the video we are
-            // currently trying to start
             if (video === exceptVideo) {
                 return;
             }
@@ -138,9 +131,11 @@ function stopAllMedia(exceptVideo = null) {
             video.currentTime = 0;
 
 
-            const card = video.closest(
-                ".business-card, .reel-card"
-            );
+            const card =
+                video.closest(
+                    ".business-card, .reel-card"
+                );
+
 
             if (card) {
 
@@ -154,7 +149,7 @@ function stopAllMedia(exceptVideo = null) {
 
 
     // ----------------------------------------
-    // STOP PORTRAIT SLIDESHOW
+    // STOP PORTRAITS
     // ----------------------------------------
 
     if (stopPortraitSlideshowGlobal) {
@@ -185,13 +180,12 @@ businessCards.forEach((card) => {
         );
 
 
-    // Portrait card has no video,
-    // so skip it here.
+    // Portrait card has no video
     if (!video) return;
 
 
     // ========================================
-    // DESKTOP — MOUSE ENTER
+    // DESKTOP — HOVER
     // ========================================
 
     card.addEventListener(
@@ -203,7 +197,7 @@ businessCards.forEach((card) => {
             }
 
 
-            // Stop everything else
+            // Stop EVERYTHING else
             stopAllMedia(video);
 
 
@@ -214,9 +208,7 @@ businessCards.forEach((card) => {
                 video.play();
 
 
-            if (
-                playPromise !== undefined
-            ) {
+            if (playPromise !== undefined) {
 
                 playPromise.catch(() => {});
 
@@ -227,7 +219,7 @@ businessCards.forEach((card) => {
 
 
     // ========================================
-    // DESKTOP — MOUSE LEAVE
+    // DESKTOP — LEAVE
     // ========================================
 
     card.addEventListener(
@@ -260,14 +252,11 @@ businessCards.forEach((card) => {
             }
 
 
-            // --------------------------------
-            // START VIDEO
-            // --------------------------------
-
+            // START
             if (video.paused) {
 
-                // Stop portrait slideshow
-                // and other videos
+                // Stop portraits
+                // Stop other reels
                 stopAllMedia(video);
 
 
@@ -293,10 +282,7 @@ businessCards.forEach((card) => {
             }
 
 
-            // --------------------------------
-            // STOP VIDEO
-            // --------------------------------
-
+            // STOP
             else {
 
                 video.pause();
@@ -338,7 +324,7 @@ weddingCards.forEach((card) => {
 
 
     // ========================================
-    // DESKTOP — MOUSE ENTER
+    // DESKTOP — HOVER
     // ========================================
 
     card.addEventListener(
@@ -350,7 +336,7 @@ weddingCards.forEach((card) => {
             }
 
 
-            // Stop everything else
+            // Stop EVERYTHING else
             stopAllMedia(video);
 
 
@@ -361,9 +347,7 @@ weddingCards.forEach((card) => {
                 video.play();
 
 
-            if (
-                playPromise !== undefined
-            ) {
+            if (playPromise !== undefined) {
 
                 playPromise.catch(() => {});
 
@@ -374,7 +358,7 @@ weddingCards.forEach((card) => {
 
 
     // ========================================
-    // DESKTOP — MOUSE LEAVE
+    // DESKTOP — LEAVE
     // ========================================
 
     card.addEventListener(
@@ -408,17 +392,13 @@ weddingCards.forEach((card) => {
 
 
             // Prevent Instagram link
-            // from opening on mobile
             event.preventDefault();
 
 
-            // --------------------------------
-            // START VIDEO
-            // --------------------------------
-
+            // START
             if (video.paused) {
 
-                // Stop everything else
+                // Stop EVERYTHING else
                 stopAllMedia(video);
 
 
@@ -444,10 +424,7 @@ weddingCards.forEach((card) => {
             }
 
 
-            // --------------------------------
-            // STOP VIDEO
-            // --------------------------------
-
+            // STOP
             else {
 
                 video.pause();
@@ -467,8 +444,18 @@ weddingCards.forEach((card) => {
 
 
 // ========================================
-// PORTRAITS IMAGE SLIDESHOW
-// DESKTOP HOVER + MOBILE TAP
+// PORTRAITS SLIDESHOW
+//
+// Desktop:
+// Hover → slideshow starts
+//
+// Mobile:
+// Tap → slideshow starts
+//
+// Leaving / tapping another media:
+// slideshow stops
+//
+// Only ONE media item can run at a time.
 // ========================================
 
 document.addEventListener(
@@ -488,7 +475,7 @@ document.addEventListener(
 
 
         // ----------------------------------------
-        // CHECK ELEMENTS
+        // CHECK
         // ----------------------------------------
 
         if (
@@ -553,7 +540,7 @@ document.addEventListener(
 
 
         // ----------------------------------------
-        // SHOW NEXT IMAGE
+        // NEXT IMAGE
         // ----------------------------------------
 
         function showNextPortrait() {
@@ -574,7 +561,7 @@ document.addEventListener(
 
 
         // ----------------------------------------
-        // START SLIDESHOW
+        // START
         // ----------------------------------------
 
         function startPortraitSlideshow() {
@@ -589,7 +576,7 @@ document.addEventListener(
             }
 
 
-            // Always start from image_6.jpg
+            // Always begin with image_6
             portraitIndex = 0;
 
 
@@ -597,12 +584,12 @@ document.addEventListener(
                 portraitImages[0];
 
 
-            console.log(
-                "Portrait slideshow STARTED"
+            portraitsCard.classList.add(
+                "portraits-playing"
             );
 
 
-            // Change image every 500ms
+            // Fast slideshow
             portraitInterval =
                 setInterval(
                     () => {
@@ -617,7 +604,7 @@ document.addEventListener(
 
 
         // ----------------------------------------
-        // STOP SLIDESHOW
+        // STOP
         // ----------------------------------------
 
         function stopPortraitSlideshow() {
@@ -635,18 +622,23 @@ document.addEventListener(
             }
 
 
-            // Return to first image
+            // Back to image_6
             portraitIndex = 0;
 
 
             portraitsImage.src =
                 portraitImages[0];
 
+
+            portraitsCard.classList.remove(
+                "portraits-playing"
+            );
+
         }
 
 
         // ----------------------------------------
-        // MAKE IT AVAILABLE GLOBALLY
+        // MAKE GLOBAL
         // ----------------------------------------
 
         stopPortraitSlideshowGlobal =
@@ -674,12 +666,11 @@ document.addEventListener(
                 }
 
 
-                // IMPORTANT:
-                // Stop any playing video
+                // Stop any reel/video
                 stopAllMedia();
 
 
-                // Start portrait slideshow
+                // Start photos
                 startPortraitSlideshow();
 
             }
@@ -687,7 +678,7 @@ document.addEventListener(
 
 
         // ========================================
-        // DESKTOP — MOUSE LEAVE
+        // DESKTOP — LEAVE
         // ========================================
 
         portraitsCard.addEventListener(
@@ -721,7 +712,7 @@ document.addEventListener(
             "click",
             () => {
 
-                // Only touch/mobile
+                // Ignore clicks on desktop
                 if (
                     window
                         .matchMedia(
@@ -736,8 +727,7 @@ document.addEventListener(
 
 
                 // --------------------------------
-                // IF PORTRAITS ARE PLAYING
-                // STOP THEM
+                // IF ALREADY RUNNING
                 // --------------------------------
 
                 if (
@@ -752,8 +742,7 @@ document.addEventListener(
 
 
                 // --------------------------------
-                // OTHERWISE:
-                // STOP VIDEOS FIRST
+                // STOP ALL OTHER MEDIA
                 // --------------------------------
 
                 stopAllMedia();
@@ -770,7 +759,7 @@ document.addEventListener(
 
 
         // ========================================
-        // RESET ON SCREEN SIZE CHANGE
+        // RESET ON RESIZE
         // ========================================
 
         window.addEventListener(

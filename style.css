@@ -55,7 +55,6 @@ video {
     position: absolute;
     top: 0;
     left: 0;
-
     width: 100%;
 
     padding: 30px 5%;
@@ -71,32 +70,24 @@ video {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-
     text-decoration: none;
 }
 
 .logo strong {
     color: #fff;
-
     font-size: 26px;
     font-weight: 600;
-
     letter-spacing: 3px;
     line-height: 1;
-
     white-space: nowrap;
 }
 
 .logo span {
     color: var(--gold);
-
     font-size: 9px;
     font-weight: 400;
-
     letter-spacing: 1.8px;
-
     margin-top: 7px;
-
     white-space: nowrap;
 }
 
@@ -108,7 +99,6 @@ video {
 .navbar nav a {
     font-size: 12px;
     color: #aaa;
-
     transition: color 0.3s ease;
 }
 
@@ -130,7 +120,6 @@ video {
     align-items: center;
 
     position: relative;
-
     overflow: hidden;
 
     background:
@@ -171,7 +160,6 @@ video {
 
     width: 35vw;
     max-width: 500px;
-
     height: 70vh;
 
     overflow: hidden;
@@ -222,31 +210,22 @@ video {
 
 .eyebrow {
     font-size: 11px;
-
     letter-spacing: 3px;
-
     color: var(--gold);
-
     margin-bottom: 35px;
 }
 
 .hero h1 {
     font-size: clamp(65px, 11vw, 160px);
-
     line-height: 0.85;
-
     letter-spacing: -7px;
-
     font-weight: 600;
 }
 
 .hero h1 span {
     font-family: "Playfair Display", serif;
-
     font-style: italic;
-
     font-weight: 400;
-
     color: #bdb7ae;
 }
 
@@ -258,7 +237,6 @@ video {
     color: var(--muted);
 
     font-size: 16px;
-
     line-height: 1.7;
 }
 
@@ -267,7 +245,6 @@ video {
     align-items: center;
 
     gap: 30px;
-
     margin-top: 40px;
 }
 
@@ -279,7 +256,6 @@ video {
     border: 1px solid #555;
 
     font-size: 11px;
-
     letter-spacing: 1px;
 
     transition: all 0.3s ease;
@@ -287,17 +263,13 @@ video {
 
 .button:hover {
     background: var(--cream);
-
     color: #111;
-
     border-color: var(--cream);
 }
 
 .text-link {
     font-size: 11px;
-
     color: #999;
-
     letter-spacing: 1px;
 
     transition: color 0.3s ease;
@@ -314,9 +286,7 @@ video {
     right: 5%;
 
     font-size: 10px;
-
     color: #666;
-
     letter-spacing: 2px;
 }
 
@@ -331,7 +301,6 @@ video {
 
 .section-header {
     display: flex;
-
     justify-content: space-between;
     align-items: flex-end;
 
@@ -342,7 +311,6 @@ video {
     color: var(--gold);
 
     font-size: 11px;
-
     letter-spacing: 2px;
 
     margin-bottom: 20px;
@@ -352,17 +320,13 @@ video {
     font-size: clamp(55px, 7vw, 100px);
 
     line-height: 0.9;
-
     letter-spacing: -4px;
 }
 
 .section-header h2 span {
     font-family: "Playfair Display", serif;
-
     font-style: italic;
-
     font-weight: 400;
-
     color: #aaa;
 }
 
@@ -372,7 +336,6 @@ video {
     color: var(--muted);
 
     font-size: 13px;
-
     line-height: 1.7;
 }
 
@@ -409,7 +372,6 @@ video {
     overflow: hidden;
 
     display: flex;
-
     align-items: flex-end;
 
     padding: 25px;
@@ -427,7 +389,6 @@ video {
     z-index: 2;
 
     font-size: 10px;
-
     letter-spacing: 2px;
 
     color: rgba(255,255,255,0.6);
@@ -435,7 +396,6 @@ video {
 
 .reel-image img {
     position: absolute;
-
     inset: 0;
 
     width: 100%;
@@ -469,13 +429,13 @@ video {
     opacity: 1;
 }
 
+
 /* =========================================================
    WEDDING VIDEO
 ========================================================= */
 
 .wedding-thumbnail {
     position: absolute;
-
     inset: 0;
 
     width: 100%;
@@ -490,12 +450,8 @@ video {
         opacity 0.4s ease;
 }
 
-
-/* Wedding video */
-
 .wedding-video {
     position: absolute;
-
     inset: 0;
 
     width: 100%;
@@ -523,43 +479,17 @@ video {
 
 .reel-card:hover .wedding-video {
     opacity: 1;
-
     transform: scale(1.04);
 }
-
-
-/* Hide thumbnail on hover */
 
 .reel-card:hover .wedding-thumbnail {
     opacity: 0;
 }
 
 
-/* Mobile */
-
-@media (max-width: 700px) {
-
-    .reel-card:hover .wedding-video {
-        opacity: 0;
-    }
-
-    .reel-card:hover .wedding-thumbnail {
-        opacity: 1;
-    }
-
-    .reel-card.video-playing .wedding-video {
-        opacity: 1;
-        transform: scale(1.02);
-    }
-
-    .reel-card.video-playing .wedding-thumbnail {
-        opacity: 0;
-    }
-
-}
-
-
-/* Wedding backgrounds */
+/* =========================================================
+   WEDDING BACKGROUNDS
+========================================================= */
 
 .wedding-one {
     background:
@@ -589,7 +519,9 @@ video {
 }
 
 
-/* Wedding play button */
+/* =========================================================
+   WEDDING PLAY BUTTON
+========================================================= */
 
 .play-button {
     position: absolute;
@@ -609,22 +541,20 @@ video {
     border-radius: 50%;
 
     display: flex;
-
     align-items: center;
     justify-content: center;
 
     font-size: 13px;
-
     color: white;
 
     transition: all 0.3s ease;
 }
 
 .reel-card:hover .play-button {
+    opacity: 0;
+
     background: white;
-
     color: black;
-
     border-color: white;
 
     transform:
@@ -635,15 +565,10 @@ video {
         0 0 0 8px rgba(255,255,255,0.08);
 }
 
-/* Hide play button while video plays */
 
-.reel-card:hover .play-button {
-    opacity: 0;
-}
-
-.reel-card:hover .play-button {
-    opacity: 0;
-}
+/* =========================================================
+   WEDDING INFO
+========================================================= */
 
 .reel-info {
     display: flex;
@@ -656,7 +581,6 @@ video {
 
 .reel-info h3 {
     font-size: 18px;
-
     font-weight: 500;
 }
 
@@ -722,7 +646,6 @@ video {
     padding: 20px;
 
     font-size: 10px;
-
     letter-spacing: 3px;
 
     color: #888;
@@ -748,7 +671,6 @@ video {
     color: var(--muted);
 
     font-size: 16px;
-
     line-height: 1.8;
 
     margin-bottom: 25px;
@@ -826,9 +748,6 @@ video {
     gap: 15px;
 }
 
-
-/* Business card */
-
 .business-card {
     position: relative;
 
@@ -848,13 +767,11 @@ video {
     color: white;
 
     font-size: 10px;
-
     letter-spacing: 2px;
 
     cursor: pointer;
 
-    transition:
-        transform 0.4s ease;
+    transition: transform 0.4s ease;
 }
 
 .business-card:hover {
@@ -868,7 +785,6 @@ video {
 
 .business-thumbnail {
     position: absolute;
-
     inset: 0;
 
     width: 100%;
@@ -917,56 +833,15 @@ video {
 }
 
 
-/* Desktop:
-   video appears when hovering */
+/* Desktop hover */
 
 .business-card:hover .business-video {
     opacity: 1;
     transform: scale(1.04);
 }
 
-
-/* Thumbnail disappears on hover */
-
 .business-card:hover .business-thumbnail {
     opacity: 0;
-}
-
-
-/* Mobile:
-   video appears after tapping */
-
-.business-card.video-playing .business-video {
-    opacity: 1;
-    transform: scale(1.02);
-}
-
-.business-card.video-playing .business-thumbnail {
-    opacity: 0;
-}
-
-
-/* Keep video hidden on touch devices
-   until user taps */
-
-@media (max-width: 700px) {
-
-    .business-card:hover .business-video {
-        opacity: 0;
-    }
-
-    .business-card:hover .business-thumbnail {
-        opacity: 1;
-    }
-
-    .business-card.video-playing .business-video {
-        opacity: 1;
-    }
-
-    .business-card.video-playing .business-thumbnail {
-        opacity: 0;
-    }
-
 }
 
 
@@ -978,7 +853,6 @@ video {
     content: "";
 
     position: absolute;
-
     inset: 0;
 
     z-index: 2;
@@ -1006,7 +880,6 @@ video {
     color: white;
 
     font-size: 10px;
-
     letter-spacing: 2px;
 }
 
@@ -1021,8 +894,7 @@ video {
     top: 50%;
     left: 50%;
 
-    transform:
-        translate(-50%, -50%);
+    transform: translate(-50%, -50%);
 
     width: 65px;
     height: 65px;
@@ -1032,7 +904,6 @@ video {
     border-radius: 50%;
 
     display: flex;
-
     align-items: center;
     justify-content: center;
 
@@ -1042,15 +913,14 @@ video {
 
     z-index: 5;
 
-    transition:
-        all 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 .business-card:hover .business-play {
+    opacity: 0;
+
     background: white;
-
     color: black;
-
     border-color: white;
 
     transform:
@@ -1058,16 +928,10 @@ video {
         scale(1.1);
 }
 
-
-/* Hide play button while video plays */
-
-.business-card:hover .business-play {
-    opacity: 0;
-}
-
 .business-card.video-playing .business-play {
     opacity: 0;
 }
+
 
 /* =========================================================
    CONTACT
@@ -1089,7 +953,6 @@ video {
     color: #777;
 
     font-size: 11px;
-
     letter-spacing: 3px;
 
     margin-bottom: 30px;
@@ -1099,7 +962,6 @@ video {
     font-size: clamp(55px, 10vw, 150px);
 
     line-height: 0.85;
-
     letter-spacing: -6px;
 }
 
@@ -1121,11 +983,9 @@ video {
     padding: 18px 30px;
 
     background: var(--cream);
-
     color: #111;
 
     font-size: 11px;
-
     letter-spacing: 1px;
 
     transition: transform 0.3s ease;
@@ -1152,7 +1012,6 @@ footer {
     color: #555;
 
     font-size: 10px;
-
     letter-spacing: 1px;
 }
 
@@ -1192,6 +1051,77 @@ section[id] {
 
 
 /* =========================================================
+   PORTRAITS SLIDESHOW
+========================================================= */
+
+.portraits-card {
+    position: relative;
+}
+
+.portraits-card .portraits-image {
+    opacity: 1;
+
+    transition:
+        opacity 0.25s ease,
+        transform 0.7s ease;
+}
+
+.portraits-card:hover .portraits-image {
+    opacity: 1;
+    transform: scale(1.04);
+}
+
+
+/* =========================================================
+   PORTRAIT INTERACTION HINT
+========================================================= */
+
+.portrait-hint {
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    z-index: 5;
+
+    padding: 12px 18px;
+
+    border: 1px solid rgba(255,255,255,0.45);
+
+    background: rgba(0,0,0,0.25);
+
+    backdrop-filter: blur(4px);
+
+    color: white;
+
+    font-size: 9px;
+    letter-spacing: 2px;
+
+    white-space: nowrap;
+
+    pointer-events: none;
+
+    transition:
+        opacity 0.35s ease,
+        transform 0.35s ease;
+}
+
+.portraits-card:hover .portrait-hint {
+    opacity: 0;
+
+    transform:
+        translate(-50%, -50%)
+        scale(0.95);
+}
+
+.portrait-hint-mobile {
+    display: none;
+}
+
+
+/* =========================================================
    MOBILE
 ========================================================= */
 
@@ -1211,15 +1141,12 @@ section[id] {
 
     .logo strong {
         font-size: 21px;
-
         letter-spacing: 2px;
     }
 
     .logo span {
         font-size: 8px;
-
         letter-spacing: 1.4px;
-
         margin-top: 6px;
     }
 
@@ -1242,9 +1169,7 @@ section[id] {
 
     .eyebrow {
         font-size: 9px;
-
         letter-spacing: 2px;
-
         margin-bottom: 25px;
     }
 
@@ -1252,7 +1177,6 @@ section[id] {
         font-size: clamp(52px, 15vw, 72px);
 
         line-height: 0.9;
-
         letter-spacing: -3px;
     }
 
@@ -1262,7 +1186,6 @@ section[id] {
         margin-top: 30px;
 
         font-size: 14px;
-
         line-height: 1.7;
     }
 
@@ -1282,7 +1205,6 @@ section[id] {
         right: -25%;
 
         width: 80vw;
-
         height: 60vh;
 
         opacity: 0.25;
@@ -1290,7 +1212,6 @@ section[id] {
 
     .scroll-indicator {
         bottom: 20px;
-
         right: 6%;
 
         font-size: 8px;
@@ -1319,7 +1240,6 @@ section[id] {
         font-size: clamp(48px, 14vw, 72px);
 
         line-height: 0.92;
-
         letter-spacing: -3px;
     }
 
@@ -1329,7 +1249,6 @@ section[id] {
         margin-top: 28px;
 
         font-size: 13px;
-
         line-height: 1.7;
     }
 
@@ -1383,6 +1302,29 @@ section[id] {
 
     .center-button {
         margin-top: 55px;
+    }
+
+
+    /* -------------------------
+       WEDDING VIDEO MOBILE
+    ------------------------- */
+
+    .reel-card:hover .wedding-video {
+        opacity: 0;
+    }
+
+    .reel-card:hover .wedding-thumbnail {
+        opacity: 1;
+    }
+
+    .reel-card.video-playing .wedding-video {
+        opacity: 1;
+
+        transform: scale(1.02);
+    }
+
+    .reel-card.video-playing .wedding-thumbnail {
+        opacity: 0;
     }
 
 
@@ -1481,6 +1423,66 @@ section[id] {
 
 
     /* -------------------------
+       BUSINESS VIDEO MOBILE
+    ------------------------- */
+
+    .business-card:hover .business-video {
+        opacity: 0;
+    }
+
+    .business-card:hover .business-thumbnail {
+        opacity: 1;
+    }
+
+    .business-card.video-playing .business-video {
+        opacity: 1;
+
+        transform: scale(1.02);
+    }
+
+    .business-card.video-playing .business-thumbnail {
+        opacity: 0;
+    }
+
+
+    /* -------------------------
+       PORTRAITS MOBILE
+    ------------------------- */
+
+    .portraits-card:hover .portraits-image {
+        opacity: 1;
+    }
+
+    .portraits-card:active .portraits-image {
+        opacity: 1;
+    }
+
+    .portrait-hint-desktop {
+        display: none;
+    }
+
+    .portrait-hint-mobile {
+        display: inline;
+    }
+
+    .portrait-hint {
+        font-size: 8px;
+
+        padding: 11px 15px;
+
+        letter-spacing: 1.6px;
+    }
+
+    .portraits-card.portraits-playing .portrait-hint {
+        opacity: 0;
+
+        transform:
+            translate(-50%, -50%)
+            scale(0.95);
+    }
+
+
+    /* -------------------------
        CONTACT
     ------------------------- */
 
@@ -1502,7 +1504,6 @@ section[id] {
         font-size: clamp(48px, 14vw, 75px);
 
         line-height: 0.9;
-
         letter-spacing: -4px;
     }
 
@@ -1605,42 +1606,4 @@ section[id] {
         opacity: 1;
         transform: none;
     }
-}
-
-/* =========================================================
-   PORTRAITS SLIDESHOW
-========================================================= */
-
-/* Keep portrait image visible while hovering */
-.portraits-card:hover .portraits-image {
-    opacity: 1;
-    transform: scale(1.04);
-}
-
-
-/* Keep portrait image visible on mobile */
-.portraits-card .portraits-image {
-    opacity: 1;
-}
-
-
-/* Smooth image changes */
-.portraits-image {
-    transition:
-        opacity 0.25s ease,
-        transform 0.7s ease;
-}
-
-
-/* Mobile portrait card */
-@media (max-width: 700px) {
-
-    .portraits-card:hover .portraits-image {
-        opacity: 1;
-    }
-
-    .portraits-card:active .portraits-image {
-        opacity: 1;
-    }
-
 }
