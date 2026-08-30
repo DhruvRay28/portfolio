@@ -35,14 +35,12 @@ revealElements.forEach((element, index) => {
 
     element.classList.add("fade-in");
 
-    // No stagger on mobile
     if (window.innerWidth <= 700) {
 
         element.style.transitionDelay = "0s";
 
     } else {
 
-        // Small desktop stagger
         element.style.transitionDelay =
             `${Math.min(index * 0.04, 0.2)}s`;
 
@@ -59,7 +57,8 @@ revealElements.forEach((element, index) => {
 
 window.addEventListener("load", () => {
 
-    const heroContent = document.querySelector(".hero-content");
+    const heroContent =
+        document.querySelector(".hero-content");
 
     if (!heroContent) return;
 
@@ -98,11 +97,29 @@ if (
 
 
 // ========================================
-// VIDEO HELPER
-// Stop every other portfolio video
+// GLOBAL MEDIA CONTROL
+// Only ONE media item can play
+// at any time.
+//
+// This controls:
+// - Business Reel 1
+// - Business Reel 2
+// - Wedding videos
+// - Portrait slideshow
 // ========================================
 
-function stopOtherVideos(currentVideo) {
+let stopPortraitSlideshowGlobal = null;
+
+
+// ========================================
+// STOP EVERYTHING ELSE
+// ========================================
+
+function stopAllMedia(exceptVideo = null) {
+
+    // ----------------------------------------
+    // STOP ALL VIDEOS
+    // ----------------------------------------
 
     document
         .querySelectorAll(
@@ -110,11 +127,16 @@ function stopOtherVideos(currentVideo) {
         )
         .forEach((video) => {
 
-            if (video === currentVideo) return;
+            // Don't stop the video we are
+            // currently trying to start
+            if (video === exceptVideo) {
+                return;
+            }
 
             video.pause();
 
             video.currentTime = 0;
+
 
             const card = video.closest(
                 ".business-card, .reel-card"
@@ -130,450 +152,640 @@ function stopOtherVideos(currentVideo) {
 
         });
 
+
+    // ----------------------------------------
+    // STOP PORTRAIT SLIDESHOW
+    // ----------------------------------------
+
+    if (stopPortraitSlideshowGlobal) {
+
+        stopPortraitSlideshowGlobal();
+
+    }
+
 }
 
 
 // ========================================
-// BUSINESS VIDEO
+// BUSINESS VIDEOS
 // DESKTOP HOVER + MOBILE TAP
 // ========================================
 
-const businessCards = document.querySelectorAll(
-    ".business-card"
-);
+const businessCards =
+    document.querySelectorAll(
+        ".business-card"
+    );
+
 
 businessCards.forEach((card) => {
 
-    const video = card.querySelector(
-        ".business-video"
-    );
+    const video =
+        card.querySelector(
+            ".business-video"
+        );
 
+
+    // Portrait card has no video,
+    // so skip it here.
     if (!video) return;
 
 
-    // ----------------------------------------
+    // ========================================
     // DESKTOP — MOUSE ENTER
-    // ----------------------------------------
+    // ========================================
 
-    card.addEventListener("mouseenter", () => {
+    card.addEventListener(
+        "mouseenter",
+        () => {
 
-        if (window.innerWidth <= 700) return;
-
-        stopOtherVideos(video);
-
-        video.currentTime = 0;
-
-        const playPromise = video.play();
-
-        if (playPromise !== undefined) {
-
-            playPromise.catch(() => {});
-
-        }
-
-    });
+            if (window.innerWidth <= 700) {
+                return;
+            }
 
 
-    // ----------------------------------------
-    // DESKTOP — MOUSE LEAVE
-    // ----------------------------------------
+            // Stop everything else
+            stopAllMedia(video);
 
-    card.addEventListener("mouseleave", () => {
-
-        if (window.innerWidth <= 700) return;
-
-        video.pause();
-
-        video.currentTime = 0;
-
-    });
-
-
-    // ----------------------------------------
-    // MOBILE — TAP
-    // ----------------------------------------
-
-    card.addEventListener("click", () => {
-
-        if (window.innerWidth > 700) return;
-
-
-        // ------------------------------------
-        // START VIDEO
-        // ------------------------------------
-
-        if (video.paused) {
-
-            stopOtherVideos(video);
 
             video.currentTime = 0;
 
-            video.play()
-                .then(() => {
 
-                    card.classList.add(
-                        "video-playing"
-                    );
+            const playPromise =
+                video.play();
 
-                })
-                .catch(() => {
 
-                    card.classList.remove(
-                        "video-playing"
-                    );
+            if (
+                playPromise !== undefined
+            ) {
 
-                });
+                playPromise.catch(() => {});
+
+            }
 
         }
+    );
 
 
-        // ------------------------------------
-        // STOP VIDEO
-        // ------------------------------------
+    // ========================================
+    // DESKTOP — MOUSE LEAVE
+    // ========================================
 
-        else {
+    card.addEventListener(
+        "mouseleave",
+        () => {
+
+            if (window.innerWidth <= 700) {
+                return;
+            }
+
 
             video.pause();
 
             video.currentTime = 0;
 
-            card.classList.remove(
-                "video-playing"
-            );
+        }
+    );
+
+
+    // ========================================
+    // MOBILE — TAP
+    // ========================================
+
+    card.addEventListener(
+        "click",
+        () => {
+
+            if (window.innerWidth > 700) {
+                return;
+            }
+
+
+            // --------------------------------
+            // START VIDEO
+            // --------------------------------
+
+            if (video.paused) {
+
+                // Stop portrait slideshow
+                // and other videos
+                stopAllMedia(video);
+
+
+                video.currentTime = 0;
+
+
+                video.play()
+                    .then(() => {
+
+                        card.classList.add(
+                            "video-playing"
+                        );
+
+                    })
+                    .catch(() => {
+
+                        card.classList.remove(
+                            "video-playing"
+                        );
+
+                    });
+
+            }
+
+
+            // --------------------------------
+            // STOP VIDEO
+            // --------------------------------
+
+            else {
+
+                video.pause();
+
+                video.currentTime = 0;
+
+                card.classList.remove(
+                    "video-playing"
+                );
+
+            }
 
         }
-
-    });
+    );
 
 });
 
 
 // ========================================
-// WEDDING VIDEO
+// WEDDING VIDEOS
 // DESKTOP HOVER + MOBILE TAP
 // ========================================
 
-const weddingCards = document.querySelectorAll(
-    ".reel-card"
-);
+const weddingCards =
+    document.querySelectorAll(
+        ".reel-card"
+    );
+
 
 weddingCards.forEach((card) => {
 
-    const video = card.querySelector(
-        ".wedding-video"
-    );
+    const video =
+        card.querySelector(
+            ".wedding-video"
+        );
+
 
     if (!video) return;
 
 
-    // ----------------------------------------
+    // ========================================
     // DESKTOP — MOUSE ENTER
-    // ----------------------------------------
+    // ========================================
 
-    card.addEventListener("mouseenter", () => {
+    card.addEventListener(
+        "mouseenter",
+        () => {
 
-        if (window.innerWidth <= 700) return;
-
-        stopOtherVideos(video);
-
-        video.currentTime = 0;
-
-        const playPromise = video.play();
-
-        if (playPromise !== undefined) {
-
-            playPromise.catch(() => {});
-
-        }
-
-    });
+            if (window.innerWidth <= 700) {
+                return;
+            }
 
 
-    // ----------------------------------------
-    // DESKTOP — MOUSE LEAVE
-    // ----------------------------------------
+            // Stop everything else
+            stopAllMedia(video);
 
-    card.addEventListener("mouseleave", () => {
-
-        if (window.innerWidth <= 700) return;
-
-        video.pause();
-
-        video.currentTime = 0;
-
-    });
-
-
-    // ----------------------------------------
-    // MOBILE — TAP
-    // ----------------------------------------
-
-    card.addEventListener("click", (event) => {
-
-        if (window.innerWidth > 700) return;
-
-
-        // Prevent the Instagram link
-        // from opening on mobile
-        event.preventDefault();
-
-
-        // ------------------------------------
-        // START VIDEO
-        // ------------------------------------
-
-        if (video.paused) {
-
-            stopOtherVideos(video);
 
             video.currentTime = 0;
 
-            video.play()
-                .then(() => {
 
-                    card.classList.add(
-                        "video-playing"
-                    );
+            const playPromise =
+                video.play();
 
-                })
-                .catch(() => {
 
-                    card.classList.remove(
-                        "video-playing"
-                    );
+            if (
+                playPromise !== undefined
+            ) {
 
-                });
+                playPromise.catch(() => {});
+
+            }
 
         }
+    );
 
 
-        // ------------------------------------
-        // STOP VIDEO
-        // ------------------------------------
+    // ========================================
+    // DESKTOP — MOUSE LEAVE
+    // ========================================
 
-        else {
+    card.addEventListener(
+        "mouseleave",
+        () => {
+
+            if (window.innerWidth <= 700) {
+                return;
+            }
+
 
             video.pause();
 
             video.currentTime = 0;
 
-            card.classList.remove(
-                "video-playing"
-            );
+        }
+    );
+
+
+    // ========================================
+    // MOBILE — TAP
+    // ========================================
+
+    card.addEventListener(
+        "click",
+        (event) => {
+
+            if (window.innerWidth > 700) {
+                return;
+            }
+
+
+            // Prevent Instagram link
+            // from opening on mobile
+            event.preventDefault();
+
+
+            // --------------------------------
+            // START VIDEO
+            // --------------------------------
+
+            if (video.paused) {
+
+                // Stop everything else
+                stopAllMedia(video);
+
+
+                video.currentTime = 0;
+
+
+                video.play()
+                    .then(() => {
+
+                        card.classList.add(
+                            "video-playing"
+                        );
+
+                    })
+                    .catch(() => {
+
+                        card.classList.remove(
+                            "video-playing"
+                        );
+
+                    });
+
+            }
+
+
+            // --------------------------------
+            // STOP VIDEO
+            // --------------------------------
+
+            else {
+
+                video.pause();
+
+                video.currentTime = 0;
+
+                card.classList.remove(
+                    "video-playing"
+                );
+
+            }
 
         }
-
-    });
+    );
 
 });
+
 
 // ========================================
 // PORTRAITS IMAGE SLIDESHOW
 // DESKTOP HOVER + MOBILE TAP
 // ========================================
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
 
-    const portraitsCard =
-        document.querySelector(".portraits-card");
+        const portraitsCard =
+            document.querySelector(
+                ".portraits-card"
+            );
 
-    const portraitsImage =
-        document.querySelector(".portraits-image");
+
+        const portraitsImage =
+            document.querySelector(
+                ".portraits-image"
+            );
 
 
-    // ----------------------------------------
-    // CHECK ELEMENTS
-    // ----------------------------------------
+        // ----------------------------------------
+        // CHECK ELEMENTS
+        // ----------------------------------------
 
-    if (!portraitsCard || !portraitsImage) {
+        if (
+            !portraitsCard ||
+            !portraitsImage
+        ) {
 
-        console.error(
-            "PORTRAITS: Card or image not found."
+            console.error(
+                "PORTRAITS: Card or image not found."
+            );
+
+            return;
+
+        }
+
+
+        // ----------------------------------------
+        // PORTRAIT IMAGES
+        // ----------------------------------------
+
+        const portraitImages = [
+
+            "image_6.jpg",
+            "image_7.jpg",
+            "image_8.jpg",
+            "image_9.jpg",
+            "image_10.jpg",
+            "image_11.jpg",
+            "image_12.jpg",
+            "image_13.jpg",
+            "image_14.jpg",
+            "image_15.jpg",
+            "image_16.jpg",
+            "image_17.jpg",
+            "image_18.jpg",
+            "image_19.jpg",
+            "image_20.jpg",
+            "image_21.jpg"
+
+        ];
+
+
+        let portraitIndex = 0;
+
+        let portraitInterval = null;
+
+
+        // ----------------------------------------
+        // PRELOAD IMAGES
+        // ----------------------------------------
+
+        portraitImages.forEach(
+            (src) => {
+
+                const img =
+                    new Image();
+
+                img.src = src;
+
+            }
         );
 
-        return;
-    }
+
+        // ----------------------------------------
+        // SHOW NEXT IMAGE
+        // ----------------------------------------
+
+        function showNextPortrait() {
+
+            portraitIndex =
+                (
+                    portraitIndex + 1
+                ) %
+                portraitImages.length;
 
 
-    // ----------------------------------------
-    // PORTRAIT IMAGES
-    // ----------------------------------------
-
-    const portraitImages = [
-        "image_6.jpg",
-        "image_7.jpg",
-        "image_8.jpg",
-        "image_9.jpg",
-        "image_10.jpg",
-        "image_11.jpg",
-        "image_12.jpg",
-        "image_13.jpg",
-        "image_14.jpg",
-        "image_15.jpg",
-        "image_16.jpg",
-        "image_17.jpg",
-        "image_18.jpg",
-        "image_19.jpg",
-        "image_20.jpg",
-        "image_21.jpg"
-    ];
-
-
-    let portraitIndex = 0;
-    let portraitInterval = null;
-
-
-    // ----------------------------------------
-    // PRELOAD IMAGES
-    // ----------------------------------------
-
-    portraitImages.forEach((src) => {
-
-        const img = new Image();
-
-        img.src = src;
-
-    });
-
-
-    // ----------------------------------------
-    // SHOW NEXT IMAGE
-    // ----------------------------------------
-
-    function showNextPortrait() {
-
-        portraitIndex =
-            (portraitIndex + 1) %
-            portraitImages.length;
-
-        portraitsImage.src =
-            portraitImages[portraitIndex];
-
-    }
-
-
-    // ----------------------------------------
-    // START SLIDESHOW
-    // ----------------------------------------
-
-    function startPortraitSlideshow() {
-
-        if (portraitInterval !== null) {
-            return;
-        }
-
-
-        // Always begin with image_6.jpg
-        portraitIndex = 0;
-
-        portraitsImage.src =
-            portraitImages[0];
-
-
-        portraitInterval = setInterval(() => {
-
-            showNextPortrait();
-
-        }, 500);
-
-    }
-
-
-    // ----------------------------------------
-    // STOP + RESET
-    // ----------------------------------------
-
-    function stopPortraitSlideshow() {
-
-        if (portraitInterval !== null) {
-
-            clearInterval(portraitInterval);
-
-            portraitInterval = null;
+            portraitsImage.src =
+                portraitImages[
+                    portraitIndex
+                ];
 
         }
 
 
-        // Always return to image_6.jpg
-        portraitIndex = 0;
+        // ----------------------------------------
+        // START SLIDESHOW
+        // ----------------------------------------
 
-        portraitsImage.src =
-            portraitImages[0];
+        function startPortraitSlideshow() {
 
-    }
+            // Already running
+            if (
+                portraitInterval !== null
+            ) {
 
-
-    // ========================================
-    // DESKTOP — HOVER
-    // ========================================
-
-    portraitsCard.addEventListener(
-        "mouseenter",
-        () => {
-
-            // Only run hover behavior
-            // on devices that support hover
-            if (!window.matchMedia("(hover: hover)").matches) {
                 return;
-            }
 
-            startPortraitSlideshow();
-
-        }
-    );
-
-
-    portraitsCard.addEventListener(
-        "mouseleave",
-        () => {
-
-            if (!window.matchMedia("(hover: hover)").matches) {
-                return;
-            }
-
-            stopPortraitSlideshow();
-
-        }
-    );
-
-
-    // ========================================
-    // MOBILE / TOUCH — TAP
-    // ========================================
-
-    portraitsCard.addEventListener(
-        "click",
-        () => {
-
-            // Don't run tap behavior
-            // on real mouse/hover devices
-            if (window.matchMedia("(hover: hover)").matches) {
-                return;
             }
 
 
-            if (portraitInterval !== null) {
+            // Always start from image_6.jpg
+            portraitIndex = 0;
+
+
+            portraitsImage.src =
+                portraitImages[0];
+
+
+            console.log(
+                "Portrait slideshow STARTED"
+            );
+
+
+            // Change image every 500ms
+            portraitInterval =
+                setInterval(
+                    () => {
+
+                        showNextPortrait();
+
+                    },
+                    500
+                );
+
+        }
+
+
+        // ----------------------------------------
+        // STOP SLIDESHOW
+        // ----------------------------------------
+
+        function stopPortraitSlideshow() {
+
+            if (
+                portraitInterval !== null
+            ) {
+
+                clearInterval(
+                    portraitInterval
+                );
+
+                portraitInterval = null;
+
+            }
+
+
+            // Return to first image
+            portraitIndex = 0;
+
+
+            portraitsImage.src =
+                portraitImages[0];
+
+        }
+
+
+        // ----------------------------------------
+        // MAKE IT AVAILABLE GLOBALLY
+        // ----------------------------------------
+
+        stopPortraitSlideshowGlobal =
+            stopPortraitSlideshow;
+
+
+        // ========================================
+        // DESKTOP — HOVER
+        // ========================================
+
+        portraitsCard.addEventListener(
+            "mouseenter",
+            () => {
+
+                if (
+                    !window
+                        .matchMedia(
+                            "(hover: hover)"
+                        )
+                        .matches
+                ) {
+
+                    return;
+
+                }
+
+
+                // IMPORTANT:
+                // Stop any playing video
+                stopAllMedia();
+
+
+                // Start portrait slideshow
+                startPortraitSlideshow();
+
+            }
+        );
+
+
+        // ========================================
+        // DESKTOP — MOUSE LEAVE
+        // ========================================
+
+        portraitsCard.addEventListener(
+            "mouseleave",
+            () => {
+
+                if (
+                    !window
+                        .matchMedia(
+                            "(hover: hover)"
+                        )
+                        .matches
+                ) {
+
+                    return;
+
+                }
+
 
                 stopPortraitSlideshow();
 
-            } else {
+            }
+        );
+
+
+        // ========================================
+        // MOBILE — TAP
+        // ========================================
+
+        portraitsCard.addEventListener(
+            "click",
+            () => {
+
+                // Only touch/mobile
+                if (
+                    window
+                        .matchMedia(
+                            "(hover: hover)"
+                        )
+                        .matches
+                ) {
+
+                    return;
+
+                }
+
+
+                // --------------------------------
+                // IF PORTRAITS ARE PLAYING
+                // STOP THEM
+                // --------------------------------
+
+                if (
+                    portraitInterval !== null
+                ) {
+
+                    stopPortraitSlideshow();
+
+                    return;
+
+                }
+
+
+                // --------------------------------
+                // OTHERWISE:
+                // STOP VIDEOS FIRST
+                // --------------------------------
+
+                stopAllMedia();
+
+
+                // --------------------------------
+                // START PORTRAITS
+                // --------------------------------
 
                 startPortraitSlideshow();
 
             }
-
-        }
-    );
+        );
 
 
-    // ========================================
-    // RESET ON SCREEN SIZE CHANGE
-    // ========================================
+        // ========================================
+        // RESET ON SCREEN SIZE CHANGE
+        // ========================================
 
-    window.addEventListener("resize", () => {
+        window.addEventListener(
+            "resize",
+            () => {
 
-        stopPortraitSlideshow();
+                stopPortraitSlideshow();
 
-    });
+            }
+        );
 
-});
+
+        console.log(
+            "Portrait slideshow initialized successfully."
+        );
+
+    }
+);
