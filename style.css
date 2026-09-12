@@ -1306,12 +1306,12 @@ section[id] {
     }
 
     .hero-text {
-        max-width: 90%;
-
-        margin-top: 30px;
+        max-width: 420px;
+        width: 88%;
+        margin-top: 32px;
 
         font-size: 14px;
-        line-height: 1.7;
+        line-height: 1.75;
     }
 
     .hero-buttons {

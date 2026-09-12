@@ -529,22 +529,22 @@ document.addEventListener(
 
         const portraitImages = [
 
-            "image_6.jpg",
-            "image_7.jpg",
-            "image_8.jpg",
-            "image_9.jpg",
-            "image_10.jpg",
-            "image_11.jpg",
-            "image_12.jpg",
-            "image_13.jpg",
-            "image_14.jpg",
-            "image_15.jpg",
-            "image_16.jpg",
-            "image_17.jpg",
-            "image_18.jpg",
-            "image_19.jpg",
-            "image_20.jpg",
-            "image_21.jpg"
+            "files/image_6.jpg",
+            "files/image_7.jpg",
+            "files/image_8.jpg",
+            "files/image_9.jpg",
+            "files/image_10.jpg",
+            "files/image_11.jpg",
+            "files/image_12.jpg",
+            "files/image_13.jpg",
+            "files/image_14.jpg",
+            "files/image_15.jpg",
+            "files/image_16.jpg",
+            "files/image_17.jpg",
+            "files/image_18.jpg",
+            "files/image_19.jpg",
+            "files/image_20.jpg",
+            "files/image_21.jpg"
 
         ];
 
