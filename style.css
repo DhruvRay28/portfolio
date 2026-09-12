@@ -490,7 +490,7 @@ video {
 }
 
 .reel-card:hover .reel-image {
-    transform: scale(0.985);
+    transform: scale(0.995);
 }
 
 .reel-image p {
@@ -588,7 +588,7 @@ video {
 
 .reel-card:hover .wedding-video {
     opacity: 1;
-    transform: scale(1.04);
+    transform: scale(1.055);
 }
 
 .reel-card:hover .wedding-thumbnail {
@@ -884,7 +884,7 @@ video {
 }
 
 .business-card:hover {
-    transform: translateY(-8px);
+    transform: translateY(-5px);
 }
 
 
@@ -1111,7 +1111,7 @@ video {
 }
 
 .contact-button:hover {
-    transform: translateY(-5px);
+    transform: translateY(-4px);
 }
 
 
@@ -1423,7 +1423,7 @@ section[id] {
     .reel-info span {
         display: block;
 
-        margin-top: 12px;
+        margin-top: 16px;
     }
 
     .center-button {
@@ -1866,7 +1866,7 @@ section[id] {
     }
 
     to {
-        transform: scale(1.07);
+        transform: scale(1.055);
     }
 
 }
@@ -2024,11 +2024,11 @@ section[id] {
 }
 
 .about-photo:hover img {
-    transform: scale(1.035);
+    transform: scale(1.025);
 
     filter:
-        contrast(1.03)
-        brightness(0.98);
+        contrast(1.02)
+        brightness(1);
 }
 
 .about-photo:hover::after {
@@ -2389,7 +2389,7 @@ footer:hover > div:first-child {
 
 
     .business-card:active {
-        transform: translateY(-3px);
+        transform: scale(0.985);
     }
 
 
@@ -2777,4 +2777,83 @@ footer:hover > div:first-child {
         transform: none;
     }
 
+}
+
+/* =========================================================
+PREMIUM PAGE LOAD
+========================================================= */
+
+body {
+    opacity: 0;
+    animation: pageFadeIn 0.8s ease forwards;
+}
+
+@keyframes pageFadeIn {
+    from {
+    opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    body {
+        animation: none;
+        opacity: 1;
+    }
+
+
+}
+
+/* =========================================================
+NAVIGATION — REFINED SPACING
+========================================================= */
+
+.navbar nav {
+align-items: center;
+}
+
+.navbar nav a {
+line-height: 1;
+padding: 6px 0;
+}
+
+/* =========================================================
+WEDDING REEL CTA
+========================================================= */
+
+.reel-info > span {
+transition:
+color 0.3s ease,
+transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reel-card:hover .reel-info > span {
+color: var(--gold);
+transform: translateX(5px);
+}
+
+/* =========================================================
+SERVICE DESCRIPTION HOVER
+========================================================= */
+
+.service p {
+transition:
+color 0.35s ease;
+}
+
+.service:hover p {
+color: #9a9690;
+}
+
+/* =========================================================
+FOOTER — BRAND HIERARCHY
+========================================================= */
+
+footer > div:first-child {
+letter-spacing: 1.5px;
+font-weight: 500;
 }
