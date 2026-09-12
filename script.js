@@ -27,7 +27,11 @@ const observer = new IntersectionObserver(
 );
 
 
-revealElements.forEach((element, index) => {
+// ========================================
+// PREMIUM SCROLL REVEAL
+// ========================================
+
+revealElements.forEach((element) => {
 
     element.classList.add("fade-in");
 
@@ -37,8 +41,23 @@ revealElements.forEach((element, index) => {
 
     } else {
 
+        const parent =
+            element.closest(
+                ".section, .about, .business, .contact"
+            );
+
+        const siblings =
+            parent
+                ? Array.from(
+                    parent.querySelectorAll(".fade-in")
+                )
+                : [];
+
+        const index =
+            siblings.indexOf(element);
+
         element.style.transitionDelay =
-            `${Math.min(index * 0.04, 0.2)}s`;
+            `${Math.min(Math.max(index, 0) * 0.08, 0.24)}s`;
 
     }
 
@@ -47,8 +66,9 @@ revealElements.forEach((element, index) => {
 });
 
 
+
 // ========================================
-// HERO INTRO
+// HERO INTRO — CINEMATIC LOAD
 // ========================================
 
 window.addEventListener("load", () => {
@@ -58,18 +78,29 @@ window.addEventListener("load", () => {
 
     if (!hero || !heroContent) return;
 
-    requestAnimationFrame(() => {
+    const reducedMotion =
+        window.matchMedia(
+            "(prefers-reduced-motion: reduce)"
+        ).matches;
 
-        setTimeout(() => {
+    if (reducedMotion) {
 
-            hero.classList.add("hero-loaded");
-            heroContent.classList.add("hero-loaded");
+        hero.classList.add("hero-loaded");
+        heroContent.classList.add("hero-loaded");
 
-        }, 100);
+        return;
 
-    });
+    }
+
+    setTimeout(() => {
+
+        hero.classList.add("hero-loaded");
+        heroContent.classList.add("hero-loaded");
+
+    }, 150);
 
 });
+
 
 // ========================================
 // REDUCE MOTION
@@ -552,12 +583,26 @@ document.addEventListener(
                 portraitImages.length;
 
 
-            portraitsImage.src =
-                portraitImages[
-                    portraitIndex
-                ];
+            portraitsImage.style.opacity = "0";
+
+
+            setTimeout(() => {
+
+                portraitsImage.src =
+                    portraitImages[
+                        portraitIndex
+                    ];
+
+                requestAnimationFrame(() => {
+
+                    portraitsImage.style.opacity = "1";
+
+                });
+
+            }, 220);
 
         }
+
 
 
         // ----------------------------------------
@@ -579,6 +624,7 @@ document.addEventListener(
             // Always begin with image_6
             portraitIndex = 0;
 
+            portraitsImage.style.opacity = "1";
 
             portraitsImage.src =
                 portraitImages[0];
@@ -597,7 +643,7 @@ document.addEventListener(
                         showNextPortrait();
 
                     },
-                    500
+                    750
                 );
 
         }
@@ -625,6 +671,7 @@ document.addEventListener(
             // Back to image_6
             portraitIndex = 0;
 
+            portraitsImage.style.opacity = "1";
 
             portraitsImage.src =
                 portraitImages[0];
@@ -778,3 +825,26 @@ document.addEventListener(
 
     }
 );
+
+// ========================================
+// VIDEO STATE POLISH
+// ========================================
+
+document.querySelectorAll(".business-video, .wedding-video").forEach((video) => {
+
+    video.addEventListener("ended", () => {
+
+        const card = video.closest(
+            ".business-card, .reel-card"
+        );
+
+        if (!card) return;
+
+        video.pause();
+        video.currentTime = 0;
+
+        card.classList.remove("video-playing");
+
+    });
+
+});
