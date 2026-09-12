@@ -558,16 +558,16 @@ document.addEventListener(
         // PRELOAD IMAGES
         // ----------------------------------------
 
-        portraitImages.forEach(
-            (src) => {
+ //       portraitImages.forEach(
+ //           (src) => {
 
-                const img =
-                    new Image();
+ //               const img =
+ //                   new Image();
 
-                img.src = src;
+ //               img.src = src;
 
-            }
-        );
+ //           }
+ //       );
 
 
         // ----------------------------------------
