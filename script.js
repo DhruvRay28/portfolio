@@ -53,15 +53,16 @@ revealElements.forEach((element, index) => {
 
 window.addEventListener("load", () => {
 
-    const heroContent =
-        document.querySelector(".hero-content");
+    const hero = document.querySelector(".hero");
+    const heroContent = document.querySelector(".hero-content");
 
-    if (!heroContent) return;
+    if (!hero || !heroContent) return;
 
     requestAnimationFrame(() => {
 
         setTimeout(() => {
 
+            hero.classList.add("hero-loaded");
             heroContent.classList.add("hero-loaded");
 
         }, 100);
@@ -69,7 +70,6 @@ window.addEventListener("load", () => {
     });
 
 });
-
 
 // ========================================
 // REDUCE MOTION
