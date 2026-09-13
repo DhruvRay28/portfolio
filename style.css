@@ -1367,6 +1367,87 @@ section[id] {
     align-items: center;
 }
 
+/* =========================================================
+   ABOUT — SUBTLE ORBIT DETAIL
+========================================================= */
+
+.about-content {
+    position: relative;
+}
+
+.about-orbit {
+    position: absolute;
+
+    width: 520px;
+    height: 520px;
+
+    right: -170px;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    border: 1px solid rgba(199, 169, 121, 0.12);
+
+    border-radius: 50%;
+
+    pointer-events: none;
+
+    z-index: -1;
+
+    opacity: 0.7;
+}
+
+.about-orbit::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 55px;
+
+    border: 1px solid rgba(199, 169, 121, 0.07);
+
+    border-radius: 50%;
+}
+
+.about-orbit::after {
+    content: "";
+
+    position: absolute;
+
+    width: 7px;
+    height: 7px;
+
+    top: 18%;
+    left: 14%;
+
+    border-radius: 50%;
+
+    background: rgba(199, 169, 121, 0.5);
+
+    box-shadow:
+        0 0 18px rgba(199, 169, 121, 0.22);
+}
+
+/* =========================================================
+   ABOUT ORBIT — VERY SLOW CINEMATIC MOTION
+========================================================= */
+
+.about-orbit {
+    animation: aboutOrbitFloat 45s linear infinite;
+}
+
+@keyframes aboutOrbitFloat {
+
+    from {
+        transform: translateY(-50%) rotate(0deg);
+    }
+
+    to {
+        transform: translateY(-50%) rotate(360deg);
+    }
+
+}
+
 .about-photo {
     position: relative;
     isolation: isolate;
@@ -2590,6 +2671,21 @@ footer a:hover::after {
         grid-template-columns: 1fr;
 
         gap: 55px;
+    }
+
+    .about-orbit {
+        width: 360px;
+        height: 360px;
+
+        right: -190px;
+        top: 20%;
+
+        opacity: 0.45;
+        animation-duration: 55s;
+    }
+
+    .about-orbit::before {
+        inset: 40px;
     }
 
     .about-photo {
