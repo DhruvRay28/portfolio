@@ -40,23 +40,25 @@
 
         <button
             class="mobile-menu-button"
+            id="mobileMenuButton"
             type="button"
-            aria-label="Open menu"
             aria-expanded="false"
+            aria-controls="mobileMenu"
         >
-            <span>MENU</span>
+            MENU
         </button>
 
     </header>
 
-        <!-- =========================
+    <!-- =========================
         MOBILE MENU
-        ========================== -->
+    ========================= -->
 
-    <div class="mobile-menu">
+    <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
 
         <button
             class="mobile-menu-close"
+            id="mobileMenuClose"
             type="button"
             aria-label="Close menu"
         >
@@ -67,22 +69,22 @@
 
             <a href="#work">
                 <span>01</span>
-                WORK
+                Work
             </a>
 
             <a href="#about">
                 <span>02</span>
-                ABOUT
+                About
             </a>
 
             <a href="#services">
                 <span>03</span>
-                SERVICES
+                Services
             </a>
 
             <a href="#contact">
                 <span>04</span>
-                CONTACT
+                Contact
             </a>
 
         </nav>

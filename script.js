@@ -857,6 +857,8 @@ function openMobileMenu() {
 
     document.body.classList.add("menu-open");
 
+    mobileMenu.setAttribute("aria-hidden", "false");
+
     if (mobileMenuButton) {
 
         mobileMenuButton.setAttribute(
@@ -867,6 +869,7 @@ function openMobileMenu() {
     }
 
 }
+
 
 
 // ----------------------------------------
@@ -880,6 +883,8 @@ function closeMobileMenu() {
     mobileMenu.classList.remove("active");
 
     document.body.classList.remove("menu-open");
+
+    mobileMenu.setAttribute("aria-hidden", "true");
 
     if (mobileMenuButton) {
 

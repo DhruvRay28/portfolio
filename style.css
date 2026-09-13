@@ -124,13 +124,13 @@ video {
     color: var(--gold-light);
 }
 
-.navbar nav {
+.desktop-nav {
     display: flex;
     align-items: center;
     gap: 35px;
 }
 
-.navbar nav a {
+.desktop-nav a {
     position: relative;
 
     padding: 6px 0;
@@ -145,7 +145,7 @@ video {
         opacity 0.3s ease;
 }
 
-.navbar nav a::after {
+.desktop-nav a::after {
     content: "";
 
     position: absolute;
@@ -165,16 +165,16 @@ video {
         transform 0.35s var(--ease);
 }
 
-.navbar nav:hover a:not(:hover) {
+.desktop-nav:hover a:not(:hover) {
     opacity: 0.45;
 }
 
-.navbar nav a:hover {
+.desktop-nav a:hover {
     color: #fff;
     opacity: 1;
 }
 
-.navbar nav a:hover::after {
+.desktop-nav a:hover::after {
     transform: scaleX(1);
     transform-origin: left;
 }
