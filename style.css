@@ -2977,3 +2977,21 @@ footer a:hover::after {
         animation: none;
     }
 }
+
+/* =========================================================
+   MOBILE MENU — PREVENT FLASH ON PAGE LOAD
+========================================================= */
+
+@media (max-width: 700px) {
+
+    .mobile-menu {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+    }
+
+    .mobile-menu:not(.active) {
+        display: flex;
+    }
+
+}

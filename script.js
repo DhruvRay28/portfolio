@@ -838,9 +838,6 @@ const mobileMenuButton =
 const mobileMenu =
     document.querySelector(".mobile-menu");
 
-const mobileMenuClose =
-    document.querySelector(".mobile-menu-close");
-
 const mobileMenuLinks =
     document.querySelectorAll(".mobile-menu-nav a");
 
@@ -934,21 +931,6 @@ if (mobileMenuButton) {
     );
 
 }
-
-
-// ----------------------------------------
-// CLOSE BUTTON
-// ----------------------------------------
-
-if (mobileMenuClose) {
-
-    mobileMenuClose.addEventListener(
-        "click",
-        closeMobileMenu
-    );
-
-}
-
 
 // ----------------------------------------
 // CLOSE AFTER NAVIGATION
