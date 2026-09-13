@@ -28,13 +28,21 @@
 }
 
 html {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+
     scroll-behavior: smooth;
 }
 
 body {
+    width: 100%;
+    max-width: 100%;
+
     background: var(--background);
     color: var(--cream);
     font-family: "DM Sans", sans-serif;
+
     overflow-x: hidden;
 }
 
