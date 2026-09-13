@@ -1375,161 +1375,105 @@ section[id] {
     position: relative;
 }
 
-/* -----------------------------------------
-   MAIN ORBIT
------------------------------------------ */
+
+/* =========================================================
+   ABOUT ORBIT
+========================================================= */
 
 .about-orbit {
     position: absolute;
 
-    width: 520px;
-    height: 520px;
+    width: 600px;
+    height: 600px;
 
-    right: -170px;
+    right: -210px;
     top: 50%;
 
     transform: translateY(-50%);
-
-    border: 1px solid rgba(199, 169, 121, 0.11);
-
-    border-radius: 50%;
 
     pointer-events: none;
 
     z-index: 0;
 
     opacity: 0.65;
-
-    animation:
-        aboutOrbitRotate
-        50s
-        linear
-        infinite;
 }
 
-/* -----------------------------------------
+
+/* =========================================================
+   ABOUT ORBIT SVG
+========================================================= */
+
+.about-orbit-svg {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    overflow: visible;
+}
+
+
+/* =========================================================
+   OUTER RING
+========================================================= */
+
+.about-orbit-ring-outer {
+    fill: none;
+
+    stroke:
+        rgba(199, 169, 121, 0.11);
+
+    stroke-width: 1;
+}
+
+
+/* =========================================================
    INNER RING
------------------------------------------ */
+========================================================= */
 
-.about-orbit::before {
-    content: "";
+.about-orbit-ring-inner {
+    fill: none;
 
-    position: absolute;
+    stroke:
+        rgba(199, 169, 121, 0.065);
 
-    inset: 55px;
-
-    border: 1px solid rgba(199, 169, 121, 0.065);
-
-    border-radius: 50%;
-}
-
-/* -----------------------------------------
-   FIRST MOVING BALL
------------------------------------------ */
-
-
-.about-orbit::after {
-    content: "";
-
-    position: absolute;
-
-    width: 7px;
-    height: 7px;
-
-    top: 50%;
-    left: 50%;
-
-    margin-left: -3.5px;
-    margin-top: -3.5px;
-
-    border-radius: 50%;
-
-    background: rgba(199, 169, 121, 0.48);
-
-    box-shadow:
-        0 0 18px rgba(199, 169, 121, 0.22);
-
-    transform:
-        rotate(0deg)
-        translateX(260px);
-}
-
-
-/* -----------------------------------------
-   SECOND MOVING BALL
------------------------------------------ */
-
-.about-orbit-dot {
-    position: absolute;
-
-    width: 5px;
-    height: 5px;
-
-    top: 50%;
-    left: 50%;
-
-    margin-left: -2.5px;
-    margin-top: -2.5px;
-
-    border-radius: 50%;
-
-    background: rgba(199, 169, 121, 0.35);
-
-    box-shadow:
-        0 0 15px rgba(199, 169, 121, 0.18);
-
-    transform:
-        rotate(180deg)
-        translateX(205px);
-
-    animation:
-        aboutInnerRotation
-        38s
-        linear
-        infinite;
+    stroke-width: 1;
 }
 
 
 /* =========================================================
-   ORBIT ROTATION
+   OUTER DOT
 ========================================================= */
 
-@keyframes aboutOrbitRotate {
+.about-orbit-dot-outer {
+    fill:
+        rgba(199, 169, 121, 0.70);
 
-    from {
-        transform:
-            translateY(-50%)
-            rotate(0deg);
-    }
-
-    to {
-        transform:
-            translateY(-50%)
-            rotate(360deg);
-    }
-
+    filter:
+        drop-shadow(
+            0 0 10px rgba(199, 169, 121, 0.28)
+        );
 }
 
 
 /* =========================================================
-   SECOND BALL ROTATION
+   INNER DOT
 ========================================================= */
 
-@keyframes aboutSecondOrbit {
+.about-orbit-dot-inner {
+    fill:
+        rgba(199, 169, 121, 0.55);
 
-    from {
-        transform:
-            rotate(180deg)
-            translateX(205px);
-    }
-
-    to {
-        transform:
-            rotate(540deg)
-            translateX(205px);
-    }
-
+    filter:
+        drop-shadow(
+            0 0 9px rgba(199, 169, 121, 0.22)
+        );
 }
+
+
+/* =========================================================
+   ABOUT PHOTO
+========================================================= */
 
 .about-photo {
     position: relative;
@@ -1544,6 +1488,7 @@ section[id] {
     box-shadow:
         0 25px 70px rgba(0, 0, 0, 0.22);
 }
+
 
 .about-photo img {
     width: 100%;
@@ -2782,21 +2727,25 @@ footer a:hover::after {
 
 
     /* =========================================================
-    ABOUT — MOBILE ORBIT
+    ABOUT — MOBILE
     ========================================================= */
 
     .about-content {
         position: relative;
+
         grid-template-columns: 1fr;
+
         gap: 55px;
     }
 
 
     /* =========================================================
-    OUTER RING
+    ABOUT — MOBILE ORBIT
     ========================================================= */
 
     .about-orbit {
+        position: absolute;
+
         width: 360px;
         height: 360px;
 
@@ -2810,204 +2759,95 @@ footer a:hover::after {
         z-index: 0;
 
         pointer-events: none;
-
-        border: 1px solid rgba(199, 169, 121, 0.14);
-        border-radius: 50%;
-
-        animation:
-            aboutOuterRotation
-            55s
-            linear
-            infinite;
     }
 
 
     /* =========================================================
-    INNER RING
+    ABOUT — MOBILE SVG
     ========================================================= */
 
-    .about-orbit::before {
-        content: "";
+    .about-orbit-svg {
+        width: 100%;
+        height: 100%;
 
-        position: absolute;
+        display: block;
 
-        inset: 40px;
-
-        border: 1px solid rgba(199, 169, 121, 0.10);
-
-        border-radius: 50%;
-
-        animation:
-            aboutInnerRotation
-            48s
-            linear
-            infinite;
+        overflow: visible;
     }
 
 
     /* =========================================================
-    OUTER DOT
-    — LOCKED TO OUTER RING
+    ABOUT — RINGS
     ========================================================= */
 
-    .about-orbit::after {
-        content: "";
+    .about-orbit-ring-outer {
+        fill: none;
 
-        position: absolute;
+        stroke: rgba(199, 169, 121, 0.14);
 
-        width: 7px;
-        height: 7px;
+        stroke-width: 1.5;
+    }
 
-        top: 50%;
-        left: 50%;
+    .about-orbit-ring-inner {
+        fill: none;
 
-        margin-left: -3.5px;
-        margin-top: -3.5px;
+        stroke: rgba(199, 169, 121, 0.09);
 
-        border-radius: 50%;
-
-        background: rgba(199, 169, 121, 0.65);
-
-        box-shadow:
-            0 0 18px rgba(199, 169, 121, 0.25);
-
-        transform-origin: 3.5px 3.5px;
-
-        animation:
-            aboutOuterDot
-            55s
-            linear
-            infinite;
+        stroke-width: 1.5;
     }
 
 
     /* =========================================================
-    INNER DOT
-    — LOCKED TO INNER RING
+    ABOUT — DOTS
     ========================================================= */
 
-    .about-orbit-dot {
-        position: absolute;
+    .about-orbit-dot-outer {
+        fill: rgba(199, 169, 121, 0.65);
 
-        width: 5px;
-        height: 5px;
+        filter:
+            drop-shadow(
+                0 0 8px rgba(199, 169, 121, 0.22)
+            );
+    }
 
-        top: 50%;
-        left: 50%;
+    .about-orbit-dot-inner {
+        fill: rgba(199, 169, 121, 0.55);
 
-        margin-left: -2.5px;
-        margin-top: -2.5px;
-
-        border-radius: 50%;
-
-        background: rgba(199, 169, 121, 0.55);
-
-        box-shadow:
-            0 0 14px rgba(199, 169, 121, 0.22);
-
-        transform-origin: 2.5px 2.5px;
-
-        animation:
-            aboutInnerDot
-            48s
-            linear
-            infinite;
+        filter:
+            drop-shadow(
+                0 0 7px rgba(199, 169, 121, 0.18)
+            );
     }
 
 
     /* =========================================================
-    CONTENT ABOVE ORBIT
+    ABOUT — CONTENT ABOVE ORBIT
     ========================================================= */
 
     .about-photo,
     .about-text {
         position: relative;
+
         z-index: 2;
     }
 
 
     /* =========================================================
-    REDUCED MOTION
+    ABOUT — REDUCED MOTION
     ========================================================= */
 
     @media (prefers-reduced-motion: reduce) {
 
-        .about-orbit,
-        .about-orbit::before,
-        .about-orbit::after,
-        .about-orbit-dot {
-            animation: none;
-        }
-
-    }
-
-        /* =========================================================
-    ABOUT — ORBIT DOT MOTION
-    ========================================================= */
-
-    /* Outer dot travels around the OUTER ring */
-    @keyframes aboutOuterDot {
-
-        0% {
-            transform: rotate(0deg)
-                    translateX(176.5px);
-        }
-
-        100% {
-            transform: rotate(360deg)
-                    translateX(176.5px);
-        }
-
-    }
-
-
-    /* Inner dot travels around the INNER ring */
-    @keyframes aboutInnerDot {
-
-        0% {
-            transform:
-                rotate(180deg)
-                translateX(137.5px);
-        }
-
-        100% {
-            transform:
-                rotate(540deg)
-                translateX(137.5px);
+        .about-orbit-svg animateMotion {
+            display: none;
         }
 
     }
 
 
     /* =========================================================
-    ABOUT — RING ROTATION
+    ABOUT PHOTO
     ========================================================= */
-
-    @keyframes aboutOuterRotation {
-
-        from {
-            transform: translateY(-50%) rotate(0deg);
-        }
-
-        to {
-            transform: translateY(-50%) rotate(360deg);
-        }
-
-    }
-
-
-    @keyframes aboutInnerRotation {
-
-        from {
-            transform: rotate(0deg);
-        }
-
-        to {
-            transform: rotate(-360deg);
-        }
-
-    }
-
 
     .about-photo {
         width: 100%;
@@ -3018,6 +2858,11 @@ footer a:hover::after {
         box-shadow:
             0 18px 45px rgba(0, 0, 0, 0.18);
     }
+
+
+    /* =========================================================
+    ABOUT BIG TEXT
+    ========================================================= */
 
     .big-text {
         font-size: 39px !important;
@@ -3183,7 +3028,7 @@ footer a:hover::after {
             translate(-50%, -50%)
             scale(0.95);
     }
-    
+
     /* =========================================================
     MOBILE CONTACT
     ========================================================= */
