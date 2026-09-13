@@ -1722,64 +1722,210 @@ section[id] {
 ========================================================= */
 
 .contact {
+    position: relative;
+
     min-height: 90vh;
 
     display: flex;
     flex-direction: column;
     justify-content: center;
 
+    overflow: hidden;
+
     border-top: 1px solid var(--line);
+
+    background:
+        radial-gradient(
+            circle at 75% 45%,
+            rgba(199, 169, 121, 0.08),
+            transparent 32%
+        );
 }
 
+
+/* -----------------------------------------
+   CONTACT BACKGROUND DETAIL
+----------------------------------------- */
+
+.contact::before {
+    content: "";
+
+    position: absolute;
+
+    width: 420px;
+    height: 420px;
+
+    right: -180px;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    border: 1px solid rgba(199, 169, 121, 0.08);
+
+    border-radius: 50%;
+
+    pointer-events: none;
+
+    transition:
+        transform 1.2s var(--ease),
+        border-color 0.6s ease;
+}
+
+.contact::after {
+    content: "";
+
+    position: absolute;
+
+    width: 240px;
+    height: 240px;
+
+    right: -90px;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    border: 1px solid rgba(199, 169, 121, 0.05);
+
+    border-radius: 50%;
+
+    pointer-events: none;
+}
+
+.contact:hover::before {
+    transform:
+        translateY(-50%)
+        scale(1.04);
+
+    border-color: rgba(199, 169, 121, 0.13);
+}
+
+
+/* -----------------------------------------
+   CONTACT NUMBER
+----------------------------------------- */
+
+.contact .section-number {
+    position: relative;
+
+    z-index: 2;
+
+    margin-bottom: 25px;
+}
+
+
+/* -----------------------------------------
+   CONTACT SMALL TEXT
+----------------------------------------- */
+
 .contact-small {
+    position: relative;
+
+    z-index: 2;
+
     color: #777;
 
     font-size: 11px;
     letter-spacing: 3px;
 
     margin-bottom: 30px;
+
+    transition:
+        color 0.4s ease,
+        letter-spacing 0.4s var(--ease);
 }
 
+.contact:hover .contact-small {
+    color: #999;
+
+    letter-spacing: 3.5px;
+}
+
+
+/* -----------------------------------------
+   CONTACT HEADING
+----------------------------------------- */
+
 .contact h2 {
+    position: relative;
+
+    z-index: 2;
+
+    max-width: 1200px;
+
     font-size: clamp(55px, 10vw, 150px);
 
     line-height: 0.85;
     letter-spacing: -6px;
+
+    transition:
+        letter-spacing 0.6s var(--ease);
+}
+
+.contact:hover h2 {
+    letter-spacing: -5.5px;
 }
 
 .contact h2 span {
+    display: inline-block;
+
     font-family: "Playfair Display", serif;
+
     font-style: italic;
     font-weight: 400;
 
     color: #aaa;
+
+    transition:
+        color 0.5s ease,
+        transform 0.6s var(--ease);
 }
+
+.contact:hover h2 span {
+    color: #c5beb5;
+
+    transform: translateX(4px);
+}
+
+
+/* -----------------------------------------
+   CONTACT BUTTON
+----------------------------------------- */
 
 .contact-button {
     position: relative;
+
+    z-index: 2;
+
     isolation: isolate;
     overflow: hidden;
 
     width: fit-content;
 
     margin-top: 60px;
+
     padding: 18px 30px;
 
     background: var(--cream);
+
     color: #111;
 
     font-size: 11px;
     letter-spacing: 1px;
 
+    border: 1px solid var(--cream);
+
     transition:
         transform 0.4s var(--ease),
-        color 0.3s ease;
+        color 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.4s ease;
 }
 
 .contact-button::before {
     content: "";
 
     position: absolute;
+
     inset: 0;
 
     z-index: -1;
@@ -1794,11 +1940,47 @@ section[id] {
 
 .contact-button:hover {
     color: #111;
+
     transform: translateY(-5px);
+
+    border-color: var(--gold);
+
+    box-shadow:
+        0 15px 35px rgba(199, 169, 121, 0.12);
 }
 
 .contact-button:hover::before {
     transform: translateY(0);
+}
+
+.contact-button:active {
+    transform: translateY(-2px) scale(0.98);
+}
+
+.contact-availability {
+    position: relative;
+    z-index: 2;
+
+    margin-top: 18px;
+
+    color: #666;
+
+    font-size: 9px;
+    font-weight: 400;
+
+    letter-spacing: 1.8px;
+    line-height: 1.6;
+
+    text-transform: uppercase;
+
+    transition:
+        color 0.3s ease,
+        letter-spacing 0.35s ease;
+}
+
+.contact:hover .contact-availability {
+    color: #85817b;
+    letter-spacing: 2px;
 }
 
 
@@ -2326,32 +2508,81 @@ footer a:hover::after {
     ----------------------------------------------------- */
 
     .contact {
-        min-height: 80svh;
+        min-height: 78svh;
 
-        justify-content: center;
+        padding-top: 100px;
+        padding-bottom: 100px;
+
+        background:
+            radial-gradient(
+                circle at 85% 50%,
+                rgba(199, 169, 121, 0.07),
+                transparent 40%
+            );
+    }
+
+    .contact::before {
+        width: 300px;
+        height: 300px;
+
+        right: -190px;
+    }
+
+    .contact::after {
+        width: 180px;
+        height: 180px;
+
+        right: -120px;
+    }
+
+    .contact .section-number {
+        margin-bottom: 20px;
     }
 
     .contact-small {
+        margin-bottom: 24px;
+
         font-size: 9px;
-
         letter-spacing: 2.5px;
-
-        margin-bottom: 25px;
     }
 
     .contact h2 {
+        max-width: 100%;
+
         font-size: clamp(48px, 13.5vw, 73px);
 
         line-height: 0.93;
         letter-spacing: -4px;
     }
 
-    .contact-button {
-        margin-top: 48px;
-
-        padding: 16px 24px;
+    .contact:hover h2 {
+        letter-spacing: -4px;
     }
 
+    .contact h2 span {
+        transform: none;
+    }
+
+    .contact:hover h2 span {
+        transform: none;
+    }
+
+    .contact-button {
+        margin-top: 45px;
+
+        padding: 16px 24px;
+
+        font-size: 10px;
+    }
+
+    .contact-availability {
+        margin-top: 15px;
+
+        font-size: 8px;
+        letter-spacing: 1.4px;
+
+        line-height: 1.6;
+    }
 
     /* -----------------------------------------------------
        FOOTER
@@ -2394,6 +2625,7 @@ footer a:hover::after {
         transform: scale(0.985);
     }
 }
+
 
 
 /* =========================================================
