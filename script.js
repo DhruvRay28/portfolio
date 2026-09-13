@@ -922,7 +922,15 @@ if (mobileMenuButton) {
 
     mobileMenuButton.addEventListener(
         "click",
-        openMobileMenu
+        () => {
+
+            if (mobileMenuButton.classList.contains("active")) {
+                closeMobileMenu();
+            } else {
+                openMobileMenu();
+            }
+
+        }
     );
 
 }
