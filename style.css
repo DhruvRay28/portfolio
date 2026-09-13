@@ -2829,37 +2829,129 @@ footer a:hover::after {
         gap: 55px;
     }
 
-    /* Put orbit behind the ABOUT TEXT area */
+
+    /* ---------------------------------------------------------
+    OUTER ORBIT
+    --------------------------------------------------------- */
+
     .about-orbit {
         width: 360px;
         height: 360px;
 
-        right: -180px;
-        top: 58%;
+        /* Move the orbit DOWN and toward the right */
+        right: -175px;
+        top: 82%;
 
-        opacity: 0.40;
+        transform: translateY(-50%);
+
+        opacity: 0.38;
 
         z-index: 0;
 
-        animation-duration: 55s;
+        pointer-events: none;
+
+        animation:
+            aboutOuterRotation
+            55s
+            linear
+            infinite;
     }
 
-    /* Keep the actual content above the orbit */
+
+    /* ---------------------------------------------------------
+    INNER RING
+    --------------------------------------------------------- */
+
+    .about-orbit::before {
+        inset: 40px;
+
+        animation:
+            aboutInnerRotation
+            48s
+            linear
+            infinite;
+    }
+
+
+    /* ---------------------------------------------------------
+    OUTER MOVING DOT
+    --------------------------------------------------------- */
+
+    .about-orbit::after {
+        width: 7px;
+        height: 7px;
+
+        top: 50%;
+        left: 50%;
+
+        transform-origin: 0 0;
+
+        animation:
+            aboutOuterDot
+            55s
+            linear
+            infinite;
+    }
+
+
+    /* ---------------------------------------------------------
+    INNER MOVING DOT
+    --------------------------------------------------------- */
+
+    .about-orbit-dot {
+        position: absolute;
+
+        width: 5px;
+        height: 5px;
+
+        top: 50%;
+        left: 50%;
+
+        border-radius: 50%;
+
+        background:
+            rgba(199, 169, 121, 0.42);
+
+        box-shadow:
+            0 0 14px rgba(199, 169, 121, 0.18);
+
+        pointer-events: none;
+
+        animation:
+            aboutInnerDot
+            48s
+            linear
+            infinite;
+    }
+
+
+    /* ---------------------------------------------------------
+    KEEP CONTENT ABOVE ORBITS
+    --------------------------------------------------------- */
+
     .about-photo,
     .about-text {
         position: relative;
+
         z-index: 2;
     }
 
-    /* Inner ring */
-    .about-orbit::before {
-        inset: 40px;
+
+    /* ---------------------------------------------------------
+    MOBILE — REDUCED MOTION
+    --------------------------------------------------------- */
+
+    @media (prefers-reduced-motion: reduce) {
+
+        .about-orbit,
+        .about-orbit::before,
+        .about-orbit::after,
+        .about-orbit-dot {
+            animation: none;
+        }
+
     }
 
-    /* Inner moving dot */
-    .about-orbit-dot {
-        animation-duration: 48s;
-    }
 
     .about-photo {
         width: 100%;
