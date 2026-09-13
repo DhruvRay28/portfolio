@@ -2979,24 +2979,6 @@ footer a:hover::after {
 }
 
 /* =========================================================
-   MOBILE MENU — PREVENT FLASH ON PAGE LOAD
-========================================================= */
-
-@media (max-width: 700px) {
-
-    .mobile-menu {
-        opacity: 0;
-        visibility: hidden;
-        pointer-events: none;
-    }
-
-    .mobile-menu:not(.active) {
-        display: flex;
-    }
-
-}
-
-/* =========================================================
    SCROLLED NAVIGATION
 ========================================================= */
 
@@ -3063,4 +3045,20 @@ footer a:hover::after {
     .navbar.scrolled .logo span {
         color: var(--gold);
     }
+}
+
+/* =========================================================
+   MOBILE MENU — PREVENT FLASH ON PAGE LOAD
+========================================================= */
+
+@media (max-width: 700px) {
+
+    .mobile-menu {
+        display: none;
+    }
+
+    .mobile-menu.active {
+        display: flex;
+    }
+
 }
