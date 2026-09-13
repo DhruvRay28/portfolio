@@ -2818,31 +2818,45 @@ footer a:hover::after {
 
 
     /* =========================================================
-    ABOUT ORBITS — MOBILE
+    ABOUT — MOBILE ORBIT POSITION
     ========================================================= */
 
     .about-content {
+        position: relative;
+
         grid-template-columns: 1fr;
 
         gap: 55px;
     }
 
+    /* Put orbit behind the ABOUT TEXT area */
     .about-orbit {
         width: 360px;
         height: 360px;
 
-        right: -190px;
-        top: 20%;
+        right: -180px;
+        top: 58%;
 
         opacity: 0.40;
+
+        z-index: 0;
 
         animation-duration: 55s;
     }
 
+    /* Keep the actual content above the orbit */
+    .about-photo,
+    .about-text {
+        position: relative;
+        z-index: 2;
+    }
+
+    /* Inner ring */
     .about-orbit::before {
         inset: 40px;
     }
 
+    /* Inner moving dot */
     .about-orbit-dot {
         animation-duration: 48s;
     }
