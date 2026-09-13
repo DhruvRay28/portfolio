@@ -945,6 +945,24 @@ mobileMenuLinks.forEach((link) => {
 
 });
 
+// ----------------------------------------
+// CLOSE WHEN TAPPING OUTSIDE MENU LINKS
+// ----------------------------------------
+
+if (mobileMenu) {
+
+    mobileMenu.addEventListener(
+        "click",
+        (event) => {
+
+            if (event.target === mobileMenu) {
+                closeMobileMenu();
+            }
+
+        }
+    );
+
+}
 
 // ----------------------------------------
 // ESC KEY
