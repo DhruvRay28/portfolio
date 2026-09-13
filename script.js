@@ -861,14 +861,22 @@ function openMobileMenu() {
 
     if (mobileMenuButton) {
 
+        mobileMenuButton.classList.add("active");
+
         mobileMenuButton.setAttribute(
             "aria-expanded",
             "true"
         );
 
+        mobileMenuButton.setAttribute(
+            "aria-label",
+            "Close menu"
+        );
+
     }
 
 }
+
 
 
 
@@ -888,14 +896,22 @@ function closeMobileMenu() {
 
     if (mobileMenuButton) {
 
+        mobileMenuButton.classList.remove("active");
+
         mobileMenuButton.setAttribute(
             "aria-expanded",
             "false"
         );
 
+        mobileMenuButton.setAttribute(
+            "aria-label",
+            "Open menu"
+        );
+
     }
 
 }
+
 
 
 // ----------------------------------------
