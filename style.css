@@ -1317,9 +1317,9 @@ section[id] {
     .hero-buttons {
         flex-wrap: wrap;
 
-        gap: 18px;
+        gap: 14px 20px;
 
-        margin-top: 30px;
+        margin-top: 34px;
     }
 
     .button {
@@ -1349,7 +1349,7 @@ section[id] {
     ------------------------- */
 
     .section {
-        padding: 90px 6%;
+        padding: 105px 6%;
     }
 
     .section-header {
@@ -1363,9 +1363,9 @@ section[id] {
     }
 
     .section-header h2 {
-        font-size: clamp(48px, 14vw, 72px);
+        font-size: clamp(48px, 13.5vw, 70px);
 
-        line-height: 0.92;
+        line-height: 0.94;
         letter-spacing: -3px;
     }
 
@@ -1394,7 +1394,7 @@ section[id] {
     }
 
     .reel-image {
-        aspect-ratio: 16 / 10;
+        aspect-ratio: 16 / 10.5;
 
         padding: 20px;
     }
@@ -1413,11 +1413,15 @@ section[id] {
     }
 
     .reel-info h3 {
-        font-size: 17px;
+        font-size: 18px;
+        font-weight: 500;
+        letter-spacing: -0.2px;
     }
 
     .reel-info p {
         font-size: 11px;
+        line-height: 1.5;
+        color: #85817b;
     }
 
     .reel-info span {
@@ -1427,7 +1431,8 @@ section[id] {
     }
 
     .center-button {
-        margin-top: 55px;
+        text-align: center;
+        margin-top: 65px;
     }
 
 
