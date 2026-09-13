@@ -827,3 +827,127 @@ window.addEventListener(
 
     }
 );
+
+// ========================================
+// MOBILE MENU
+// ========================================
+
+const mobileMenuButton =
+    document.querySelector(".mobile-menu-button");
+
+const mobileMenu =
+    document.querySelector(".mobile-menu");
+
+const mobileMenuClose =
+    document.querySelector(".mobile-menu-close");
+
+const mobileMenuLinks =
+    document.querySelectorAll(".mobile-menu-nav a");
+
+
+// ----------------------------------------
+// OPEN MENU
+// ----------------------------------------
+
+function openMobileMenu() {
+
+    if (!mobileMenu) return;
+
+    mobileMenu.classList.add("active");
+
+    document.body.classList.add("menu-open");
+
+    if (mobileMenuButton) {
+
+        mobileMenuButton.setAttribute(
+            "aria-expanded",
+            "true"
+        );
+
+    }
+
+}
+
+
+// ----------------------------------------
+// CLOSE MENU
+// ----------------------------------------
+
+function closeMobileMenu() {
+
+    if (!mobileMenu) return;
+
+    mobileMenu.classList.remove("active");
+
+    document.body.classList.remove("menu-open");
+
+    if (mobileMenuButton) {
+
+        mobileMenuButton.setAttribute(
+            "aria-expanded",
+            "false"
+        );
+
+    }
+
+}
+
+
+// ----------------------------------------
+// MENU BUTTON
+// ----------------------------------------
+
+if (mobileMenuButton) {
+
+    mobileMenuButton.addEventListener(
+        "click",
+        openMobileMenu
+    );
+
+}
+
+
+// ----------------------------------------
+// CLOSE BUTTON
+// ----------------------------------------
+
+if (mobileMenuClose) {
+
+    mobileMenuClose.addEventListener(
+        "click",
+        closeMobileMenu
+    );
+
+}
+
+
+// ----------------------------------------
+// CLOSE AFTER NAVIGATION
+// ----------------------------------------
+
+mobileMenuLinks.forEach((link) => {
+
+    link.addEventListener(
+        "click",
+        closeMobileMenu
+    );
+
+});
+
+
+// ----------------------------------------
+// ESC KEY
+// ----------------------------------------
+
+document.addEventListener(
+    "keydown",
+    (event) => {
+
+        if (event.key === "Escape") {
+
+            closeMobileMenu();
+
+        }
+
+    }
+);
