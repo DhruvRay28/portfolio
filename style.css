@@ -2167,125 +2167,170 @@ section[id] {
         );
 }
 
-
 /* =========================================================
-   CONTACT ORBITS
-   TWO VERY SUBTLE MOVING DETAILS
+   CONTACT INFINITY
 ========================================================= */
 
-/* -----------------------------------------
-   OUTER RING + FIRST MOVING BALL
------------------------------------------ */
-
-.contact::before {
-    content: "";
-
+.contact-infinity {
     position: absolute;
 
-    width: 420px;
-    height: 420px;
+    width: 720px;
+    height: 360px;
 
-    right: -140px;
+    right: -100px;
     top: 50%;
 
     transform: translateY(-50%);
 
-    border: 1px solid rgba(199, 169, 121, 0.10);
-
-    border-radius: 50%;
-
     pointer-events: none;
 
     z-index: 0;
-
-    background:
-        radial-gradient(
-            circle at 18% 18%,
-            rgba(199, 169, 121, 0.45) 0,
-            rgba(199, 169, 121, 0.12) 3px,
-            transparent 7px
-        );
-
-    animation:
-        contactOrbitOuter 30s linear infinite;
 }
 
 
-/* -----------------------------------------
-   INNER RING + SECOND MOVING BALL
------------------------------------------ */
+/* =========================================================
+   INFINITY LOOPS
+========================================================= */
 
-.contact::after {
-    content: "";
-
+.contact-infinity-loop {
     position: absolute;
 
-    width: 240px;
-    height: 240px;
+    width: 360px;
+    height: 360px;
 
-    right: -70px;
+    top: 0;
+
+    border: 1px solid rgba(199, 169, 121, 0.13);
+
+    border-radius: 50%;
+}
+
+.contact-infinity-loop-left {
+    left: 0;
+}
+
+.contact-infinity-loop-right {
+    right: 0;
+}
+
+
+/* =========================================================
+   DOT
+========================================================= */
+
+.contact-infinity-dot {
+    position: absolute;
+
+    width: 7px;
+    height: 7px;
+
     top: 50%;
+    left: 50%;
 
-    transform: translateY(-50%);
-
-    border: 1px solid rgba(199, 169, 121, 0.06);
+    margin-left: -3.5px;
+    margin-top: -3.5px;
 
     border-radius: 50%;
 
-    pointer-events: none;
+    background: rgba(199, 169, 121, 0.70);
 
-    z-index: 0;
-
-    background:
-        radial-gradient(
-            circle at 75% 75%,
-            rgba(199, 169, 121, 0.40) 0,
-            rgba(199, 169, 121, 0.10) 3px,
-            transparent 7px
-        );
+    box-shadow:
+        0 0 18px rgba(199, 169, 121, 0.22);
 
     animation:
-        contactOrbitInner 22s linear infinite reverse;
+        contactInfinity
+        10s
+        linear
+        infinite;
 }
 
 
 /* =========================================================
-   CONTACT ORBIT — MOTION
+   DOT — FOLLOWS THE INFINITY RING
 ========================================================= */
 
-@keyframes contactOrbitOuter {
+@keyframes contactInfinity {
 
-    from {
-        transform: translateY(-50%) rotate(0deg);
+    /* LEFT LOOP — TOP */
+    0% {
+        transform:
+            translate(-180px, -180px)
+            rotate(0deg)
+            translateX(180px);
     }
 
-    to {
-        transform: translateY(-50%) rotate(360deg);
+    /* LEFT LOOP — LEFT */
+    12.5% {
+        transform:
+            translate(-180px, -180px)
+            rotate(90deg)
+            translateX(180px);
     }
 
-}
-
-
-@keyframes contactOrbitInner {
-
-    from {
-        transform: translateY(-50%) rotate(0deg);
+    /* LEFT LOOP — BOTTOM */
+    25% {
+        transform:
+            translate(-180px, -180px)
+            rotate(180deg)
+            translateX(180px);
     }
 
-    to {
-        transform: translateY(-50%) rotate(360deg);
+    /* LEFT LOOP — CENTER */
+    37.5% {
+        transform:
+            translate(-180px, -180px)
+            rotate(270deg)
+            translateX(180px);
     }
 
+    /* RIGHT LOOP — TOP */
+    50% {
+        transform:
+            translate(180px, -180px)
+            rotate(0deg)
+            translateX(180px);
+    }
+
+    /* RIGHT LOOP — RIGHT */
+    62.5% {
+        transform:
+            translate(180px, -180px)
+            rotate(90deg)
+            translateX(180px);
+    }
+
+    /* RIGHT LOOP — BOTTOM */
+    75% {
+        transform:
+            translate(180px, -180px)
+            rotate(180deg)
+            translateX(180px);
+    }
+
+    /* RIGHT LOOP — CENTER */
+    87.5% {
+        transform:
+            translate(180px, -180px)
+            rotate(270deg)
+            translateX(180px);
+    }
+
+    /* BACK TO LEFT */
+    100% {
+        transform:
+            translate(-180px, -180px)
+            rotate(360deg)
+            translateX(180px);
+    }
 }
 
 
 /* =========================================================
-   CONTACT CONTENT — ALWAYS ABOVE ORBITS
+   CONTACT CONTENT
 ========================================================= */
 
-.contact > * {
+.contact > *:not(.contact-infinity) {
     position: relative;
-
     z-index: 2;
 }
 
@@ -3001,13 +3046,15 @@ footer a:hover::after {
     @keyframes aboutInnerDot {
 
         0% {
-            transform: rotate(0deg)
-                    translateX(137.5px);
+            transform:
+                rotate(180deg)
+                translateX(137.5px);
         }
 
         100% {
-            transform: rotate(360deg)
-                    translateX(137.5px);
+            transform:
+                rotate(540deg)
+                translateX(137.5px);
         }
 
     }
@@ -3218,7 +3265,6 @@ footer a:hover::after {
             scale(0.95);
     }
 
-
     /* =========================================================
     MOBILE CONTACT
     ========================================================= */
@@ -3237,33 +3283,100 @@ footer a:hover::after {
             );
     }
 
-    /* -----------------------------------------
-       OUTER RING
-    ----------------------------------------- */
 
-    .contact::before {
-        width: 300px;
-        height: 300px;
+    /* =========================================================
+    CONTACT INFINITY — MOBILE
+    ========================================================= */
 
-        right: -150px;
+    .contact-infinity {
+        position: absolute;
 
-        animation-duration: 38s;
+        width: 520px;
+        height: 260px;
+
+        right: -190px;
+        top: 50%;
+
+        transform: translateY(-50%);
+
+        pointer-events: none;
+
+        z-index: 0;
+
+        opacity: 0.75;
     }
 
 
-    /* -----------------------------------------
-       INNER RING
-    ----------------------------------------- */
+    /* =========================================================
+    INFINITY LOOPS — MOBILE
+    ========================================================= */
 
-    .contact::after {
-        width: 180px;
-        height: 180px;
+    .contact-infinity-loop {
+        position: absolute;
 
-        right: -95px;
+        width: 260px;
+        height: 260px;
 
-        animation-duration: 30s;
+        top: 0;
+
+        border: 1px solid rgba(199, 169, 121, 0.13);
+
+        border-radius: 50%;
     }
 
+
+    .contact-infinity-loop-left {
+        left: 0;
+    }
+
+
+    .contact-infinity-loop-right {
+        right: 0;
+    }
+
+
+    /* =========================================================
+    INFINITY DOT — MOBILE
+    ========================================================= */
+
+    .contact-infinity-dot {
+        position: absolute;
+
+        width: 6px;
+        height: 6px;
+
+        top: 50%;
+        left: 50%;
+
+        margin-left: -3px;
+        margin-top: -3px;
+
+        border-radius: 50%;
+
+        background: rgba(199, 169, 121, 0.65);
+
+        box-shadow:
+            0 0 14px rgba(199, 169, 121, 0.22);
+
+        animation:
+            contactInfinity
+            10s
+            linear
+            infinite;
+    }
+
+
+    /* =========================================================
+    REDUCED MOTION
+    ========================================================= */
+
+    @media (prefers-reduced-motion: reduce) {
+
+        .contact-infinity-dot {
+            animation: none !important;
+        }
+
+    }
 
     /* -----------------------------------------
        NUMBER
@@ -3338,22 +3451,6 @@ footer a:hover::after {
         letter-spacing: 1.4px;
 
         line-height: 1.6;
-    }
-
-
-    /* =========================================================
-    REDUCED MOTION
-    ========================================================= */
-
-    @media (prefers-reduced-motion: reduce) {
-
-        .contact::before,
-        .contact::after,
-        .about-orbit,
-        .about-orbit-dot {
-            animation: none !important;
-        }
-
     }
 
     /* -----------------------------------------------------
