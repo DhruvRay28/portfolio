@@ -814,7 +814,6 @@ document.addEventListener(
     }
 );
 
-
 // ========================================
 // SAFETY — STOP MEDIA BEFORE PAGE UNLOAD
 // ========================================
@@ -840,6 +839,29 @@ const mobileMenu =
 
 const mobileMenuLinks =
     document.querySelectorAll(".mobile-menu-nav a");
+
+const navbar = 
+    document.querySelector(".navbar");
+
+
+// ========================================
+// NAVBAR — SCROLL EFFECT
+// ========================================
+
+if (navbar) {
+
+    window.addEventListener("scroll", () => {
+
+        if (window.scrollY > 40) {
+            navbar.classList.add("scrolled");
+        } else {
+            navbar.classList.remove("scrolled");
+        }
+
+    });
+
+}
+
 
 
 // ----------------------------------------

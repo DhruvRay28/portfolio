@@ -2995,3 +2995,72 @@ footer a:hover::after {
     }
 
 }
+
+/* =========================================================
+   SCROLLED NAVIGATION
+========================================================= */
+
+.navbar.scrolled {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    background: rgba(11, 11, 11, 0.72);
+
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+
+    padding-top: 18px;
+    padding-bottom: 18px;
+
+    box-shadow:
+        0 10px 35px rgba(0, 0, 0, 0.12);
+}
+
+/* Keep the logo elegant while scrolling */
+
+.navbar.scrolled .logo strong {
+    color: #f5f1eb;
+}
+
+.navbar.scrolled .logo span {
+    color: var(--gold);
+}
+
+/* Desktop navigation */
+
+.navbar.scrolled .desktop-nav a {
+    color: #aaa;
+}
+
+.navbar.scrolled .desktop-nav a:hover {
+    color: #fff;
+}
+
+
+/* =========================================================
+   MOBILE SCROLLED NAV
+========================================================= */
+
+@media (max-width: 700px) {
+
+    .navbar.scrolled {
+        padding-top: 17px;
+        padding-bottom: 17px;
+
+        background: rgba(11, 11, 11, 0.78);
+
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+    }
+
+    .navbar.scrolled .logo strong {
+        color: #fff;
+    }
+
+    .navbar.scrolled .logo span {
+        color: var(--gold);
+    }
+}
