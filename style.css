@@ -2185,143 +2185,49 @@ section[id] {
     pointer-events: none;
 
     z-index: 0;
+
+    opacity: 0.9;
 }
 
 
 /* =========================================================
-   INFINITY LOOPS
+   INFINITY SVG
 ========================================================= */
 
-.contact-infinity-loop {
-    position: absolute;
+.contact-infinity-svg {
+    width: 100%;
+    height: 100%;
 
-    width: 360px;
-    height: 360px;
+    display: block;
 
-    top: 0;
-
-    border: 1px solid rgba(199, 169, 121, 0.13);
-
-    border-radius: 50%;
-}
-
-.contact-infinity-loop-left {
-    left: 0;
-}
-
-.contact-infinity-loop-right {
-    right: 0;
+    overflow: visible;
 }
 
 
 /* =========================================================
-   DOT
+   INFINITY PATH
+========================================================= */
+
+.contact-infinity-svg path {
+    fill: none;
+
+    stroke: rgba(199, 169, 121, 0.13);
+
+    stroke-width: 1.5;
+}
+
+
+/* =========================================================
+   MOVING DOT
 ========================================================= */
 
 .contact-infinity-dot {
-    position: absolute;
+    fill: rgba(199, 169, 121, 0.70);
 
-    width: 7px;
-    height: 7px;
-
-    top: 50%;
-    left: 50%;
-
-    margin-left: -3.5px;
-    margin-top: -3.5px;
-
-    border-radius: 50%;
-
-    background: rgba(199, 169, 121, 0.70);
-
-    box-shadow:
-        0 0 18px rgba(199, 169, 121, 0.22);
-
-    animation:
-        contactInfinity
-        10s
-        linear
-        infinite;
-}
-
-
-/* =========================================================
-   DOT — FOLLOWS THE INFINITY RING
-========================================================= */
-
-@keyframes contactInfinity {
-
-    /* LEFT LOOP — TOP */
-    0% {
-        transform:
-            translate(-180px, -180px)
-            rotate(0deg)
-            translateX(180px);
-    }
-
-    /* LEFT LOOP — LEFT */
-    12.5% {
-        transform:
-            translate(-180px, -180px)
-            rotate(90deg)
-            translateX(180px);
-    }
-
-    /* LEFT LOOP — BOTTOM */
-    25% {
-        transform:
-            translate(-180px, -180px)
-            rotate(180deg)
-            translateX(180px);
-    }
-
-    /* LEFT LOOP — CENTER */
-    37.5% {
-        transform:
-            translate(-180px, -180px)
-            rotate(270deg)
-            translateX(180px);
-    }
-
-    /* RIGHT LOOP — TOP */
-    50% {
-        transform:
-            translate(180px, -180px)
-            rotate(0deg)
-            translateX(180px);
-    }
-
-    /* RIGHT LOOP — RIGHT */
-    62.5% {
-        transform:
-            translate(180px, -180px)
-            rotate(90deg)
-            translateX(180px);
-    }
-
-    /* RIGHT LOOP — BOTTOM */
-    75% {
-        transform:
-            translate(180px, -180px)
-            rotate(180deg)
-            translateX(180px);
-    }
-
-    /* RIGHT LOOP — CENTER */
-    87.5% {
-        transform:
-            translate(180px, -180px)
-            rotate(270deg)
-            translateX(180px);
-    }
-
-    /* BACK TO LEFT */
-    100% {
-        transform:
-            translate(-180px, -180px)
-            rotate(360deg)
-            translateX(180px);
-    }
+    filter:
+        drop-shadow(
+            0 0 10px rgba(199, 169, 121, 0.25)
+        );
 }
 
 
@@ -2331,9 +2237,22 @@ section[id] {
 
 .contact > *:not(.contact-infinity) {
     position: relative;
+
     z-index: 2;
 }
 
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .contact-infinity-dot {
+        animation: none;
+    }
+
+}
 
 /* =========================================================
    CONTACT NUMBER
@@ -3264,7 +3183,7 @@ footer a:hover::after {
             translate(-50%, -50%)
             scale(0.95);
     }
-
+    
     /* =========================================================
     MOBILE CONTACT
     ========================================================= */
@@ -3291,10 +3210,10 @@ footer a:hover::after {
     .contact-infinity {
         position: absolute;
 
-        width: 520px;
-        height: 260px;
+        width: 440px;
+        height: 220px;
 
-        right: -190px;
+        right: -150px;
         top: 50%;
 
         transform: translateY(-50%);
@@ -3308,61 +3227,43 @@ footer a:hover::after {
 
 
     /* =========================================================
-    INFINITY LOOPS — MOBILE
+    INFINITY SVG — MOBILE
     ========================================================= */
 
-    .contact-infinity-loop {
-        position: absolute;
+    .contact-infinity-svg {
+        width: 100%;
+        height: 100%;
 
-        width: 260px;
-        height: 260px;
+        display: block;
 
-        top: 0;
-
-        border: 1px solid rgba(199, 169, 121, 0.13);
-
-        border-radius: 50%;
-    }
-
-
-    .contact-infinity-loop-left {
-        left: 0;
-    }
-
-
-    .contact-infinity-loop-right {
-        right: 0;
+        overflow: visible;
     }
 
 
     /* =========================================================
-    INFINITY DOT — MOBILE
+    INFINITY PATH — MOBILE
+    ========================================================= */
+
+    .contact-infinity-svg path {
+        fill: none;
+
+        stroke: rgba(199, 169, 121, 0.13);
+
+        stroke-width: 1.5;
+    }
+
+
+    /* =========================================================
+    MOVING DOT — MOBILE
     ========================================================= */
 
     .contact-infinity-dot {
-        position: absolute;
+        fill: rgba(199, 169, 121, 0.65);
 
-        width: 6px;
-        height: 6px;
-
-        top: 50%;
-        left: 50%;
-
-        margin-left: -3px;
-        margin-top: -3px;
-
-        border-radius: 50%;
-
-        background: rgba(199, 169, 121, 0.65);
-
-        box-shadow:
-            0 0 14px rgba(199, 169, 121, 0.22);
-
-        animation:
-            contactInfinity
-            10s
-            linear
-            infinite;
+        filter:
+            drop-shadow(
+                0 0 8px rgba(199, 169, 121, 0.22)
+            );
     }
 
 
@@ -3372,8 +3273,8 @@ footer a:hover::after {
 
     @media (prefers-reduced-motion: reduce) {
 
-        .contact-infinity-dot {
-            animation: none !important;
+        .contact-infinity {
+            opacity: 0.75;
         }
 
     }
