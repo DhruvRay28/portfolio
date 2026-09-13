@@ -1352,7 +1352,6 @@ section[id] {
     text-align: center;
 }
 
-
 /* =========================================================
    ABOUT
 ========================================================= */
@@ -1365,13 +1364,7 @@ section[id] {
     gap: 100px;
 
     align-items: center;
-}
 
-/* =========================================================
-   ABOUT — CINEMATIC ORBITS — DESKTOP
-========================================================= */
-
-.about-content {
     position: relative;
 }
 
@@ -1404,10 +1397,10 @@ section[id] {
 ========================================================= */
 
 .about-orbit-svg {
+    display: block;
+
     width: 100%;
     height: 100%;
-
-    display: block;
 
     overflow: visible;
 }
@@ -1420,8 +1413,7 @@ section[id] {
 .about-orbit-ring-outer {
     fill: none;
 
-    stroke:
-        rgba(199, 169, 121, 0.11);
+    stroke: rgba(199, 169, 121, 0.11);
 
     stroke-width: 1;
 }
@@ -1434,42 +1426,108 @@ section[id] {
 .about-orbit-ring-inner {
     fill: none;
 
-    stroke:
-        rgba(199, 169, 121, 0.065);
+    stroke: rgba(199, 169, 121, 0.065);
 
     stroke-width: 1;
 }
 
 
 /* =========================================================
-   OUTER DOT
+   DOTS
 ========================================================= */
 
+.about-orbit-dot {
+    pointer-events: none;
+
+    transform-box: view-box;
+}
+
+
+/* OUTER DOT */
+
 .about-orbit-dot-outer {
-    fill:
-        rgba(199, 169, 121, 0.70);
+    fill: rgba(199, 169, 121, 0.70);
 
     filter:
         drop-shadow(
             0 0 10px rgba(199, 169, 121, 0.28)
         );
+
+    transform-origin: 300px 300px;
+
+    animation:
+        aboutOuterDot
+        18s
+        linear
+        infinite;
 }
 
 
-/* =========================================================
-   INNER DOT
-========================================================= */
+
+/* INNER DOT */
 
 .about-orbit-dot-inner {
-    fill:
-        rgba(199, 169, 121, 0.55);
+    fill: rgba(199, 169, 121, 0.55);
 
     filter:
         drop-shadow(
             0 0 9px rgba(199, 169, 121, 0.22)
         );
+
+    transform-origin: 300px 300px;
+
+    animation:
+        aboutInnerDot
+        18s
+        linear
+        infinite;
 }
 
+/* =========================================================
+   OUTER DOT MOTION
+========================================================= */
+
+@keyframes aboutOuterDot {
+
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+
+}
+
+
+/* =========================================================
+   INNER DOT MOTION
+========================================================= */
+
+@keyframes aboutInnerDot {
+
+    from {
+        transform: rotate(180deg);
+    }
+
+    to {
+        transform: rotate(540deg);
+    }
+
+}
+
+/* =========================================================
+ABOUT — REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .about-orbit-dot-outer,
+    .about-orbit-dot-inner {
+        animation: none;
+    }
+
+}
 
 /* =========================================================
    ABOUT PHOTO
@@ -1477,6 +1535,7 @@ section[id] {
 
 .about-photo {
     position: relative;
+
     isolation: isolate;
 
     aspect-ratio: 4 / 5;
@@ -2754,7 +2813,7 @@ footer a:hover::after {
 
         transform: translateY(-50%);
 
-        opacity: 0.55;
+        opacity: 0.65;
 
         z-index: 0;
 
@@ -2808,6 +2867,14 @@ footer a:hover::after {
             drop-shadow(
                 0 0 8px rgba(199, 169, 121, 0.22)
             );
+
+        transform-origin: 300px 300px;
+
+        animation:
+            aboutOuterDot
+            18s
+            linear
+            infinite;
     }
 
     .about-orbit-dot-inner {
@@ -2817,6 +2884,14 @@ footer a:hover::after {
             drop-shadow(
                 0 0 7px rgba(199, 169, 121, 0.18)
             );
+
+        transform-origin: 300px 300px;
+
+        animation:
+            aboutInnerDot
+            18s
+            linear
+            infinite;
     }
 
 
@@ -2838,12 +2913,12 @@ footer a:hover::after {
 
     @media (prefers-reduced-motion: reduce) {
 
-        .about-orbit-svg animateMotion {
-            display: none;
+        .about-orbit-dot-outer,
+        .about-orbit-dot-inner {
+            animation: none;
         }
 
     }
-
 
     /* =========================================================
     ABOUT PHOTO

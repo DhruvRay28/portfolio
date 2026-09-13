@@ -401,63 +401,48 @@
 
             <div class="about-content">
 
-            <div class="about-orbit" aria-hidden="true">
+                <div class="about-orbit" aria-hidden="true">
 
-                <svg
-                    class="about-orbit-svg"
-                    viewBox="0 0 600 600"
-                >
-
-                    <!-- OUTER RING -->
-                    <circle
-                        id="aboutOuterPath"
-                        class="about-orbit-ring about-orbit-ring-outer"
-                        cx="300"
-                        cy="300"
-                        r="250"
-                    />
-
-                    <!-- INNER RING -->
-                    <circle
-                        id="aboutInnerPath"
-                        class="about-orbit-ring about-orbit-ring-inner"
-                        cx="300"
-                        cy="300"
-                        r="150"
-                    />
-                    <!-- OUTER DOT -->
-                    <circle
-                        class="about-orbit-dot about-orbit-dot-outer"
-                        r="6"
+                    <svg
+                        class="about-orbit-svg"
+                        viewBox="0 0 600 600"
                     >
-                        <animateMotion
-                            dur="18s"
-                            repeatCount="indefinite"
-                            rotate="auto"
-                        >
-                            <mpath href="#aboutOuterPath" />
-                        </animateMotion>
-                    </circle>
 
+                        <!-- OUTER RING -->
+                        <circle
+                            id="aboutOuterPath"
+                            class="about-orbit-ring about-orbit-ring-outer"
+                            cx="300"
+                            cy="300"
+                            r="250"
+                        />
 
-                    <!-- INNER DOT — 180° OPPOSITE -->
-                    <circle
-                        class="about-orbit-dot about-orbit-dot-inner"
-                        r="5"
-                    >
-                        <animateMotion
-                            dur="18s"
-                            begin="-9s"
-                            repeatCount="indefinite"
-                            rotate="auto"
-                        >
-                            <mpath href="#aboutInnerPath" />
-                        </animateMotion>
-                    </circle>
+                        <!-- INNER RING -->
+                        <circle
+                            id="aboutInnerPath"
+                            class="about-orbit-ring about-orbit-ring-inner"
+                            cx="300"
+                            cy="300"
+                            r="150"
+                        />
+                            <!-- OUTER DOT -->
+                        <circle
+                            class="about-orbit-dot about-orbit-dot-outer"
+                            cx="550"
+                            cy="300"
+                            r="6"
+                        />
 
-                </svg>
+                        <!-- INNER DOT — STARTS 180° OPPOSITE -->
+                        <circle
+                            class="about-orbit-dot about-orbit-dot-inner"
+                            cx="150"
+                            cy="300"
+                            r="5"
+                        />
+                    </svg>
 
-            </div>
+                </div>
 
                 <div class="about-photo">
 
