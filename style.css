@@ -2,6 +2,22 @@
 
 
 /* =========================================================
+   VARIABLES
+========================================================= */
+
+:root {
+    --background: #0b0b0b;
+    --cream: #f5f1eb;
+    --muted: #8e8a84;
+    --line: #292725;
+    --gold: #c7a979;
+    --gold-light: #d2b989;
+
+    --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+
+/* =========================================================
    RESET
 ========================================================= */
 
@@ -16,8 +32,8 @@ html {
 }
 
 body {
-    background: #0b0b0b;
-    color: #f5f1eb;
+    background: var(--background);
+    color: var(--cream);
     font-family: "DM Sans", sans-serif;
     overflow-x: hidden;
 }
@@ -29,21 +45,8 @@ a {
 
 img,
 video {
-    max-width: 100%;
     display: block;
-}
-
-
-/* =========================================================
-   VARIABLES
-========================================================= */
-
-:root {
-    --background: #0b0b0b;
-    --cream: #f5f1eb;
-    --muted: #8e8a84;
-    --line: #292725;
-    --gold: #c7a979;
+    max-width: 100%;
 }
 
 
@@ -55,6 +58,7 @@ video {
     position: absolute;
     top: 0;
     left: 0;
+
     width: 100%;
 
     padding: 30px 5%;
@@ -64,46 +68,115 @@ video {
     justify-content: space-between;
 
     z-index: 20;
+
+    transition:
+        background 0.4s ease,
+        padding 0.4s ease;
 }
 
 .logo {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+
     text-decoration: none;
 }
 
 .logo strong {
     color: #fff;
+
     font-size: 26px;
     font-weight: 600;
+
     letter-spacing: 3px;
     line-height: 1;
+
     white-space: nowrap;
+
+    transition:
+        color 0.3s ease,
+        letter-spacing 0.35s var(--ease);
 }
 
 .logo span {
     color: var(--gold);
+
     font-size: 9px;
     font-weight: 400;
+
     letter-spacing: 1.8px;
+
     margin-top: 7px;
+
     white-space: nowrap;
+
+    transition:
+        color 0.3s ease,
+        opacity 0.3s ease;
+}
+
+.logo:hover strong {
+    color: var(--cream);
+    letter-spacing: 3.3px;
+}
+
+.logo:hover span {
+    color: var(--gold-light);
 }
 
 .navbar nav {
     display: flex;
+    align-items: center;
     gap: 35px;
 }
 
 .navbar nav a {
-    font-size: 12px;
+    position: relative;
+
+    padding: 6px 0;
+
     color: #aaa;
-    transition: color 0.3s ease;
+
+    font-size: 12px;
+    line-height: 1;
+
+    transition:
+        color 0.3s ease,
+        opacity 0.3s ease;
+}
+
+.navbar nav a::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    bottom: 0;
+
+    width: 100%;
+    height: 1px;
+
+    background: var(--gold);
+
+    transform: scaleX(0);
+    transform-origin: right;
+
+    transition:
+        transform 0.35s var(--ease);
+}
+
+.navbar nav:hover a:not(:hover) {
+    opacity: 0.45;
 }
 
 .navbar nav a:hover {
     color: #fff;
+    opacity: 1;
+}
+
+.navbar nav a:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
 }
 
 
@@ -128,7 +201,7 @@ video {
             rgba(120, 95, 65, 0.18),
             transparent 35%
         ),
-        #0b0b0b;
+        var(--background);
 }
 
 .hero-content {
@@ -141,8 +214,8 @@ video {
     transform: translateY(30px);
 
     transition:
-        opacity 1s cubic-bezier(0.22, 1, 0.36, 1),
-        transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+        opacity 1s var(--ease),
+        transform 1s var(--ease);
 }
 
 .hero-content.hero-loaded {
@@ -150,8 +223,9 @@ video {
     transform: translateY(0);
 }
 
+
 /* =========================================================
-   HERO CINEMATIC TEXT REVEAL
+   HERO TEXT REVEAL
 ========================================================= */
 
 .hero .eyebrow,
@@ -159,53 +233,230 @@ video {
 .hero-text,
 .hero-buttons {
     opacity: 0;
-
     transform: translateY(25px);
 
     transition:
-        opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
-        transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+        opacity 0.9s var(--ease),
+        transform 0.9s var(--ease);
 }
-
-
-/* Eyebrow */
 
 .hero-content.hero-loaded .eyebrow {
     opacity: 1;
     transform: translateY(0);
-
     transition-delay: 0.05s;
 }
-
-
-/* Main headline */
 
 .hero-content.hero-loaded h1 {
     opacity: 1;
     transform: translateY(0);
-
     transition-delay: 0.18s;
 }
-
-
-/* Description */
 
 .hero-content.hero-loaded .hero-text {
     opacity: 1;
     transform: translateY(0);
-
     transition-delay: 0.32s;
 }
-
-
-/* Buttons */
 
 .hero-content.hero-loaded .hero-buttons {
     opacity: 1;
     transform: translateY(0);
-
     transition-delay: 0.46s;
 }
+
+
+/* =========================================================
+   HERO TYPOGRAPHY
+========================================================= */
+
+.eyebrow {
+    font-size: 11px;
+    letter-spacing: 3px;
+
+    color: var(--gold);
+
+    margin-bottom: 35px;
+}
+
+.hero h1 {
+    font-size: clamp(65px, 11vw, 160px);
+
+    line-height: 0.85;
+    letter-spacing: -7px;
+
+    font-weight: 600;
+
+    text-wrap: balance;
+
+    text-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.02);
+
+    transition:
+        letter-spacing 0.6s var(--ease);
+}
+
+.hero h1 span {
+    display: inline-block;
+
+    font-family: "Playfair Display", serif;
+    font-style: italic;
+    font-weight: 400;
+
+    color: #bdb7ae;
+
+    transition:
+        color 0.5s ease,
+        transform 0.6s var(--ease);
+}
+
+.hero:hover h1 {
+    letter-spacing: -6.5px;
+}
+
+.hero:hover h1 span {
+    color: #d0c9bf;
+    transform: translateX(3px);
+}
+
+
+/* =========================================================
+   HERO DESCRIPTION
+========================================================= */
+
+.hero-text {
+    max-width: 470px;
+
+    margin-top: 45px;
+
+    color: var(--muted);
+
+    font-size: 16px;
+    line-height: 1.75;
+}
+
+
+/* =========================================================
+   HERO BUTTONS
+========================================================= */
+
+.hero-buttons {
+    display: flex;
+    align-items: center;
+
+    gap: 30px;
+
+    margin-top: 44px;
+}
+
+.button {
+    display: inline-block;
+
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+
+    padding: 16px 25px;
+
+    border: 1px solid #555;
+
+    color: var(--cream);
+
+    font-size: 11px;
+    letter-spacing: 1px;
+
+    transition:
+        color 0.3s ease,
+        border-color 0.3s ease,
+        transform 0.35s var(--ease);
+}
+
+.button::before {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background: var(--gold);
+
+    z-index: -1;
+
+    transform: translateX(-101%);
+
+    transition:
+        transform 0.45s var(--ease);
+}
+
+.button:hover {
+    color: #111;
+
+    border-color: var(--gold);
+
+    transform: translateY(-3px);
+}
+
+.button:hover::before {
+    transform: translateX(0);
+}
+
+.button > * {
+    position: relative;
+    z-index: 1;
+}
+
+.text-link {
+    display: inline-flex;
+    align-items: center;
+
+    position: relative;
+
+    gap: 5px;
+
+    padding-bottom: 5px;
+
+    color: #999;
+
+    font-size: 11px;
+    letter-spacing: 1px;
+
+    transition:
+        color 0.3s ease,
+        transform 0.3s ease;
+}
+
+.text-link::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    bottom: 0;
+
+    width: 100%;
+    height: 1px;
+
+    background: var(--gold);
+
+    transform: scaleX(0);
+    transform-origin: right;
+
+    transition:
+        transform 0.35s var(--ease);
+}
+
+.text-link:hover {
+    color: #fff;
+    transform: translateX(3px);
+}
+
+.text-link:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+
+/* =========================================================
+   HERO IMAGE
+========================================================= */
 
 .hero-image {
     position: absolute;
@@ -213,17 +464,30 @@ video {
     right: 5%;
     top: 42%;
 
-    transform: translateY(-50%);
-
     width: 35vw;
     max-width: 500px;
     height: 70vh;
 
     overflow: hidden;
+    isolation: isolate;
 
-    opacity: 0.65;
+    transform: translateY(-50%);
+
+    opacity: 0;
 
     z-index: 0;
+
+    box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.22);
+
+    transition:
+        opacity 1.2s ease,
+        transform 1.4s var(--ease);
+}
+
+.hero.hero-loaded .hero-image {
+    opacity: 0.65;
+    transform: translateY(-50%) translateX(0);
 }
 
 .hero-image img {
@@ -237,23 +501,50 @@ video {
         contrast(1.05)
         brightness(0.8);
 
-    transform: translateY(35px) scale(1.08);
+    transform: scale(1.03);
+
     opacity: 0;
 
+    will-change: transform;
+
     transition:
-        transform 1.6s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 1.6s var(--ease),
         opacity 1.2s ease;
 }
 
 .hero.hero-loaded .hero-image img {
     opacity: 1;
-    transform: translateY(0) scale(1.03);
+
+    animation:
+        heroImageBreath 10s ease-in-out infinite alternate;
 }
 
-/* Existing hover interaction */
+.hero-image::before {
+    content: "";
 
-.hero:hover .hero-image img {
-    transform: scale(1.06);
+    position: absolute;
+    inset: 0;
+
+    z-index: 2;
+
+    pointer-events: none;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255, 255, 255, 0.06),
+            transparent 35%
+        ),
+        linear-gradient(
+            to bottom,
+            transparent 55%,
+            rgba(0, 0, 0, 0.28)
+        );
+
+    opacity: 0.75;
+
+    transition:
+        opacity 0.6s ease;
 }
 
 .hero-image::after {
@@ -262,128 +553,45 @@ video {
     position: absolute;
     inset: 0;
 
+    z-index: 3;
+
+    pointer-events: none;
+
     background:
         linear-gradient(
             to right,
-            #0b0b0b 0%,
+            var(--background) 0%,
             transparent 60%
         ),
         linear-gradient(
             to top,
-            #0b0b0b 0%,
+            var(--background) 0%,
             transparent 40%
         );
 }
 
-.eyebrow {
-    font-size: 11px;
-    letter-spacing: 3px;
-    color: var(--gold);
-    margin-bottom: 35px;
+.hero:hover .hero-image::before {
+    opacity: 0.9;
 }
 
-.hero h1 {
-    font-size: clamp(65px, 11vw, 160px);
-    line-height: 0.85;
-    letter-spacing: -7px;
-    font-weight: 600;
+.hero:hover .hero-image img {
+    transform: scale(1.055);
 }
 
-.hero h1 span {
-    font-family: "Playfair Display", serif;
-    font-style: italic;
-    font-weight: 400;
-    color: #bdb7ae;
+@keyframes heroImageBreath {
+    from {
+        transform: scale(1.03);
+    }
+
+    to {
+        transform: scale(1.055);
+    }
 }
 
-.hero-text {
-    max-width: 470px;
-    margin-top: 45px;
-    color: var(--muted);
-    font-size: 16px;
-    line-height: 1.75;
-}
 
-.hero-buttons {
-    display: flex;
-    align-items: center;
-    gap: 30px;
-    margin-top: 44px;
-}
-
-.button {
-    display: inline-block;
-
-    padding: 16px 25px;
-
-    border: 1px solid #555;
-
-    font-size: 11px;
-    letter-spacing: 1px;
-
-    position: relative;
-    overflow: hidden;
-
-    transition:
-        color 0.35s ease,
-        border-color 0.35s ease,
-        transform 0.35s ease;
-}
-
-.button::before {
-    content: "";
-
-    position: absolute;
-    inset: 0;
-
-    background: var(--cream);
-
-    transform: translateY(101%);
-
-    transition:
-        transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
-
-    z-index: 0;
-}
-
-.button:hover::before {
-    transform: translateY(0);
-}
-
-.button:hover {
-    color: #111;
-    border-color: var(--cream);
-
-    transform: translateY(-2px);
-}
-
-.button {
-    isolation: isolate;
-}
-
-.button > * {
-    position: relative;
-    z-index: 1;
-}
-
-.text-link {
-    font-size: 11px;
-    color: #999;
-    letter-spacing: 1px;
-
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-
-    transition:
-        color 0.3s ease,
-        transform 0.3s ease;
-}
-
-.text-link:hover {
-    color: #fff;
-    transform: translateX(3px);
-}
+/* =========================================================
+   HERO SCROLL INDICATOR
+========================================================= */
 
 .scroll-indicator {
     position: absolute;
@@ -393,6 +601,7 @@ video {
 
     font-size: 10px;
     color: #666;
+
     letter-spacing: 2px;
 }
 
@@ -407,8 +616,8 @@ video {
 
 .section-header {
     display: flex;
-    justify-content: space-between;
     align-items: flex-end;
+    justify-content: space-between;
 
     margin-bottom: 90px;
 }
@@ -433,6 +642,7 @@ video {
     font-family: "Playfair Display", serif;
     font-style: italic;
     font-weight: 400;
+
     color: #aaa;
 }
 
@@ -445,31 +655,93 @@ video {
     line-height: 1.7;
 }
 
+section[id] {
+    scroll-margin-top: 0;
+}
+
 
 /* =========================================================
-   WEDDING WORK
+   SECTION DIVIDERS
 ========================================================= */
 
-.work {
+.work,
+.about,
+.services,
+.business,
+.contact {
+    position: relative;
+}
+
+.work,
+.about,
+.services,
+.business {
     border-top: 1px solid var(--line);
 }
 
+.work::after,
+.about::after,
+.services::after,
+.business::after {
+    content: "";
+
+    position: absolute;
+
+    left: 5%;
+    right: 5%;
+    bottom: 0;
+
+    height: 1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(199, 169, 121, 0.35),
+            transparent
+        );
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   WEDDING WORK GRID
+========================================================= */
+
 .reel-grid {
     display: grid;
+
     grid-template-columns: repeat(2, 1fr);
+
     gap: 90px 25px;
 }
 
 .reel-card {
     display: block;
+    position: relative;
+
+    transition:
+        transform 0.45s var(--ease),
+        opacity 0.35s ease;
 }
 
 .reel-card.large {
     grid-column: span 2;
 }
 
+.reel-card:hover {
+    transform: translateY(-4px);
+}
+
+
+/* =========================================================
+   WEDDING IMAGE
+========================================================= */
+
 .reel-image {
     position: relative;
+    isolation: isolate;
 
     aspect-ratio: 16 / 9;
 
@@ -480,22 +752,12 @@ video {
 
     padding: 25px;
 
-    transition: transform 0.5s ease;
+    transition:
+        transform 0.5s ease;
 }
 
 .reel-card:hover .reel-image {
     transform: scale(0.995);
-}
-
-.reel-image p {
-    position: relative;
-
-    z-index: 2;
-
-    font-size: 10px;
-    letter-spacing: 2px;
-
-    color: rgba(255,255,255,0.6);
 }
 
 .reel-image img {
@@ -506,13 +768,23 @@ video {
     height: 100%;
 
     object-fit: cover;
-
-    transition: transform 0.7s ease;
 }
 
-.reel-card:hover .reel-image img {
-    transform: scale(1.08);
+.reel-image p {
+    position: relative;
+
+    z-index: 4;
+
+    color: rgba(255, 255, 255, 0.6);
+
+    font-size: 10px;
+    letter-spacing: 2px;
 }
+
+
+/* =========================================================
+   WEDDING IMAGE OVERLAYS
+========================================================= */
 
 .reel-image::before {
     content: "";
@@ -520,22 +792,52 @@ video {
     position: absolute;
     inset: 0;
 
+    z-index: 2;
+
     background: rgba(0, 0, 0, 0.15);
 
     opacity: 0;
 
-    z-index: 1;
+    pointer-events: none;
 
-    transition: opacity 0.5s ease;
+    transition:
+        opacity 0.5s ease;
 }
 
 .reel-card:hover .reel-image::before {
     opacity: 1;
 }
 
+.reel-image::after {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    z-index: 3;
+
+    pointer-events: none;
+
+    background:
+        linear-gradient(
+            to top,
+            rgba(0, 0, 0, 0.32),
+            transparent 45%
+        );
+
+    opacity: 0.55;
+
+    transition:
+        opacity 0.6s ease;
+}
+
+.reel-card:hover .reel-image::after {
+    opacity: 0.85;
+}
+
 
 /* =========================================================
-   WEDDING VIDEO
+   WEDDING THUMBNAIL
 ========================================================= */
 
 .wedding-thumbnail {
@@ -549,10 +851,21 @@ video {
 
     z-index: 0;
 
+    transform: scale(1.01);
+
     transition:
-        transform 1s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 1s var(--ease),
         opacity 0.6s ease;
 }
+
+.reel-card:hover .wedding-thumbnail {
+    transform: scale(1.07);
+}
+
+
+/* =========================================================
+   WEDDING VIDEO
+========================================================= */
 
 .wedding-video {
     position: absolute;
@@ -561,9 +874,9 @@ video {
     width: 100%;
     height: 100%;
 
-    object-fit: cover;
-
     display: block;
+
+    object-fit: cover;
 
     opacity: 0;
 
@@ -575,18 +888,12 @@ video {
 
     transition:
         opacity 0.6s ease,
-        transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+        transform 1s var(--ease);
 }
-
-/* Desktop hover */
 
 .reel-card:hover .wedding-video {
     opacity: 1;
     transform: scale(1.055);
-}
-
-.reel-card:hover .wedding-thumbnail {
-    opacity: 0;
 }
 
 
@@ -632,25 +939,30 @@ video {
     top: 50%;
     left: 50%;
 
-    z-index: 3;
-
-    transform: translate(-50%, -50%);
+    z-index: 5;
 
     width: 70px;
     height: 70px;
-
-    border: 1px solid rgba(255,255,255,0.5);
-
-    border-radius: 50%;
 
     display: flex;
     align-items: center;
     justify-content: center;
 
-    font-size: 13px;
+    transform: translate(-50%, -50%);
+
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+
     color: white;
 
-    transition: all 0.3s ease;
+    font-size: 13px;
+
+    transition:
+        opacity 0.35s ease,
+        transform 0.45s var(--ease),
+        background 0.3s ease,
+        color 0.3s ease,
+        border-color 0.3s ease;
 }
 
 .reel-card:hover .play-button {
@@ -665,7 +977,7 @@ video {
         scale(1.12);
 
     box-shadow:
-        0 0 0 8px rgba(255,255,255,0.08);
+        0 0 0 8px rgba(255, 255, 255, 0.08);
 }
 
 
@@ -675,48 +987,114 @@ video {
 
 .reel-info {
     display: flex;
-
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
 
     padding-top: 20px;
+
+    transition:
+        transform 0.45s var(--ease);
+}
+
+.reel-card:hover .reel-info {
+    transform: translateY(-2px);
 }
 
 .reel-info h3 {
     font-size: 18px;
     font-weight: 500;
-    letter-spacing: -0.15px;
+
+    letter-spacing: -0.2px;
+
+    transition:
+        color 0.3s ease,
+        letter-spacing 0.35s ease;
+}
+
+.reel-card:hover .reel-info h3 {
+    color: #fff;
+    letter-spacing: 0.2px;
 }
 
 .reel-info p {
+    margin-top: 6px;
+
     color: #85817b;
+
     font-size: 11px;
     line-height: 1.5;
-    margin-top: 6px;
+
+    letter-spacing: 0.15px;
+
+    transition:
+        color 0.3s ease;
 }
 
-.reel-info span {
-    font-size: 10px;
+.reel-card:hover .reel-info p {
+    color: #999;
+}
+
+.reel-info > span {
+    display: inline-flex;
+    align-items: center;
+
+    position: relative;
+
+    gap: 5px;
+
+    padding-bottom: 4px;
 
     color: #777;
 
-    letter-spacing: 1px;
+    font-size: 10px;
+
+    letter-spacing: 1.2px;
+
+    transition:
+        color 0.3s ease,
+        transform 0.35s var(--ease);
+}
+
+.reel-info > span::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    bottom: 0;
+
+    width: 100%;
+    height: 1px;
+
+    background: var(--gold);
+
+    transform: scaleX(0);
+    transform-origin: right;
+
+    transition:
+        transform 0.35s var(--ease);
+}
+
+.reel-card:hover .reel-info > span {
+    color: var(--gold);
+    transform: translateX(4px);
+}
+
+.reel-card:hover .reel-info > span::after {
+    transform: scaleX(1);
+    transform-origin: left;
 }
 
 .center-button {
-    text-align: center;
-
     margin-top: 80px;
+
+    text-align: center;
 }
 
 
 /* =========================================================
    ABOUT
 ========================================================= */
-
-.about {
-    border-top: 1px solid var(--line);
-}
 
 .about-content {
     display: grid;
@@ -729,11 +1107,17 @@ video {
 }
 
 .about-photo {
+    position: relative;
+    isolation: isolate;
+
     aspect-ratio: 4 / 5;
 
     overflow: hidden;
 
     background: #171615;
+
+    box-shadow:
+        0 25px 70px rgba(0, 0, 0, 0.22);
 }
 
 .about-photo img {
@@ -741,10 +1125,82 @@ video {
     height: 100%;
 
     object-fit: cover;
+
+    filter:
+        contrast(1.02)
+        brightness(0.96)
+        saturate(0.92);
+
+    transition:
+        transform 1s var(--ease),
+        filter 0.6s ease;
+}
+
+.about-photo::after {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    z-index: 2;
+
+    pointer-events: none;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255, 255, 255, 0.04),
+            transparent 35%
+        ),
+        linear-gradient(
+            to top,
+            rgba(0, 0, 0, 0.18),
+            transparent 55%
+        );
+
+    opacity: 0.7;
+
+    transition:
+        opacity 0.5s ease;
+}
+
+.about-photo::before {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    z-index: 3;
+
+    pointer-events: none;
+
+    border: 1px solid rgba(255, 255, 255, 0.08);
+
+    opacity: 0;
+
+    transition:
+        opacity 0.5s ease;
+}
+
+.about-photo:hover img {
+    transform: scale(1.025);
+
+    filter:
+        contrast(1.02)
+        brightness(1)
+        saturate(0.92);
+}
+
+.about-photo:hover::after {
+    opacity: 0.9;
+}
+
+.about-photo:hover::before {
+    opacity: 1;
 }
 
 .photo-placeholder {
-    border: 1px solid rgba(255,255,255,0.2);
+    border: 1px solid rgba(255, 255, 255, 0.2);
 
     padding: 20px;
 
@@ -759,24 +1215,25 @@ video {
 }
 
 .big-text {
-    font-family: "Playfair Display", serif;
-
-    font-style: italic;
-
-    font-size: 55px !important;
+    margin-bottom: 35px !important;
 
     color: var(--cream) !important;
 
-    margin-bottom: 35px !important;
+    font-family: "Playfair Display", serif;
+
+    font-size: 55px !important;
+    font-style: italic;
+
+    line-height: 1.08;
 }
 
 .about-text p {
+    margin-bottom: 25px;
+
     color: var(--muted);
 
     font-size: 16px;
     line-height: 1.8;
-
-    margin-bottom: 25px;
 }
 
 
@@ -784,15 +1241,14 @@ video {
    SERVICES
 ========================================================= */
 
-.services {
-    border-top: 1px solid var(--line);
-}
-
 .service-list {
     border-top: 1px solid var(--line);
 }
 
 .service {
+    position: relative;
+    overflow: hidden;
+
     display: grid;
 
     grid-template-columns: 80px 1fr;
@@ -803,11 +1259,9 @@ video {
 
     border-bottom: 1px solid var(--line);
 
-    transition: padding 0.3s ease;
-}
-
-.service:hover {
-    padding-left: 15px;
+    transition:
+        padding 0.45s var(--ease),
+        background 0.4s ease;
 }
 
 .service > span {
@@ -816,12 +1270,57 @@ video {
     font-size: 11px;
 }
 
-.service h3 {
-    font-size: 27px;
+.service > div {
+    transition:
+        transform 0.45s var(--ease);
+}
 
+.service:hover {
+    padding-left: 15px;
+}
+
+.service:hover > div {
+    transform: translateX(5px);
+}
+
+.service::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    bottom: 0;
+
+    width: 100%;
+    height: 1px;
+
+    background: var(--gold);
+
+    transform: scaleX(0);
+    transform-origin: left;
+
+    transition:
+        transform 0.5s var(--ease);
+}
+
+.service:hover::after {
+    transform: scaleX(1);
+}
+
+.service h3 {
+    margin-bottom: 10px;
+
+    color: var(--cream);
+
+    font-size: 27px;
     font-weight: 500;
 
-    margin-bottom: 10px;
+    transition:
+        color 0.3s ease;
+}
+
+.service:hover h3 {
+    color: #fff;
 }
 
 .service p {
@@ -830,8 +1329,29 @@ video {
     color: #777;
 
     font-size: 13px;
-
     line-height: 1.6;
+
+    transition:
+        color 0.35s ease;
+}
+
+.service:hover p {
+    color: #9a9690;
+}
+
+.service-arrow {
+    display: inline-block;
+
+    font-size: 13px;
+
+    transition:
+        color 0.3s ease,
+        transform 0.4s var(--ease);
+}
+
+.service:hover .service-arrow {
+    color: #fff;
+    transform: translateX(8px);
 }
 
 
@@ -839,31 +1359,29 @@ video {
    BUSINESS
 ========================================================= */
 
-.business {
-    border-top: 1px solid var(--line);
-}
-
 .business-grid {
     display: grid;
 
     grid-template-columns: repeat(3, 1fr);
 
-    gap: 15px;
+    gap: 18px;
 }
 
 .business-card {
     position: relative;
+    isolation: isolate;
 
     aspect-ratio: 4 / 5;
 
     overflow: hidden;
 
     display: flex;
-
     align-items: flex-end;
     justify-content: flex-start;
 
     padding: 25px;
+
+    min-width: 0;
 
     background: #171615;
 
@@ -874,7 +1392,8 @@ video {
 
     cursor: pointer;
 
-    transition: transform 0.4s ease;
+    transition:
+        transform 0.4s var(--ease);
 }
 
 .business-card:hover {
@@ -898,8 +1417,8 @@ video {
     z-index: 0;
 
     transition:
-        transform 1s cubic-bezier(0.22, 1, 0.36, 1),
-        opacity 0.6s ease;
+        transform 0.9s var(--ease),
+        opacity 0.4s ease;
 }
 
 .business-card:hover .business-thumbnail {
@@ -918,9 +1437,9 @@ video {
     width: 100%;
     height: 100%;
 
-    object-fit: cover;
-
     display: block;
+
+    object-fit: cover;
 
     opacity: 0;
 
@@ -931,35 +1450,54 @@ video {
     transform: scale(1.03);
 
     transition:
-        opacity 0.6s ease,
-        transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+        transform 0.9s var(--ease),
+        opacity 0.4s ease;
 }
-
-
-/* Desktop hover */
 
 .business-card:hover .business-video {
     opacity: 1;
     transform: scale(1.04);
 }
 
-.business-card:hover .business-thumbnail {
-    opacity: 0;
-}
-
 
 /* =========================================================
-   BUSINESS OVERLAY
+   BUSINESS OVERLAYS
 ========================================================= */
+
+.business-card::before {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    z-index: 2;
+
+    pointer-events: none;
+
+    background:
+        linear-gradient(
+            to top,
+            rgba(0, 0, 0, 0.38),
+            transparent 55%
+        );
+
+    opacity: 0.65;
+
+    transition:
+        opacity 0.5s ease;
+}
+
+.business-card:hover::before {
+    opacity: 0.95;
+}
 
 .business-card::after {
     content: "";
 
     position: absolute;
-
     inset: 0;
 
-    z-index: 2;
+    z-index: 3;
 
     pointer-events: none;
 
@@ -987,14 +1525,23 @@ video {
     color: rgba(255, 255, 255, 0.85);
 
     font-size: 9px;
-
     letter-spacing: 2px;
+
+    line-height: 1.5;
 
     text-align: right;
 
     white-space: nowrap;
+
+    transition:
+        color 0.3s ease,
+        letter-spacing 0.35s ease;
 }
 
+.business-card:hover > span {
+    color: #fff;
+    letter-spacing: 2.4px;
+}
 
 
 /* =========================================================
@@ -1007,26 +1554,29 @@ video {
     top: 50%;
     left: 50%;
 
-    transform: translate(-50%, -50%);
+    z-index: 5;
 
     width: 65px;
     height: 65px;
-
-    border: 1px solid rgba(255,255,255,0.6);
-
-    border-radius: 50%;
 
     display: flex;
     align-items: center;
     justify-content: center;
 
+    transform: translate(-50%, -50%);
+
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+
     color: white;
 
     font-size: 13px;
 
-    z-index: 5;
-
-    transition: all 0.3s ease;
+    transition:
+        opacity 0.35s ease,
+        transform 0.45s var(--ease),
+        background 0.3s ease,
+        color 0.3s ease;
 }
 
 .business-card:hover .business-play {
@@ -1034,11 +1584,10 @@ video {
 
     background: white;
     color: black;
-    border-color: white;
 
     transform:
         translate(-50%, -50%)
-        scale(1.1);
+        scale(1.08);
 }
 
 .business-card.video-playing .business-play {
@@ -1047,130 +1596,7 @@ video {
 
 
 /* =========================================================
-   CONTACT
-========================================================= */
-
-.contact {
-    min-height: 90vh;
-
-    display: flex;
-
-    flex-direction: column;
-
-    justify-content: center;
-
-    border-top: 1px solid var(--line);
-}
-
-.contact-small {
-    color: #777;
-
-    font-size: 11px;
-    letter-spacing: 3px;
-
-    margin-bottom: 30px;
-}
-
-.contact h2 {
-    font-size: clamp(55px, 10vw, 150px);
-
-    line-height: 0.85;
-    letter-spacing: -6px;
-}
-
-.contact h2 span {
-    font-family: "Playfair Display", serif;
-
-    font-style: italic;
-
-    color: #aaa;
-
-    font-weight: 400;
-}
-
-.contact-button {
-    width: fit-content;
-
-    margin-top: 60px;
-
-    padding: 18px 30px;
-
-    background: var(--cream);
-    color: #111;
-
-    font-size: 11px;
-    letter-spacing: 1px;
-
-    transition: transform 0.3s ease;
-}
-
-.contact-button:hover {
-    transform: translateY(-4px);
-}
-
-
-/* =========================================================
-   FOOTER
-========================================================= */
-
-footer {
-    border-top: 1px solid var(--line);
-
-    padding: 30px 5%;
-
-    display: flex;
-
-    justify-content: space-between;
-
-    color: #555;
-
-    font-size: 10px;
-    letter-spacing: 1px;
-}
-
-footer a {
-    color: #888;
-}
-
-
-/* =========================================================
-   SCROLL REVEAL
-========================================================= */
-
-.fade-in {
-    opacity: 0;
-
-    transform: translateY(30px);
-
-    transition:
-        opacity 0.9s ease,
-        transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.fade-in.visible {
-    opacity: 1;
-
-    transform: translateY(0);
-}
-
-.fade-in.visible {
-    opacity: 1;
-
-    transform: translateY(0);
-}
-
-
-/* =========================================================
-   SCROLL POSITION
-========================================================= */
-
-section[id] {
-    scroll-margin-top: 0;
-}
-
-
-/* =========================================================
-   PORTRAITS SLIDESHOW
+   PORTRAITS
 ========================================================= */
 
 .portraits-card {
@@ -1182,7 +1608,7 @@ section[id] {
 
     transition:
         opacity 0.45s ease,
-        transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+        transform 1s var(--ease);
 }
 
 .portraits-card:hover .portraits-image {
@@ -1192,7 +1618,7 @@ section[id] {
 
 
 /* =========================================================
-   PORTRAIT INTERACTION HINT
+   PORTRAIT HINT
 ========================================================= */
 
 .portrait-hint {
@@ -1201,17 +1627,18 @@ section[id] {
     top: 50%;
     left: 50%;
 
-    transform: translate(-50%, -50%);
-
     z-index: 5;
+
+    transform: translate(-50%, -50%);
 
     padding: 12px 18px;
 
-    border: 1px solid rgba(255,255,255,0.45);
+    border: 1px solid rgba(255, 255, 255, 0.45);
 
-    background: rgba(0,0,0,0.25);
+    background: rgba(0, 0, 0, 0.25);
 
     backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
 
     color: white;
 
@@ -1241,14 +1668,243 @@ section[id] {
 
 
 /* =========================================================
+   PORTRAITS EXPLORE
+========================================================= */
+
+.portraits-explore {
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    z-index: 6;
+
+    transform: translate(-50%, -50%);
+
+    padding: 6px 10px;
+
+    border: 1px solid rgba(255, 255, 255, 0.85);
+
+    background: rgba(0, 0, 0, 0.06);
+
+    color: rgba(255, 255, 255, 0.85);
+
+    font-size: 7px;
+    font-weight: 400;
+
+    letter-spacing: 1.5px;
+    line-height: 1;
+
+    white-space: nowrap;
+
+    pointer-events: none;
+
+    transition:
+        opacity 0.35s ease,
+        transform 0.35s ease;
+}
+
+.mobile-explore {
+    display: none;
+}
+
+.business-card:hover .portraits-explore {
+    opacity: 0;
+
+    transform:
+        translate(-50%, -50%)
+        scale(0.95);
+}
+
+
+/* =========================================================
+   CONTACT
+========================================================= */
+
+.contact {
+    min-height: 90vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    border-top: 1px solid var(--line);
+}
+
+.contact-small {
+    color: #777;
+
+    font-size: 11px;
+    letter-spacing: 3px;
+
+    margin-bottom: 30px;
+}
+
+.contact h2 {
+    font-size: clamp(55px, 10vw, 150px);
+
+    line-height: 0.85;
+    letter-spacing: -6px;
+}
+
+.contact h2 span {
+    font-family: "Playfair Display", serif;
+    font-style: italic;
+    font-weight: 400;
+
+    color: #aaa;
+}
+
+.contact-button {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+
+    width: fit-content;
+
+    margin-top: 60px;
+    padding: 18px 30px;
+
+    background: var(--cream);
+    color: #111;
+
+    font-size: 11px;
+    letter-spacing: 1px;
+
+    transition:
+        transform 0.4s var(--ease),
+        color 0.3s ease;
+}
+
+.contact-button::before {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    z-index: -1;
+
+    background: var(--gold);
+
+    transform: translateY(100%);
+
+    transition:
+        transform 0.45s var(--ease);
+}
+
+.contact-button:hover {
+    color: #111;
+    transform: translateY(-5px);
+}
+
+.contact-button:hover::before {
+    transform: translateY(0);
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 30px 5%;
+
+    border-top: 1px solid var(--line);
+
+    color: #555;
+
+    font-size: 10px;
+    letter-spacing: 1px;
+}
+
+footer > div:first-child {
+    color: #777;
+
+    font-weight: 500;
+    letter-spacing: 1.5px;
+
+    transition:
+        color 0.3s ease;
+}
+
+footer:hover > div:first-child {
+    color: #aaa;
+}
+
+footer a {
+    position: relative;
+
+    padding-bottom: 4px;
+
+    color: #888;
+
+    transition:
+        color 0.3s ease;
+}
+
+footer a::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    bottom: 0;
+
+    width: 100%;
+    height: 1px;
+
+    background: var(--gold);
+
+    transform: scaleX(0);
+    transform-origin: right;
+
+    transition:
+        transform 0.35s var(--ease);
+}
+
+footer a:hover {
+    color: #fff;
+}
+
+footer a:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+
+/* =========================================================
+   SCROLL REVEAL
+========================================================= */
+
+.fade-in {
+    opacity: 0;
+
+    transform: translateY(30px);
+
+    transition:
+        opacity 0.9s ease,
+        transform 0.9s var(--ease);
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+/* =========================================================
    MOBILE
 ========================================================= */
 
 @media (max-width: 700px) {
 
-    /* -------------------------
+    /* -----------------------------------------------------
        NAVIGATION
-    ------------------------- */
+    ----------------------------------------------------- */
 
     .navbar {
         padding: 24px 6%;
@@ -1270,9 +1926,9 @@ section[id] {
     }
 
 
-    /* -------------------------
+    /* -----------------------------------------------------
        HERO
-    ------------------------- */
+    ----------------------------------------------------- */
 
     .hero {
         min-height: 100svh;
@@ -1289,6 +1945,7 @@ section[id] {
     .eyebrow {
         font-size: 9px;
         letter-spacing: 2px;
+
         margin-bottom: 25px;
     }
 
@@ -1299,9 +1956,22 @@ section[id] {
         letter-spacing: -3px;
     }
 
+    .hero:hover h1 {
+        letter-spacing: -3px;
+    }
+
+    .hero h1 span {
+        transform: none;
+    }
+
+    .hero:hover h1 span {
+        transform: none;
+    }
+
     .hero-text {
-        max-width: 420px;
         width: 88%;
+        max-width: 420px;
+
         margin-top: 32px;
 
         font-size: 14px;
@@ -1327,20 +1997,24 @@ section[id] {
         width: 80vw;
         height: 60vh;
 
-        opacity: 0.20;
+        opacity: 0.2 !important;
+    }
+
+    .hero:hover .hero-image img {
+        transform: scale(1.03);
     }
 
     .scroll-indicator {
-        bottom: 20px;
         right: 6%;
+        bottom: 20px;
 
         font-size: 8px;
     }
 
 
-    /* -------------------------
+    /* -----------------------------------------------------
        SECTIONS
-    ------------------------- */
+    ----------------------------------------------------- */
 
     .section {
         padding: 105px 6%;
@@ -1373,9 +2047,22 @@ section[id] {
     }
 
 
-    /* -------------------------
+    /* -----------------------------------------------------
+       SECTION DIVIDERS
+    ----------------------------------------------------- */
+
+    .work::after,
+    .about::after,
+    .services::after,
+    .business::after {
+        left: 6%;
+        right: 6%;
+    }
+
+
+    /* -----------------------------------------------------
        WEDDING WORK
-    ------------------------- */
+    ----------------------------------------------------- */
 
     .reel-grid {
         grid-template-columns: 1fr;
@@ -1408,31 +2095,27 @@ section[id] {
 
     .reel-info h3 {
         font-size: 18px;
-        font-weight: 500;
-        letter-spacing: -0.2px;
     }
 
     .reel-info p {
         font-size: 11px;
         line-height: 1.5;
-        color: #85817b;
     }
 
-    .reel-info span {
-        display: block;
+    .reel-info > span {
+        display: inline-flex;
 
         margin-top: 16px;
     }
 
     .center-button {
-        text-align: center;
         margin-top: 65px;
     }
 
 
-    /* -------------------------
+    /* -----------------------------------------------------
        WEDDING VIDEO MOBILE
-    ------------------------- */
+    ----------------------------------------------------- */
 
     .reel-card:hover .wedding-video {
         opacity: 0;
@@ -1444,7 +2127,6 @@ section[id] {
 
     .reel-card.video-playing .wedding-video {
         opacity: 1;
-
         transform: scale(1.02);
     }
 
@@ -1453,9 +2135,9 @@ section[id] {
     }
 
 
-    /* -------------------------
+    /* -----------------------------------------------------
        ABOUT
-    ------------------------- */
+    ----------------------------------------------------- */
 
     .about-content {
         grid-template-columns: 1fr;
@@ -1465,14 +2147,17 @@ section[id] {
 
     .about-photo {
         width: 100%;
-
         max-width: 500px;
 
         aspect-ratio: 4 / 5;
+
+        box-shadow:
+            0 18px 45px rgba(0, 0, 0, 0.18);
     }
 
     .big-text {
         font-size: 39px !important;
+
         line-height: 1.08;
         letter-spacing: -0.3px;
     }
@@ -1480,13 +2165,14 @@ section[id] {
     .about-text p {
         font-size: 14px;
         line-height: 1.8;
+
         color: #96918a;
     }
 
 
-    /* -------------------------
+    /* -----------------------------------------------------
        SERVICES
-    ------------------------- */
+    ----------------------------------------------------- */
 
     .service {
         grid-template-columns: 40px 1fr;
@@ -1500,9 +2186,14 @@ section[id] {
         padding-left: 0;
     }
 
+    .service:hover > div {
+        transform: none;
+    }
+
     .service h3 {
         font-size: 21px;
         font-weight: 500;
+
         letter-spacing: -0.2px;
 
         margin-bottom: 9px;
@@ -1511,41 +2202,51 @@ section[id] {
     .service p {
         font-size: 13px;
         line-height: 1.7;
+
         color: #85817b;
     }
 
+    .service:active .service-arrow {
+        color: #fff;
+        transform: translateX(5px);
+    }
 
-    /* -------------------------
+
+    /* -----------------------------------------------------
        BUSINESS
-    ------------------------- */
+    ----------------------------------------------------- */
 
     .business-grid {
         grid-template-columns: 1fr 1fr;
+
         gap: 14px;
     }
 
     .business-card {
-        aspect-ratio: 4 / 5;
+        aspect-ratio: 4 / 5.2;
+
         padding: 20px;
-        min-width: 0;
     }
 
     .business-play {
         width: 54px;
         height: 54px;
+
         font-size: 11px;
     }
 
     .business-card > span {
+        right: 18px;
+        bottom: 18px;
+
         font-size: 8px;
         letter-spacing: 1.7px;
-        line-height: 1.5;
     }
 
 
-    /* -------------------------
+    /* -----------------------------------------------------
        BUSINESS VIDEO MOBILE
-    ------------------------- */
+    ----------------------------------------------------- */
 
     .business-card:hover .business-video {
         opacity: 0;
@@ -1566,9 +2267,9 @@ section[id] {
     }
 
 
-    /* -------------------------
+    /* -----------------------------------------------------
        PORTRAITS MOBILE
-    ------------------------- */
+    ----------------------------------------------------- */
 
     .portraits-card:hover .portraits-image {
         opacity: 1;
@@ -1578,11 +2279,13 @@ section[id] {
         opacity: 1;
     }
 
-    .portrait-hint-desktop {
+    .portrait-hint-desktop,
+    .desktop-explore {
         display: none;
     }
 
-    .portrait-hint-mobile {
+    .portrait-hint-mobile,
+    .mobile-explore {
         display: inline;
     }
 
@@ -1594,7 +2297,22 @@ section[id] {
         letter-spacing: 1.6px;
     }
 
-    .portraits-card.portraits-playing .portrait-hint {
+    .portraits-explore {
+        font-size: 6.5px;
+
+        padding: 5px 9px;
+
+        letter-spacing: 1.3px;
+
+        background: rgba(0, 0, 0, 0.04);
+
+        border-color: rgba(255, 255, 255, 0.85);
+
+        color: rgba(255, 255, 255, 0.85);
+    }
+
+    .portraits-card.portraits-playing .portrait-hint,
+    .portraits-card.portraits-playing .portraits-explore {
         opacity: 0;
 
         transform:
@@ -1603,9 +2321,9 @@ section[id] {
     }
 
 
-    /* -------------------------
+    /* -----------------------------------------------------
        CONTACT
-    ------------------------- */
+    ----------------------------------------------------- */
 
     .contact {
         min-height: 80svh;
@@ -1630,19 +2348,50 @@ section[id] {
 
     .contact-button {
         margin-top: 48px;
+
         padding: 16px 24px;
     }
 
 
-    /* -------------------------
+    /* -----------------------------------------------------
        FOOTER
-    ------------------------- */
+    ----------------------------------------------------- */
 
     footer {
         flex-direction: column;
+        align-items: flex-start;
+
         gap: 18px;
+
         padding: 36px 6%;
+
         font-size: 9px;
+    }
+
+
+    /* -----------------------------------------------------
+       MOBILE TOUCH FEEDBACK
+    ----------------------------------------------------- */
+
+    .button,
+    .contact-button,
+    .reel-card,
+    .business-card {
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    .button:active,
+    .contact-button:active,
+    .center-button .button:active {
+        transform: scale(0.98);
+    }
+
+    .reel-card:active .reel-image {
+        transform: scale(0.99);
+    }
+
+    .business-card:active {
+        transform: scale(0.985);
     }
 }
 
@@ -1667,7 +2416,6 @@ section[id] {
 
     .hero h1 {
         font-size: 50px;
-
         letter-spacing: -2.5px;
     }
 
@@ -1700,7 +2448,6 @@ section[id] {
         bottom: 14px;
 
         font-size: 7px;
-
         letter-spacing: 1.5px;
     }
 }
@@ -1728,1094 +2475,8 @@ section[id] {
         opacity: 1;
         transform: none;
     }
-}
-
-/* =========================================================
-   PORTRAITS — EXPLORE HINT
-========================================================= */
-
-.portraits-explore {
-    position: absolute;
-
-    top: 50%;
-    left: 50%;
-
-    transform: translate(-50%, -50%);
-
-    z-index: 6;
-
-    padding: 6px 10px;
-
-    border: 1px solid rgba(255, 255, 255, 0.85);
-
-    background: rgba(0, 0, 0, 0.06);
-
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-
-    color: rgba(255, 255, 255, 0.85);
-
-    font-size: 7px;
-
-    font-weight: 400;
-
-    letter-spacing: 1.5px;
-
-    line-height: 1;
-
-    white-space: nowrap;
-
-    pointer-events: none;
-
-    transition:
-        opacity 0.35s ease,
-        transform 0.35s ease;
-}
-
-
-/* Desktop — HOVER TO EXPLORE */
-
-.mobile-explore {
-    display: none;
-}
-
-.business-card:hover .portraits-explore {
-    opacity: 0;
-
-    transform:
-        translate(-50%, -50%)
-        scale(0.95);
-}
-
-
-/* =========================================================
-   PORTRAITS — MOBILE
-========================================================= */
-
-@media (max-width: 700px) {
-
-    .desktop-explore {
-        display: none;
-    }
-
-    .mobile-explore {
-        display: inline;
-    }
-
-    .portraits-explore {
-        font-size: 6.5px;
-
-        padding: 5px 9px;
-
-        letter-spacing: 1.3px;
-
-        background: rgba(0, 0, 0, 0.04);
-
-        border-color: rgba(255, 255, 255, 0.85);
-
-        color: rgba(255, 255, 255, 0.85);
-    }
-
-    /* Hide after portrait is tapped/activated */
-
-    .portraits-card.portraits-playing .portraits-explore {
-        opacity: 0;
-
-        transform:
-            translate(-50%, -50%)
-            scale(0.95);
-    }
-}
-
-/* =========================================================
-   PREMIUM HERO IMAGE MOTION
-========================================================= */
-
-.hero-image {
-    transition:
-        opacity 1.2s ease,
-        transform 1.4s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.hero.hero-loaded .hero-image {
-    opacity: 0.65;
-    transform: translateY(-50%) translateX(0);
-}
-
-/* =========================================================
-   HERO IMAGE SUBTLE CINEMATIC SCALE
-========================================================= */
-
-.hero.hero-loaded .hero-image img {
-    animation: heroImageBreath 10s ease-in-out infinite alternate;
-}
-
-@keyframes heroImageBreath {
-
-    from {
-        transform: scale(1.03);
-    }
-
-    to {
-        transform: scale(1.055);
-    }
-
-}
-
-
-/* =========================================================
-   REDUCED MOTION
-========================================================= */
-
-@media (prefers-reduced-motion: reduce) {
 
     .hero.hero-loaded .hero-image img {
         animation: none;
     }
-
-}
-
-/* =========================================================
-   PREMIUM NAVIGATION HOVER
-========================================================= */
-
-.navbar nav a {
-    position: relative;
-    padding-bottom: 5px;
-}
-
-.navbar nav a::after {
-    content: "";
-
-    position: absolute;
-    left: 0;
-    bottom: 0;
-
-    width: 100%;
-    height: 1px;
-
-    background: var(--gold);
-
-    transform: scaleX(0);
-    transform-origin: right;
-
-    transition:
-        transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.navbar nav a:hover {
-    color: #fff;
-}
-
-.navbar nav a:hover::after {
-    transform: scaleX(1);
-    transform-origin: left;
-}
-
-/* =========================================================
-   CINEMATIC WEDDING CARD DEPTH
-========================================================= */
-
-.reel-image {
-    isolation: isolate;
-}
-
-.reel-image::after {
-    content: "";
-
-    position: absolute;
-    inset: 0;
-
-    z-index: 2;
-    pointer-events: none;
-
-    background:
-        linear-gradient(
-            to top,
-            rgba(0, 0, 0, 0.32),
-            transparent 45%
-        );
-
-    opacity: 0.55;
-
-    transition:
-        opacity 0.6s ease;
-}
-
-.reel-card:hover .reel-image::after {
-    opacity: 0.85;
-}
-
-
-/* Keep video above thumbnail but below controls */
-
-.wedding-video {
-    z-index: 1;
-}
-
-
-/* Subtle thumbnail movement */
-
-.reel-card .wedding-thumbnail {
-    transform: scale(1.01);
-}
-
-.reel-card:hover .wedding-thumbnail {
-    transform: scale(1.07);
-}
-
-
-/* Keep play button and label above overlay */
-
-.reel-image .play-button,
-.reel-image > p {
-    z-index: 4;
-}
-
-/* =========================================================
-   PREMIUM ABOUT PHOTO
-========================================================= */
-
-.about-photo {
-    position: relative;
-    isolation: isolate;
-}
-
-.about-photo::after {
-    content: "";
-
-    position: absolute;
-    inset: 0;
-
-    z-index: 2;
-    pointer-events: none;
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(255,255,255,0.04),
-            transparent 35%
-        ),
-        linear-gradient(
-            to top,
-            rgba(0,0,0,0.18),
-            transparent 55%
-        );
-
-    opacity: 0.7;
-
-    transition:
-        opacity 0.5s ease;
-}
-
-.about-photo img {
-    transition:
-        transform 1s cubic-bezier(0.22, 1, 0.36, 1),
-        filter 0.6s ease;
-}
-
-.about-photo:hover img {
-    transform: scale(1.025);
-
-    filter:
-        contrast(1.02)
-        brightness(1);
-}
-
-.about-photo:hover::after {
-    opacity: 0.9;
-}
-
-/* =========================================================
-   PREMIUM SERVICE INTERACTION
-========================================================= */
-
-.service {
-    position: relative;
-    overflow: hidden;
-}
-
-.service::after {
-    content: "";
-
-    position: absolute;
-    left: 0;
-    bottom: 0;
-
-    width: 100%;
-    height: 1px;
-
-    background: var(--gold);
-
-    transform: scaleX(0);
-    transform-origin: left;
-
-    transition:
-        transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.service:hover::after {
-    transform: scaleX(1);
-}
-
-.service-arrow {
-    display: inline-block;
-
-    transition:
-        color 0.3s ease,
-        transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.service:hover .service-arrow {
-    color: #fff;
-
-    transform: translateX(8px);
-}
-
-.service h3 {
-    transition:
-        color 0.3s ease;
-}
-
-.service:hover h3 {
-    color: #fff;
-}
-
-/* =========================================================
-   PREMIUM BUSINESS CARD DEPTH
-========================================================= */
-
-.business-card {
-    isolation: isolate;
-}
-
-.business-card::before {
-    content: "";
-
-    position: absolute;
-    inset: 0;
-
-    z-index: 2;
-    pointer-events: none;
-
-    background:
-        linear-gradient(
-            to top,
-            rgba(0, 0, 0, 0.38),
-            transparent 55%
-        );
-
-    opacity: 0.65;
-
-    transition:
-        opacity 0.5s ease;
-}
-
-.business-card:hover::before {
-    opacity: 0.95;
-}
-
-
-/* Keep existing overlay above image/video */
-
-.business-card::after {
-    z-index: 3;
-}
-
-
-/* Give the media a smoother cinematic push */
-
-.business-card .business-thumbnail,
-.business-card .business-video {
-    transition:
-        transform 0.9s cubic-bezier(0.22, 1, 0.36, 1),
-        opacity 0.4s ease;
-}
-
-
-/* Business title */
-
-.business-card > span {
-    transition:
-        color 0.3s ease,
-        letter-spacing 0.35s ease;
-}
-
-.business-card:hover > span {
-    color: #fff;
-
-    letter-spacing: 2.4px;
-}
-
-
-/* Play button refinement */
-
-.business-play {
-    transition:
-        opacity 0.35s ease,
-        transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-        background 0.3s ease,
-        color 0.3s ease;
-}
-
-.business-card:hover .business-play {
-    transform:
-        translate(-50%, -50%)
-        scale(1.08);
-}
-
-/* =========================================================
-   PREMIUM CONTACT CTA
-========================================================= */
-
-.contact-button {
-    position: relative;
-    overflow: hidden;
-
-    isolation: isolate;
-
-    transition:
-        transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
-        color 0.3s ease;
-}
-
-.contact-button::before {
-    content: "";
-
-    position: absolute;
-    inset: 0;
-
-    background: var(--gold);
-
-    z-index: -1;
-
-    transform: translateY(100%);
-
-    transition:
-        transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.contact-button:hover {
-    color: #111;
-
-    transform: translateY(-5px);
-}
-
-.contact-button:hover::before {
-    transform: translateY(0);
-}
-
-/* =========================================================
-   PREMIUM FOOTER
-========================================================= */
-
-footer {
-    align-items: center;
-}
-
-footer a {
-    position: relative;
-
-    padding-bottom: 4px;
-
-    transition:
-        color 0.3s ease;
-}
-
-footer a::after {
-    content: "";
-
-    position: absolute;
-    left: 0;
-    bottom: 0;
-
-    width: 100%;
-    height: 1px;
-
-    background: var(--gold);
-
-    transform: scaleX(0);
-    transform-origin: right;
-
-    transition:
-        transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-footer a:hover {
-    color: #fff;
-}
-
-footer a:hover::after {
-    transform: scaleX(1);
-    transform-origin: left;
-}
-
-
-/* Subtle brand emphasis */
-
-footer > div:first-child {
-    color: #777;
-
-    transition:
-        color 0.3s ease;
-}
-
-footer:hover > div:first-child {
-    color: #aaa;
-}
-
-/* =========================================================
-   PREMIUM HERO BUTTONS
-========================================================= */
-
-.hero .button,
-.center-button .button {
-    position: relative;
-
-    overflow: hidden;
-
-    isolation: isolate;
-
-    transition:
-        transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
-        color 0.3s ease,
-        border-color 0.3s ease;
-}
-
-.hero .button::before,
-.center-button .button::before {
-    content: "";
-
-    position: absolute;
-    inset: 0;
-
-    background: var(--gold);
-
-    z-index: -1;
-
-    transform: translateX(-101%);
-
-    transition:
-        transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.hero .button:hover,
-.center-button .button:hover {
-    color: #111;
-
-    border-color: var(--gold);
-
-    transform: translateY(-3px);
-}
-
-.hero .button:hover::before,
-.center-button .button:hover::before {
-    transform: translateX(0);
-}
-
-
-/* Instagram link */
-
-.hero .text-link {
-    position: relative;
-
-    padding-bottom: 5px;
-
-    transition:
-        color 0.3s ease;
-}
-
-.hero .text-link::after {
-    content: "";
-
-    position: absolute;
-    left: 0;
-    bottom: 0;
-
-    width: 100%;
-    height: 1px;
-
-    background: var(--gold);
-
-    transform: scaleX(0);
-    transform-origin: right;
-
-    transition:
-        transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.hero .text-link:hover {
-    color: #fff;
-}
-
-.hero .text-link:hover::after {
-    transform: scaleX(1);
-    transform-origin: left;
-}
-
-/* =========================================================
-   MOBILE TOUCH FEEDBACK
-========================================================= */
-
-@media (max-width: 700px) {
-
-    .button,
-    .contact-button,
-    .reel-card,
-    .business-card {
-        -webkit-tap-highlight-color: transparent;
-    }
-
-
-    .button:active,
-    .contact-button:active,
-    .center-button .button:active {
-        transform: scale(0.98);
-    }
-
-
-    .reel-card:active .reel-image {
-        transform: scale(0.99);
-    }
-
-
-    .business-card:active {
-        transform: scale(0.985);
-    }
-
-
-    .service:active .service-arrow {
-        transform: translateX(5px);
-        color: #fff;
-    }
-
-}
-
-/* =========================================================
-   PREMIUM NAVIGATION FINISH
-========================================================= */
-
-.navbar {
-    transition:
-        background 0.4s ease,
-        padding 0.4s ease;
-}
-
-/* Slightly stronger brand presence */
-
-.logo strong {
-    transition:
-        color 0.3s ease,
-        letter-spacing 0.35s ease;
-}
-
-.logo:hover strong {
-    color: #f5f1eb;
-    letter-spacing: 3.3px;
-}
-
-.logo span {
-    transition:
-        color 0.3s ease,
-        opacity 0.3s ease;
-}
-
-.logo:hover span {
-    color: #d2b989;
-}
-
-/* Cleaner navigation interaction */
-
-.navbar nav a {
-    transition:
-        color 0.3s ease,
-        opacity 0.3s ease;
-}
-
-.navbar nav:hover a:not(:hover) {
-    opacity: 0.45;
-}
-
-.navbar nav a:hover {
-    opacity: 1;
-}
-
-/* =========================================================
-   PREMIUM HERO TYPOGRAPHY
-========================================================= */
-
-.hero h1 {
-    text-wrap: balance;
-
-    text-shadow:
-        0 1px 0 rgba(255,255,255,0.02);
-
-    transition:
-        letter-spacing 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.hero:hover h1 {
-    letter-spacing: -6.5px;
-}
-
-.hero h1 span {
-    display: inline-block;
-
-    transition:
-        color 0.5s ease,
-        transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.hero:hover h1 span {
-    color: #d0c9bf;
-
-    transform: translateX(3px);
-}
-
-/* =========================================================
-   PREMIUM HERO IMAGE FINISH
-========================================================= */
-
-.hero-image {
-    isolation: isolate;
-
-    box-shadow:
-        0 30px 80px rgba(0, 0, 0, 0.22);
-}
-
-.hero-image::before {
-    content: "";
-
-    position: absolute;
-    inset: 0;
-
-    z-index: 2;
-    pointer-events: none;
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(255,255,255,0.06),
-            transparent 35%
-        ),
-        linear-gradient(
-            to bottom,
-            transparent 55%,
-            rgba(0,0,0,0.28)
-        );
-
-    opacity: 0.75;
-
-    transition:
-        opacity 0.6s ease;
-}
-
-.hero-image img {
-    will-change: transform;
-}
-
-.hero:hover .hero-image::before {
-    opacity: 0.9;
-}
-
-/* =========================================================
-   PREMIUM WEDDING CARD FINISH
-========================================================= */
-
-.reel-card {
-    position: relative;
-
-    transition:
-        transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-        opacity 0.35s ease;
-}
-
-.reel-card:hover {
-    transform: translateY(-4px);
-}
-
-.reel-info {
-    transition:
-        transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.reel-card:hover .reel-info {
-    transform: translateY(-2px);
-}
-
-.reel-info h3 {
-    transition:
-        color 0.3s ease,
-        letter-spacing 0.35s ease;
-}
-
-.reel-card:hover .reel-info h3 {
-    color: #fff;
-    letter-spacing: 0.2px;
-}
-
-.reel-info p {
-    transition:
-        color 0.3s ease;
-}
-
-.reel-card:hover .reel-info p {
-    color: #999;
-}
-
-.reel-info span {
-    transition:
-        color 0.3s ease,
-        transform 0.35s ease;
-}
-
-.reel-card:hover .reel-info span {
-    color: var(--gold);
-    transform: translateX(4px);
-}
-
- /* =========================================================
-    PREMIUM REEL INFORMATION
- ========================================================= */
-
-.reel-info h3 {
-    font-weight: 500;
-    letter-spacing: -0.2px;
-}
-
-.reel-info p {
-    letter-spacing: 0.15px;
-}
-
-.reel-info span {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-
-    position: relative;
-
-    padding-bottom: 4px;
-
-    letter-spacing: 1.2px;
-
-    transition:
-        color 0.3s ease,
-        transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.reel-info span::after {
-    content: "";
-
-    position: absolute;
-
-    left: 0;
-    bottom: 0;
-
-    width: 100%;
-    height: 1px;
-
-    background: var(--gold);
-
-    transform: scaleX(0);
-    transform-origin: right;
-
-    transition:
-        transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.reel-card:hover .reel-info span {
-    color: var(--gold);
-
-    transform: translateX(3px);
-}
-
-.reel-card:hover .reel-info span::after {
-    transform: scaleX(1);
-    transform-origin: left;
-}
-
-/* =========================================================
-   PREMIUM SECTION TRANSITION
-========================================================= */
-
-.work,
-.about,
-.services,
-.business,
-.contact {
-    position: relative;
-}
-
-.work::after,
-.about::after,
-.services::after,
-.business::after {
-    content: "";
-
-    position: absolute;
-
-    left: 5%;
-    right: 5%;
-    bottom: 0;
-
-    height: 1px;
-
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            rgba(199, 169, 121, 0.35),
-            transparent
-        );
-
-    pointer-events: none;
-}
-
-@media (max-width: 700px) {
-
-    .work::after,
-    .about::after,
-    .services::after,
-    .business::after {
-        left: 6%;
-        right: 6%;
-    }
-
-}
-
-/* =========================================================
-   PREMIUM ABOUT IMAGE FINISH
-========================================================= */
-
-.about-photo {
-    box-shadow:
-        0 25px 70px rgba(0, 0, 0, 0.22);
-}
-
-.about-photo img {
-    filter:
-        contrast(1.02)
-        brightness(0.96)
-        saturate(0.92);
-}
-
-.about-photo::before {
-    content: "";
-
-    position: absolute;
-    inset: 0;
-
-    z-index: 3;
-
-    pointer-events: none;
-
-    border: 1px solid rgba(255, 255, 255, 0.08);
-
-    opacity: 0;
-
-    transition:
-        opacity 0.5s ease;
-}
-
-.about-photo:hover::before {
-    opacity: 1;
-}
-
-@media (max-width: 700px) {
-
-    .about-photo {
-        box-shadow:
-            0 18px 45px rgba(0, 0, 0, 0.18);
-    }
-
-}
-
-/* =========================================================
-   PREMIUM SERVICES REFINEMENT
-========================================================= */
-
-.service {
-    transition:
-        padding 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-        background 0.4s ease;
-}
-
-.service > div {
-    transition:
-        transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.service:hover > div {
-    transform: translateX(5px);
-}
-
-.service p {
-    transition:
-        color 0.35s ease;
-}
-
-.service:hover p {
-    color: #96918a;
-}
-
-.service-arrow {
-    font-size: 13px;
-}
-
-@media (max-width: 700px) {
-
-    .service:hover > div {
-        transform: none;
-    }
-
-}
-
-/* =========================================================
-NAVIGATION — REFINED SPACING
-========================================================= */
-
-.navbar nav {
-align-items: center;
-}
-
-.navbar nav a {
-line-height: 1;
-padding: 6px 0;
-}
-
-/* =========================================================
-WEDDING REEL CTA
-========================================================= */
-
-.reel-info > span {
-transition:
-color 0.3s ease,
-transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.reel-card:hover .reel-info > span {
-color: var(--gold);
-transform: translateX(5px);
-}
-
-/* =========================================================
-SERVICE DESCRIPTION HOVER
-========================================================= */
-
-.service p {
-transition:
-color 0.35s ease;
-}
-
-.service:hover p {
-color: #9a9690;
-}
-
-/* =========================================================
-FOOTER — BRAND HIERARCHY
-========================================================= */
-
-footer > div:first-child {
-letter-spacing: 1.5px;
-font-weight: 500;
 }

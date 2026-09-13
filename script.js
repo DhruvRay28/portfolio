@@ -8,17 +8,12 @@ const revealElements = document.querySelectorAll(
 
 const observer = new IntersectionObserver(
     (entries) => {
-
         entries.forEach((entry) => {
-
             if (!entry.isIntersecting) return;
 
             entry.target.classList.add("visible");
-
             observer.unobserve(entry.target);
-
         });
-
     },
     {
         threshold: 0.12,
@@ -41,30 +36,22 @@ revealElements.forEach((element) => {
 
     } else {
 
-        const parent =
-            element.closest(
-                ".section, .about, .business, .contact"
-            );
+        const parent = element.closest(
+            ".section, .about, .business, .contact"
+        );
 
-        const siblings =
-            parent
-                ? Array.from(
-                    parent.querySelectorAll(".fade-in")
-                )
-                : [];
+        const siblings = parent
+            ? Array.from(parent.querySelectorAll(".fade-in"))
+            : [];
 
-        const index =
-            siblings.indexOf(element);
+        const index = siblings.indexOf(element);
 
         element.style.transitionDelay =
             `${Math.min(Math.max(index, 0) * 0.08, 0.24)}s`;
-
     }
 
     observer.observe(element);
-
 });
-
 
 
 // ========================================
@@ -78,10 +65,9 @@ window.addEventListener("load", () => {
 
     if (!hero || !heroContent) return;
 
-    const reducedMotion =
-        window.matchMedia(
-            "(prefers-reduced-motion: reduce)"
-        ).matches;
+    const reducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+    ).matches;
 
     if (reducedMotion) {
 
@@ -89,7 +75,6 @@ window.addEventListener("load", () => {
         heroContent.classList.add("hero-loaded");
 
         return;
-
     }
 
     setTimeout(() => {
@@ -103,7 +88,7 @@ window.addEventListener("load", () => {
 
 
 // ========================================
-// REDUCE MOTION
+// REDUCED MOTION
 // ========================================
 
 if (
@@ -119,19 +104,17 @@ if (
             element.style.transform = "none";
 
         });
-
 }
 
 
 // ========================================
 // GLOBAL MEDIA CONTROL
 //
-// Only ONE thing can be active at once:
+// Only ONE media item can be active:
 //
-// - Business Reel 1
-// - Business Reel 2
-// - Wedding videos
-// - Portrait slideshow
+// - Business Reel
+// - Wedding Reel
+// - Portrait Slideshow
 // ========================================
 
 let stopPortraitSlideshowGlobal = null;
@@ -159,14 +142,15 @@ function stopAllMedia(exceptVideo = null) {
 
             video.pause();
 
-            video.currentTime = 0;
+            try {
+                video.currentTime = 0;
+            } catch (error) {
+                // Ignore media reset errors
+            }
 
-
-            const card =
-                video.closest(
-                    ".business-card, .reel-card"
-                );
-
+            const card = video.closest(
+                ".business-card, .reel-card"
+            );
 
             if (card) {
 
@@ -194,29 +178,30 @@ function stopAllMedia(exceptVideo = null) {
 
 // ========================================
 // BUSINESS VIDEOS
-// DESKTOP HOVER + MOBILE TAP
+//
+// Desktop:
+// Hover → video plays
+//
+// Mobile:
+// Tap → video plays/stops
 // ========================================
 
-const businessCards =
-    document.querySelectorAll(
-        ".business-card"
-    );
-
+const businessCards = document.querySelectorAll(
+    ".business-card"
+);
 
 businessCards.forEach((card) => {
 
-    const video =
-        card.querySelector(
-            ".business-video"
-        );
-
+    const video = card.querySelector(
+        ".business-video"
+    );
 
     // Portrait card has no video
     if (!video) return;
 
 
     // ========================================
-    // DESKTOP — HOVER
+    // DESKTOP — HOVER IN
     // ========================================
 
     card.addEventListener(
@@ -227,17 +212,11 @@ businessCards.forEach((card) => {
                 return;
             }
 
-
-            // Stop EVERYTHING else
             stopAllMedia(video);
-
 
             video.currentTime = 0;
 
-
-            const playPromise =
-                video.play();
-
+            const playPromise = video.play();
 
             if (playPromise !== undefined) {
 
@@ -250,7 +229,7 @@ businessCards.forEach((card) => {
 
 
     // ========================================
-    // DESKTOP — LEAVE
+    // DESKTOP — HOVER OUT
     // ========================================
 
     card.addEventListener(
@@ -261,10 +240,12 @@ businessCards.forEach((card) => {
                 return;
             }
 
-
             video.pause();
-
             video.currentTime = 0;
+
+            card.classList.remove(
+                "video-playing"
+            );
 
         }
     );
@@ -283,48 +264,46 @@ businessCards.forEach((card) => {
             }
 
 
-            // START
-            if (video.paused) {
-
-                // Stop portraits
-                // Stop other reels
-                stopAllMedia(video);
-
-
-                video.currentTime = 0;
-
-
-                video.play()
-                    .then(() => {
-
-                        card.classList.add(
-                            "video-playing"
-                        );
-
-                    })
-                    .catch(() => {
-
-                        card.classList.remove(
-                            "video-playing"
-                        );
-
-                    });
-
-            }
-
-
+            // --------------------------------
             // STOP
-            else {
+            // --------------------------------
+
+            if (!video.paused) {
 
                 video.pause();
-
                 video.currentTime = 0;
 
                 card.classList.remove(
                     "video-playing"
                 );
 
+                return;
             }
+
+
+            // --------------------------------
+            // START
+            // --------------------------------
+
+            stopAllMedia(video);
+
+            video.currentTime = 0;
+
+            video.play()
+                .then(() => {
+
+                    card.classList.add(
+                        "video-playing"
+                    );
+
+                })
+                .catch(() => {
+
+                    card.classList.remove(
+                        "video-playing"
+                    );
+
+                });
 
         }
     );
@@ -334,28 +313,29 @@ businessCards.forEach((card) => {
 
 // ========================================
 // WEDDING VIDEOS
-// DESKTOP HOVER + MOBILE TAP
+//
+// Desktop:
+// Hover → video plays
+//
+// Mobile:
+// Tap → video plays/stops
 // ========================================
 
-const weddingCards =
-    document.querySelectorAll(
-        ".reel-card"
-    );
-
+const weddingCards = document.querySelectorAll(
+    ".reel-card"
+);
 
 weddingCards.forEach((card) => {
 
-    const video =
-        card.querySelector(
-            ".wedding-video"
-        );
-
+    const video = card.querySelector(
+        ".wedding-video"
+    );
 
     if (!video) return;
 
 
     // ========================================
-    // DESKTOP — HOVER
+    // DESKTOP — HOVER IN
     // ========================================
 
     card.addEventListener(
@@ -366,17 +346,11 @@ weddingCards.forEach((card) => {
                 return;
             }
 
-
-            // Stop EVERYTHING else
             stopAllMedia(video);
-
 
             video.currentTime = 0;
 
-
-            const playPromise =
-                video.play();
-
+            const playPromise = video.play();
 
             if (playPromise !== undefined) {
 
@@ -389,7 +363,7 @@ weddingCards.forEach((card) => {
 
 
     // ========================================
-    // DESKTOP — LEAVE
+    // DESKTOP — HOVER OUT
     // ========================================
 
     card.addEventListener(
@@ -400,10 +374,12 @@ weddingCards.forEach((card) => {
                 return;
             }
 
-
             video.pause();
-
             video.currentTime = 0;
+
+            card.classList.remove(
+                "video-playing"
+            );
 
         }
     );
@@ -422,51 +398,50 @@ weddingCards.forEach((card) => {
             }
 
 
-            // Prevent Instagram link
+            // Prevent the card/link from navigating
             event.preventDefault();
 
 
-            // START
-            if (video.paused) {
-
-                // Stop EVERYTHING else
-                stopAllMedia(video);
-
-
-                video.currentTime = 0;
-
-
-                video.play()
-                    .then(() => {
-
-                        card.classList.add(
-                            "video-playing"
-                        );
-
-                    })
-                    .catch(() => {
-
-                        card.classList.remove(
-                            "video-playing"
-                        );
-
-                    });
-
-            }
-
-
+            // --------------------------------
             // STOP
-            else {
+            // --------------------------------
+
+            if (!video.paused) {
 
                 video.pause();
-
                 video.currentTime = 0;
 
                 card.classList.remove(
                     "video-playing"
                 );
 
+                return;
             }
+
+
+            // --------------------------------
+            // START
+            // --------------------------------
+
+            stopAllMedia(video);
+
+            video.currentTime = 0;
+
+            video.play()
+                .then(() => {
+
+                    card.classList.add(
+                        "video-playing"
+                    );
+
+                })
+                .catch(() => {
+
+                    card.classList.remove(
+                        "video-playing"
+                    );
+
+                });
 
         }
     );
@@ -481,12 +456,10 @@ weddingCards.forEach((card) => {
 // Hover → slideshow starts
 //
 // Mobile:
-// Tap → slideshow starts
+// Tap → slideshow starts/stops
 //
-// Leaving / tapping another media:
+// Leaving / activating another media:
 // slideshow stops
-//
-// Only ONE media item can run at a time.
 // ========================================
 
 document.addEventListener(
@@ -497,7 +470,6 @@ document.addEventListener(
             document.querySelector(
                 ".portraits-card"
             );
-
 
         const portraitsImage =
             document.querySelector(
@@ -519,7 +491,6 @@ document.addEventListener(
             );
 
             return;
-
         }
 
 
@@ -550,7 +521,6 @@ document.addEventListener(
 
 
         let portraitIndex = 0;
-
         let portraitInterval = null;
 
 
@@ -561,11 +531,8 @@ document.addEventListener(
         function showNextPortrait() {
 
             portraitIndex =
-                (
-                    portraitIndex + 1
-                ) %
+                (portraitIndex + 1) %
                 portraitImages.length;
-
 
             portraitsImage.style.opacity = "0";
 
@@ -588,30 +555,25 @@ document.addEventListener(
         }
 
 
-
         // ----------------------------------------
-        // START
+        // START SLIDESHOW
         // ----------------------------------------
 
         function startPortraitSlideshow() {
 
             // Already running
-            if (
-                portraitInterval !== null
-            ) {
-
+            if (portraitInterval !== null) {
                 return;
-
             }
 
 
             // Always begin with image_6
             portraitIndex = 0;
 
-            portraitsImage.style.opacity = "1";
-
             portraitsImage.src =
                 portraitImages[0];
+
+            portraitsImage.style.opacity = "1";
 
 
             portraitsCard.classList.add(
@@ -619,14 +581,9 @@ document.addEventListener(
             );
 
 
-            // Fast slideshow
             portraitInterval =
                 setInterval(
-                    () => {
-
-                        showNextPortrait();
-
-                    },
+                    showNextPortrait,
                     750
                 );
 
@@ -634,14 +591,12 @@ document.addEventListener(
 
 
         // ----------------------------------------
-        // STOP
+        // STOP SLIDESHOW
         // ----------------------------------------
 
         function stopPortraitSlideshow() {
 
-            if (
-                portraitInterval !== null
-            ) {
+            if (portraitInterval !== null) {
 
                 clearInterval(
                     portraitInterval
@@ -652,7 +607,7 @@ document.addEventListener(
             }
 
 
-            // Back to image_6
+            // Return to image_6
             portraitIndex = 0;
 
             portraitsImage.style.opacity = "1";
@@ -677,7 +632,7 @@ document.addEventListener(
 
 
         // ========================================
-        // DESKTOP — HOVER
+        // DESKTOP — HOVER IN
         // ========================================
 
         portraitsCard.addEventListener(
@@ -685,23 +640,19 @@ document.addEventListener(
             () => {
 
                 if (
-                    !window
-                        .matchMedia(
-                            "(hover: hover)"
-                        )
-                        .matches
+                    !window.matchMedia(
+                        "(hover: hover)"
+                    ).matches
                 ) {
 
                     return;
-
                 }
 
 
-                // Stop any reel/video
+                // Stop any other media
                 stopAllMedia();
 
-
-                // Start photos
+                // Start portraits
                 startPortraitSlideshow();
 
             }
@@ -709,7 +660,7 @@ document.addEventListener(
 
 
         // ========================================
-        // DESKTOP — LEAVE
+        // DESKTOP — HOVER OUT
         // ========================================
 
         portraitsCard.addEventListener(
@@ -717,15 +668,12 @@ document.addEventListener(
             () => {
 
                 if (
-                    !window
-                        .matchMedia(
-                            "(hover: hover)"
-                        )
-                        .matches
+                    !window.matchMedia(
+                        "(hover: hover)"
+                    ).matches
                 ) {
 
                     return;
-
                 }
 
 
@@ -745,20 +693,17 @@ document.addEventListener(
 
                 // Ignore clicks on desktop
                 if (
-                    window
-                        .matchMedia(
-                            "(hover: hover)"
-                        )
-                        .matches
+                    window.matchMedia(
+                        "(hover: hover)"
+                    ).matches
                 ) {
 
                     return;
-
                 }
 
 
                 // --------------------------------
-                // IF ALREADY RUNNING
+                // STOP IF ALREADY RUNNING
                 // --------------------------------
 
                 if (
@@ -768,12 +713,11 @@ document.addEventListener(
                     stopPortraitSlideshow();
 
                     return;
-
                 }
 
 
                 // --------------------------------
-                // STOP ALL OTHER MEDIA
+                // STOP OTHER MEDIA
                 // --------------------------------
 
                 stopAllMedia();
@@ -810,25 +754,76 @@ document.addEventListener(
     }
 );
 
+
 // ========================================
 // VIDEO STATE POLISH
+//
+// When a video naturally finishes:
+// - reset video
+// - remove active state
 // ========================================
 
-document.querySelectorAll(".business-video, .wedding-video").forEach((video) => {
+document
+    .querySelectorAll(
+        ".business-video, .wedding-video"
+    )
+    .forEach((video) => {
 
-    video.addEventListener("ended", () => {
+        video.addEventListener(
+            "ended",
+            () => {
 
-        const card = video.closest(
-            ".business-card, .reel-card"
+                const card = video.closest(
+                    ".business-card, .reel-card"
+                );
+
+                if (!card) return;
+
+                video.pause();
+                video.currentTime = 0;
+
+                card.classList.remove(
+                    "video-playing"
+                );
+
+            }
         );
-
-        if (!card) return;
-
-        video.pause();
-        video.currentTime = 0;
-
-        card.classList.remove("video-playing");
 
     });
 
-});
+
+// ========================================
+// SAFETY — STOP MEDIA WHEN TAB IS HIDDEN
+//
+// Prevents videos/slideshow from continuing
+// when the user switches tabs.
+// ========================================
+
+document.addEventListener(
+    "visibilitychange",
+    () => {
+
+        if (
+            document.visibilityState === "hidden"
+        ) {
+
+            stopAllMedia();
+
+        }
+
+    }
+);
+
+
+// ========================================
+// SAFETY — STOP MEDIA BEFORE PAGE UNLOAD
+// ========================================
+
+window.addEventListener(
+    "beforeunload",
+    () => {
+
+        stopAllMedia();
+
+    }
+);
