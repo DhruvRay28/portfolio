@@ -1197,59 +1197,6 @@ section[id] {
         );
 }
 
-
-/* =========================================================
-   WEDDING PLAY BUTTON
-========================================================= */
-
-.play-button {
-    position: absolute;
-
-    top: 50%;
-    left: 50%;
-
-    z-index: 5;
-
-    width: 70px;
-    height: 70px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    transform: translate(-50%, -50%);
-
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    border-radius: 50%;
-
-    color: white;
-
-    font-size: 13px;
-
-    transition:
-        opacity 0.35s ease,
-        transform 0.45s var(--ease),
-        background 0.3s ease,
-        color 0.3s ease,
-        border-color 0.3s ease;
-}
-
-.reel-card:hover .play-button {
-    opacity: 0;
-
-    background: white;
-    color: black;
-    border-color: white;
-
-    transform:
-        translate(-50%, -50%)
-        scale(1.12);
-
-    box-shadow:
-        0 0 0 8px rgba(255, 255, 255, 0.08);
-}
-
-
 /* =========================================================
    WEDDING INFO
 ========================================================= */
@@ -1980,58 +1927,6 @@ ABOUT — REDUCED MOTION
     letter-spacing: 2.4px;
 }
 
-
-/* =========================================================
-   BUSINESS PLAY BUTTON
-========================================================= */
-
-.business-play {
-    position: absolute;
-
-    top: 50%;
-    left: 50%;
-
-    z-index: 5;
-
-    width: 65px;
-    height: 65px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    transform: translate(-50%, -50%);
-
-    border: 1px solid rgba(255, 255, 255, 0.6);
-    border-radius: 50%;
-
-    color: white;
-
-    font-size: 13px;
-
-    transition:
-        opacity 0.35s ease,
-        transform 0.45s var(--ease),
-        background 0.3s ease,
-        color 0.3s ease;
-}
-
-.business-card:hover .business-play {
-    opacity: 0;
-
-    background: white;
-    color: black;
-
-    transform:
-        translate(-50%, -50%)
-        scale(1.08);
-}
-
-.business-card.video-playing .business-play {
-    opacity: 0;
-}
-
-
 /* =========================================================
    PORTRAITS
 ========================================================= */
@@ -2102,57 +1997,6 @@ ABOUT — REDUCED MOTION
 .portrait-hint-mobile {
     display: none;
 }
-
-
-/* =========================================================
-   PORTRAITS EXPLORE
-========================================================= */
-
-.portraits-explore {
-    position: absolute;
-
-    top: 50%;
-    left: 50%;
-
-    z-index: 6;
-
-    transform: translate(-50%, -50%);
-
-    padding: 6px 10px;
-
-    border: 1px solid rgba(255, 255, 255, 0.85);
-
-    background: rgba(0, 0, 0, 0.06);
-
-    color: rgba(255, 255, 255, 0.85);
-
-    font-size: 7px;
-    font-weight: 400;
-
-    letter-spacing: 1.5px;
-    line-height: 1;
-
-    white-space: nowrap;
-
-    pointer-events: none;
-
-    transition:
-        opacity 0.35s ease,
-        transform 0.35s ease;
-}
-
-.mobile-explore {
-    display: none;
-}
-
-.business-card:hover .portraits-explore {
-    opacity: 0;
-
-    transform:
-        translate(-50%, -50%)
-        scale(0.95);
-}
-
 
 /* =========================================================
    CONTACT
@@ -2738,13 +2582,6 @@ footer a:hover::after {
         padding: 20px;
     }
 
-    .play-button {
-        width: 60px;
-        height: 60px;
-
-        font-size: 12px;
-    }
-
     .reel-info {
         display: block;
 
@@ -3020,13 +2857,6 @@ footer a:hover::after {
         padding: 20px;
     }
 
-    .business-play {
-        width: 54px;
-        height: 54px;
-
-        font-size: 11px;
-    }
-
     .business-card > span {
         right: 18px;
         bottom: 18px;
@@ -3071,13 +2901,11 @@ footer a:hover::after {
         opacity: 1;
     }
 
-    .portrait-hint-desktop,
-    .desktop-explore {
+    .portrait-hint-desktop {
         display: none;
     }
 
-    .portrait-hint-mobile,
-    .mobile-explore {
+    .portrait-hint-mobile {
         display: inline;
     }
 
@@ -3089,22 +2917,8 @@ footer a:hover::after {
         letter-spacing: 1.6px;
     }
 
-    .portraits-explore {
-        font-size: 6.5px;
-
-        padding: 5px 9px;
-
-        letter-spacing: 1.3px;
-
-        background: rgba(0, 0, 0, 0.04);
-
-        border-color: rgba(255, 255, 255, 0.85);
-
-        color: rgba(255, 255, 255, 0.85);
-    }
-
     .portraits-card.portraits-playing .portrait-hint,
-    .portraits-card.portraits-playing .portraits-explore {
+    .portraits-card.portraits-playing {
         opacity: 0;
 
         transform:
