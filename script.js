@@ -1004,7 +1004,7 @@ document.addEventListener(
 );
 
 /* =========================================================
-   MOBILE — PAUSE VIDEOS ON SCROLL
+   MOBILE — RESET VIDEOS ON SCROLL
 ========================================================= */
 
 if (window.matchMedia("(max-width: 700px)").matches) {
@@ -1018,7 +1018,10 @@ if (window.matchMedia("(max-width: 700px)").matches) {
             videos.forEach((video) => {
 
                 if (!video.paused) {
+
                     video.pause();
+                    video.currentTime = 0;
+
                 }
 
             });
@@ -1028,3 +1031,4 @@ if (window.matchMedia("(max-width: 700px)").matches) {
     );
 
 }
+
