@@ -1004,52 +1004,227 @@ document.addEventListener(
 );
 
 /* =========================================================
-   MOBILE — RESET VIDEOS ON SCROLL
+   MOBILE — AUTO PLAY VISIBLE REELS
 ========================================================= */
 
 if (window.matchMedia("(max-width: 700px)").matches) {
 
-    const videos = document.querySelectorAll(
+    const mobileVideos = document.querySelectorAll(
         ".business-video, .wedding-video"
     );
 
-    window.addEventListener(
-        "scroll",
-        () => {
+    let activeMobileVideo = null;
 
-            videos.forEach((video) => {
 
-                if (!video.paused) {
+    // ----------------------------------------
+    // PLAY ONLY ONE VIDEO
+    // ----------------------------------------
 
-                    video.pause();
+    function playMobileVideo(video) {
 
-                    try {
-                        video.currentTime = 0;
-                    } catch (error) {
-                        // Ignore reset errors
-                    }
+        if (!video) return;
 
-                    /* Return card to thumbnail state */
-                    const card = video.closest(
-                        ".business-card, .reel-card"
+        // Already playing
+        if (
+            activeMobileVideo === video &&
+            !video.paused
+        ) {
+            return;
+        }
+
+
+        // Stop every other video
+        mobileVideos.forEach((otherVideo) => {
+
+            if (otherVideo === video) {
+                return;
+            }
+
+            otherVideo.pause();
+
+            try {
+                otherVideo.currentTime = 0;
+            } catch (error) {
+                // Ignore reset errors
+            }
+
+            const otherCard = otherVideo.closest(
+                ".business-card, .reel-card"
+            );
+
+            if (otherCard) {
+
+                otherCard.classList.remove(
+                    "video-playing"
+                );
+
+            }
+
+        });
+
+
+        // ----------------------------------------
+        // START NEW VIDEO
+        // ----------------------------------------
+
+        video.currentTime = 0;
+
+        const card = video.closest(
+            ".business-card, .reel-card"
+        );
+
+        video.play()
+            .then(() => {
+
+                activeMobileVideo = video;
+
+                if (card) {
+
+                    card.classList.add(
+                        "video-playing"
                     );
 
-                    if (card) {
+                }
 
-                        card.classList.remove(
-                            "video-playing"
-                        );
+            })
+            .catch(() => {
 
-                    }
+                activeMobileVideo = null;
+
+                if (card) {
+
+                    card.classList.remove(
+                        "video-playing"
+                    );
 
                 }
 
             });
 
-        },
-        { passive: true }
-    );
+    }
+
+
+    // ----------------------------------------
+    // STOP VIDEO
+    // ----------------------------------------
+
+    function stopMobileVideo(video) {
+
+        if (!video) return;
+
+        video.pause();
+
+        try {
+            video.currentTime = 0;
+        } catch (error) {
+            // Ignore reset errors
+        }
+
+        const card = video.closest(
+            ".business-card, .reel-card"
+        );
+
+        if (card) {
+
+            card.classList.remove(
+                "video-playing"
+            );
+
+        }
+
+        if (activeMobileVideo === video) {
+
+            activeMobileVideo = null;
+
+        }
+
+    }
+
+
+    // ----------------------------------------
+    // OBSERVE VISIBILITY
+    // ----------------------------------------
+
+    const mobileVideoObserver =
+        new IntersectionObserver(
+            (entries) => {
+
+                entries.forEach((entry) => {
+
+                    const video = entry.target;
+
+
+                    // --------------------------------
+                    // VIDEO IS VISIBLE
+                    // --------------------------------
+
+                    if (
+                        entry.isIntersecting &&
+                        entry.intersectionRatio >= 0.65
+                    ) {
+
+                        playMobileVideo(video);
+
+                    }
+
+
+                    // --------------------------------
+                    // VIDEO LEFT VIEW
+                    // --------------------------------
+
+                    else if (
+                        video === activeMobileVideo
+                    ) {
+
+                        stopMobileVideo(video);
+
+                    }
+
+                });
+
+            },
+            {
+                threshold: [
+                    0,
+                    0.25,
+                    0.50,
+                    0.65,
+                    0.80,
+                    1
+                ]
+            }
+        );
+
+
+    // ----------------------------------------
+    // START OBSERVING
+    // ----------------------------------------
+
+    mobileVideos.forEach((video) => {
+
+        mobileVideoObserver.observe(video);
+
+    });
+
+
+    // ----------------------------------------
+    // NATURAL VIDEO END
+    // ----------------------------------------
+
+    mobileVideos.forEach((video) => {
+
+        video.addEventListener(
+            "ended",
+            () => {
+
+                stopMobileVideo(video);
+
+            }
+        );
+
+    });
 
 }
+
 
 
