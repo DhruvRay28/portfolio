@@ -1010,7 +1010,7 @@ document.addEventListener(
 if (window.matchMedia("(max-width: 700px)").matches) {
 
     const mobileVideos = document.querySelectorAll(
-        ".business-video, .wedding-video"
+        ".wedding-video"
     );
 
     let activeMobileVideo = null;
@@ -1049,7 +1049,7 @@ if (window.matchMedia("(max-width: 700px)").matches) {
             }
 
             const otherCard = otherVideo.closest(
-                ".business-card, .reel-card"
+                ".reel-card"
             );
 
             if (otherCard) {
@@ -1070,7 +1070,7 @@ if (window.matchMedia("(max-width: 700px)").matches) {
         video.currentTime = 0;
 
         const card = video.closest(
-            ".business-card, .reel-card"
+            ".reel-card"
         );
 
         video.play()
@@ -1121,7 +1121,7 @@ if (window.matchMedia("(max-width: 700px)").matches) {
         }
 
         const card = video.closest(
-            ".business-card, .reel-card"
+            ".reel-card"
         );
 
         if (card) {
