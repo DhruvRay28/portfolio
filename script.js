@@ -1002,9 +1002,9 @@ document.addEventListener(
 
     }
 );
-
 /* =========================================================
-   MOBILE — AUTO PLAY VISIBLE REELS
+   MOBILE — AUTO PLAY VISIBLE WEDDING REELS
+   + MANUAL TAP CONTROL
 ========================================================= */
 
 if (window.matchMedia("(max-width: 700px)").matches) {
@@ -1015,16 +1015,37 @@ if (window.matchMedia("(max-width: 700px)").matches) {
 
     let activeMobileVideo = null;
 
+    /*
+     * Remembers videos that the user manually stopped.
+     *
+     * This prevents the IntersectionObserver from
+     * immediately starting the video again while it
+     * is still visible.
+     */
+    const manuallyStoppedVideos = new WeakSet();
 
-    // ----------------------------------------
-    // PLAY ONLY ONE VIDEO
-    // ----------------------------------------
+
+    // ========================================
+    // PLAY MOBILE VIDEO
+    // ========================================
 
     function playMobileVideo(video) {
 
         if (!video) return;
 
+        // ----------------------------------------
+        // Do not autoplay if user manually stopped it
+        // ----------------------------------------
+
+        if (manuallyStoppedVideos.has(video)) {
+            return;
+        }
+
+
+        // ----------------------------------------
         // Already playing
+        // ----------------------------------------
+
         if (
             activeMobileVideo === video &&
             !video.paused
@@ -1033,7 +1054,10 @@ if (window.matchMedia("(max-width: 700px)").matches) {
         }
 
 
-        // Stop every other video
+        // ----------------------------------------
+        // STOP ALL OTHER WEDDING VIDEOS
+        // ----------------------------------------
+
         mobileVideos.forEach((otherVideo) => {
 
             if (otherVideo === video) {
@@ -1048,9 +1072,10 @@ if (window.matchMedia("(max-width: 700px)").matches) {
                 // Ignore reset errors
             }
 
-            const otherCard = otherVideo.closest(
-                ".reel-card"
-            );
+
+            const otherCard =
+                otherVideo.closest(".reel-card");
+
 
             if (otherCard) {
 
@@ -1064,14 +1089,14 @@ if (window.matchMedia("(max-width: 700px)").matches) {
 
 
         // ----------------------------------------
-        // START NEW VIDEO
+        // START VIDEO
         // ----------------------------------------
 
         video.currentTime = 0;
 
-        const card = video.closest(
-            ".reel-card"
-        );
+        const card =
+            video.closest(".reel-card");
+
 
         video.play()
             .then(() => {
@@ -1104,25 +1129,34 @@ if (window.matchMedia("(max-width: 700px)").matches) {
     }
 
 
-    // ----------------------------------------
-    // STOP VIDEO
-    // ----------------------------------------
+    // ========================================
+    // STOP MOBILE VIDEO
+    // ========================================
 
-    function stopMobileVideo(video) {
+    function stopMobileVideo(
+        video,
+        rememberManualStop = false
+    ) {
 
         if (!video) return;
+
 
         video.pause();
 
         try {
+
             video.currentTime = 0;
+
         } catch (error) {
+
             // Ignore reset errors
+
         }
 
-        const card = video.closest(
-            ".reel-card"
-        );
+
+        const card =
+            video.closest(".reel-card");
+
 
         if (card) {
 
@@ -1132,18 +1166,122 @@ if (window.matchMedia("(max-width: 700px)").matches) {
 
         }
 
-        if (activeMobileVideo === video) {
+
+        if (
+            activeMobileVideo === video
+        ) {
 
             activeMobileVideo = null;
 
         }
 
+
+        // ----------------------------------------
+        // Remember manual stop
+        // ----------------------------------------
+
+        if (rememberManualStop) {
+
+            manuallyStoppedVideos.add(
+                video
+            );
+
+        }
+
     }
 
+    // ========================================
+    // MOBILE TAP
+    //
+    // User can still manually play / stop.
+    // ========================================
 
-    // ----------------------------------------
-    // OBSERVE VISIBILITY
-    // ----------------------------------------
+    mobileVideos.forEach((video) => {
+
+        const card =
+            video.closest(".reel-card");
+
+
+        if (!card) return;
+
+
+        card.addEventListener(
+            "click",
+            (event) => {
+
+                // Only mobile
+                if (window.innerWidth > 700) {
+                    return;
+                }
+
+
+                // Prevent Instagram/card navigation
+                event.preventDefault();
+
+
+                // --------------------------------
+                // VIDEO IS PLAYING
+                // --------------------------------
+                //
+                // User wants to stop it.
+                //
+
+                if (!video.paused) {
+
+                    stopMobileVideo(
+                        video,
+                        true
+                    );
+
+                    return;
+
+                }
+
+
+                // --------------------------------
+                // USER WANTS TO PLAY
+                // --------------------------------
+
+                // Remove manual-stop state.
+
+                manuallyStoppedVideos.delete(
+                    video
+                );
+
+
+                // Stop every other video.
+
+                mobileVideos.forEach(
+                    (otherVideo) => {
+
+                        if (
+                            otherVideo === video
+                        ) {
+                            return;
+                        }
+
+
+                        stopMobileVideo(
+                            otherVideo
+                        );
+
+                    }
+                );
+
+
+                // Play selected video.
+
+                playMobileVideo(video);
+
+            }
+        );
+
+    });
+
+
+    // ========================================
+    // VISIBILITY OBSERVER
+    // ========================================
 
     const mobileVideoObserver =
         new IntersectionObserver(
@@ -1151,11 +1289,12 @@ if (window.matchMedia("(max-width: 700px)").matches) {
 
                 entries.forEach((entry) => {
 
-                    const video = entry.target;
+                    const video =
+                        entry.target;
 
 
                     // --------------------------------
-                    // VIDEO IS VISIBLE
+                    // VIDEO BECOMES VISIBLE
                     // --------------------------------
 
                     if (
@@ -1163,20 +1302,24 @@ if (window.matchMedia("(max-width: 700px)").matches) {
                         entry.intersectionRatio >= 0.65
                     ) {
 
-                        playMobileVideo(video);
+                        playMobileVideo(
+                            video
+                        );
 
                     }
 
 
                     // --------------------------------
-                    // VIDEO LEFT VIEW
+                    // VIDEO LEAVES VIEW
                     // --------------------------------
 
                     else if (
                         video === activeMobileVideo
                     ) {
 
-                        stopMobileVideo(video);
+                        stopMobileVideo(
+                            video
+                        );
 
                     }
 
@@ -1196,20 +1339,22 @@ if (window.matchMedia("(max-width: 700px)").matches) {
         );
 
 
-    // ----------------------------------------
+    // ========================================
     // START OBSERVING
-    // ----------------------------------------
+    // ========================================
 
     mobileVideos.forEach((video) => {
 
-        mobileVideoObserver.observe(video);
+        mobileVideoObserver.observe(
+            video
+        );
 
     });
 
 
-    // ----------------------------------------
+    // ========================================
     // NATURAL VIDEO END
-    // ----------------------------------------
+    // ========================================
 
     mobileVideos.forEach((video) => {
 
@@ -1217,7 +1362,9 @@ if (window.matchMedia("(max-width: 700px)").matches) {
             "ended",
             () => {
 
-                stopMobileVideo(video);
+                stopMobileVideo(
+                    video
+                );
 
             }
         );
@@ -1225,6 +1372,3 @@ if (window.matchMedia("(max-width: 700px)").matches) {
     });
 
 }
-
-
-
