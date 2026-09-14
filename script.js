@@ -1002,3 +1002,29 @@ document.addEventListener(
 
     }
 );
+
+/* =========================================================
+   MOBILE — PAUSE VIDEOS ON SCROLL
+========================================================= */
+
+if (window.matchMedia("(max-width: 700px)").matches) {
+
+    const videos = document.querySelectorAll("video");
+
+    window.addEventListener(
+        "scroll",
+        () => {
+
+            videos.forEach((video) => {
+
+                if (!video.paused) {
+                    video.pause();
+                }
+
+            });
+
+        },
+        { passive: true }
+    );
+
+}
