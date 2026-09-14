@@ -1009,7 +1009,9 @@ document.addEventListener(
 
 if (window.matchMedia("(max-width: 700px)").matches) {
 
-    const videos = document.querySelectorAll("video");
+    const videos = document.querySelectorAll(
+        ".business-video, .wedding-video"
+    );
 
     window.addEventListener(
         "scroll",
@@ -1020,7 +1022,25 @@ if (window.matchMedia("(max-width: 700px)").matches) {
                 if (!video.paused) {
 
                     video.pause();
-                    video.currentTime = 0;
+
+                    try {
+                        video.currentTime = 0;
+                    } catch (error) {
+                        // Ignore reset errors
+                    }
+
+                    /* Return card to thumbnail state */
+                    const card = video.closest(
+                        ".business-card, .reel-card"
+                    );
+
+                    if (card) {
+
+                        card.classList.remove(
+                            "video-playing"
+                        );
+
+                    }
 
                 }
 
@@ -1031,4 +1051,5 @@ if (window.matchMedia("(max-width: 700px)").matches) {
     );
 
 }
+
 
