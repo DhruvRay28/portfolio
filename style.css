@@ -3306,7 +3306,7 @@ footer a:hover::after {
     .mobile-menu.active {
         display: flex;
     }
-    
+
     /* -----------------------------------------------------
     MOBILE CARD LABELS — MATCH WEDDING FILM
     ----------------------------------------------------- */
@@ -3337,3 +3337,15 @@ footer a:hover::after {
     }
 }
 
+/* =========================================
+   MOBILE — HIDE LINK ARROWS
+   Desktop remains unchanged
+========================================= */
+
+@media (max-width: 768px) {
+
+    .link-arrow {
+        display: none;
+    }
+
+}
