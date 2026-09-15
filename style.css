@@ -2917,8 +2917,7 @@ footer a:hover::after {
         letter-spacing: 1.6px;
     }
 
-    .portraits-card.portraits-playing .portrait-hint,
-    .portraits-card.portraits-playing {
+    .portraits-card.portraits-playing .portrait-hint {
         opacity: 0;
 
         transform:
