@@ -3306,5 +3306,34 @@ footer a:hover::after {
     .mobile-menu.active {
         display: flex;
     }
+    
+    /* -----------------------------------------------------
+    MOBILE CARD LABELS — MATCH WEDDING FILM
+    ----------------------------------------------------- */
 
+    .business-card > span {
+        color: rgba(255, 255, 255, 0.6);
+
+        font-size: 8px;
+        font-weight: 400;
+
+        letter-spacing: 1.5px;
+
+        opacity: 0.8;
+    }
+
+    .business-card:hover > span {
+        color: rgba(255, 255, 255, 0.6);
+        letter-spacing: 1.5px;
+    }
+
+    .reel-info > span {
+        color: #777;
+
+        font-size: 10px;
+        font-weight: 400;
+
+        letter-spacing: 1.2px;
+    }
 }
+
