@@ -624,20 +624,31 @@ body.menu-open {
     isolation: isolate;
     overflow: hidden;
 
-    padding: 16px 25px;
+    padding: 15px 26px;
 
-    border: 1px solid #555;
+    border: 1px solid rgba(199, 169, 121, 0.45);
+    border-radius: 999px;
+
+    background: rgba(199, 169, 121, 0.03);
 
     color: var(--cream);
 
     font-size: 11px;
-    letter-spacing: 1px;
+    font-weight: 500;
+    letter-spacing: 1.2px;
+
+    box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, 0.025),
+        0 6px 20px rgba(0, 0, 0, 0.12);
 
     transition:
         color 0.3s ease,
         border-color 0.3s ease,
-        transform 0.35s var(--ease);
+        background 0.3s ease,
+        transform 0.35s var(--ease),
+        box-shadow 0.35s ease;
 }
+
 
 .button::before {
     content: "";
@@ -645,11 +656,15 @@ body.menu-open {
     position: absolute;
     inset: 0;
 
-    background: var(--gold);
+    background: linear-gradient(
+        135deg,
+        #d2b989,
+        #c7a979
+    );
 
     z-index: -1;
 
-    transform: translateX(-101%);
+    transform: translateY(101%);
 
     transition:
         transform 0.45s var(--ease);
@@ -660,11 +675,16 @@ body.menu-open {
 
     border-color: var(--gold);
 
+    background: rgba(199, 169, 121, 0.08);
+
     transform: translateY(-3px);
+
+    box-shadow:
+        0 10px 30px rgba(199, 169, 121, 0.12);
 }
 
 .button:hover::before {
-    transform: translateX(0);
+    transform: translateY(0);
 }
 
 .button > * {
@@ -2213,23 +2233,31 @@ ABOUT — REDUCED MOTION
 
     margin-top: 60px;
 
-    padding: 18px 30px;
+    padding: 16px 30px;
 
-    background: var(--cream);
+    border: 1px solid rgba(199, 169, 121, 0.55);
+    border-radius: 999px;
 
-    color: #111;
+    background: rgba(199, 169, 121, 0.04);
+
+    color: var(--cream);
 
     font-size: 11px;
-    letter-spacing: 1px;
+    font-weight: 500;
+    letter-spacing: 1.3px;
 
-    border: 1px solid var(--cream);
+    box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, 0.025),
+        0 8px 25px rgba(0, 0, 0, 0.15);
 
     transition:
         transform 0.4s var(--ease),
         color 0.3s ease,
         border-color 0.3s ease,
+        background 0.3s ease,
         box-shadow 0.4s ease;
 }
+
 
 .contact-button::before {
     content: "";
@@ -2240,9 +2268,14 @@ ABOUT — REDUCED MOTION
 
     z-index: -1;
 
-    background: var(--gold);
+    background:
+        linear-gradient(
+            135deg,
+            #d2b989,
+            #c7a979
+        );
 
-    transform: translateY(100%);
+    transform: translateY(101%);
 
     transition:
         transform 0.45s var(--ease);
@@ -2251,22 +2284,24 @@ ABOUT — REDUCED MOTION
 .contact-button:hover {
     color: #111;
 
-    transform: translateY(-5px);
+    transform: translateY(-4px);
 
     border-color: var(--gold);
 
+    background: rgba(199, 169, 121, 0.08);
+
     box-shadow:
-        0 15px 35px rgba(199, 169, 121, 0.12);
+        0 14px 35px rgba(199, 169, 121, 0.14);
 }
 
 .contact-button:hover::before {
     transform: translateY(0);
 }
 
+
 .contact-button:active {
     transform: translateY(-2px) scale(0.98);
 }
-
 
 /* =========================================================
    CONTACT AVAILABILITY
