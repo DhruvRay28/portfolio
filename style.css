@@ -3634,3 +3634,47 @@ footer a:hover::after {
     }
 
 }
+
+/* =========================================================
+   MOBILE — INSTAGRAM TEXT LINK
+========================================================= */
+
+@media (max-width: 768px) {
+
+    .text-link {
+        color: #999;
+
+        transition:
+            color 0.25s ease,
+            transform 0.25s var(--ease);
+    }
+
+    /* Gold underline stays subtle */
+    .text-link::after {
+        background: var(--gold);
+
+        transform: scaleX(1);
+        transform-origin: left;
+
+        opacity: 0.45;
+
+        transition:
+            opacity 0.25s ease,
+            transform 0.25s var(--ease);
+    }
+
+    /* When finger is pressing */
+    .text-link:active {
+        color: var(--gold-light);
+
+        transform: translateX(3px);
+    }
+
+    .text-link:active::after {
+        opacity: 1;
+
+        box-shadow:
+            0 0 6px rgba(199, 169, 121, 0.45);
+    }
+
+}
