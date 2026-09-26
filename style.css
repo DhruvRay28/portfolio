@@ -3470,3 +3470,112 @@ footer a:hover::after {
     }
 }
 
+/* =========================================================
+   MOBILE — PREMIUM BUTTON SYSTEM
+========================================================= */
+
+@media (max-width: 700px) {
+
+    /* -----------------------------------------
+       ALL MOBILE BUTTONS
+    ----------------------------------------- */
+
+    .button,
+    .contact-button {
+
+        border-radius: 999px;
+
+        border: 1px solid rgba(199, 169, 121, 0.60);
+
+        background: rgba(199, 169, 121, 0.025);
+
+        color: var(--cream) !important;
+
+        box-shadow:
+            0 0 0 1px rgba(199, 169, 121, 0.025),
+            0 6px 22px rgba(0, 0, 0, 0.22);
+
+        animation:
+            mobileGoldEdge
+            4s
+            ease-in-out
+            infinite;
+
+        transition:
+            transform 0.2s ease,
+            color 0.2s ease,
+            background 0.2s ease;
+    }
+
+
+    /* -----------------------------------------
+       REMOVE DESKTOP FILL ANIMATION
+    ----------------------------------------- */
+
+    .button::before,
+    .contact-button::before {
+        display: none;
+    }
+
+
+    /* -----------------------------------------
+       KEEP TEXT LIGHT
+    ----------------------------------------- */
+
+    .button,
+    .button:hover,
+    .button:focus,
+    .button:focus-visible,
+    .button:active,
+
+    .contact-button,
+    .contact-button:hover,
+    .contact-button:focus,
+    .contact-button:focus-visible,
+    .contact-button:active {
+        color: var(--cream) !important;
+    }
+
+
+    /* -----------------------------------------
+       PRESS FEEDBACK
+    ----------------------------------------- */
+
+    .button:active,
+    .contact-button:active {
+        transform: scale(0.97);
+
+        background:
+            rgba(199, 169, 121, 0.07);
+    }
+}
+
+
+/* =========================================================
+   MOBILE — GOLD EDGE BREATH
+========================================================= */
+
+@keyframes mobileGoldEdge {
+
+    0%,
+    100% {
+
+        border-color:
+            rgba(199, 169, 121, 0.50);
+
+        box-shadow:
+            0 0 0 1px rgba(199, 169, 121, 0.02),
+            0 6px 22px rgba(0, 0, 0, 0.22);
+    }
+
+    50% {
+
+        border-color:
+            rgba(218, 188, 137, 0.95);
+
+        box-shadow:
+            0 0 0 1px rgba(199, 169, 121, 0.07),
+            0 0 14px rgba(199, 169, 121, 0.13),
+            0 8px 26px rgba(0, 0, 0, 0.26);
+    }
+}
