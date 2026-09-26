@@ -3678,3 +3678,115 @@ footer a:hover::after {
     }
 
 }
+
+/* =========================================================
+   PREMIUM GOLD DUST
+   Subtle luminous particles falling from the top
+========================================================= */
+
+.gold-dust {
+    position: fixed;
+    inset: 0;
+
+    pointer-events: none;
+    overflow: hidden;
+
+    /* Behind content/media */
+    z-index: 0;
+}
+
+.gold-dust-particle {
+    position: absolute;
+    top: -10px;
+
+    width: 2px;
+    height: 2px;
+
+    border-radius: 50%;
+
+    /* Brighter gold center */
+    background: #e4c35a;
+
+    /* Soft premium glow */
+    box-shadow:
+        0 0 4px rgba(228, 195, 90, 0.9),
+        0 0 9px rgba(212, 175, 55, 0.55),
+        0 0 16px rgba(212, 175, 55, 0.18);
+
+    opacity: 0;
+
+    animation: goldDustFall linear forwards;
+}
+
+
+@keyframes goldDustFall {
+
+    0% {
+        transform:
+            translate3d(0, -10px, 0)
+            scale(0.7);
+
+        opacity: 0;
+    }
+
+    12% {
+        opacity: 0.8;
+    }
+
+    45% {
+        opacity: 0.95;
+    }
+
+    75% {
+        opacity: 0.65;
+    }
+
+    100% {
+        transform:
+            translate3d(var(--drift), 110vh, 0)
+            scale(0.55);
+
+        opacity: 0;
+    }
+}
+
+
+/* Respect reduced-motion preferences */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .gold-dust {
+        display: none;
+    }
+
+}
+
+/* =========================================================
+   KEEP WEBSITE CONTENT ABOVE GOLD DUST
+========================================================= */
+
+main,
+.navbar,
+.hero,
+.section,
+.about,
+.business,
+.contact,
+.footer {
+    position: relative;
+    z-index: 1;
+}
+
+/* =========================================================
+   MOBILE — SLIGHTLY SOFTER GOLD DUST
+========================================================= */
+
+@media (max-width: 700px) {
+
+    .gold-dust-particle {
+        box-shadow:
+            0 0 4px rgba(228, 195, 90, 0.8),
+            0 0 8px rgba(212, 175, 55, 0.4);
+    }
+
+}

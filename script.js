@@ -1010,7 +1010,7 @@ document.addEventListener(
 if (window.matchMedia("(max-width: 700px)").matches) {
 
     const mobileVideos = document.querySelectorAll(
-        ".wedding-video"
+        ".business-video, .wedding-video"
     );
 
     let activeMobileVideo = null;
@@ -1049,7 +1049,7 @@ if (window.matchMedia("(max-width: 700px)").matches) {
             }
 
             const otherCard = otherVideo.closest(
-                ".reel-card"
+                ".business-card, .reel-card"
             );
 
             if (otherCard) {
@@ -1226,5 +1226,103 @@ if (window.matchMedia("(max-width: 700px)").matches) {
 
 }
 
+// =========================================================
+// PREMIUM GOLD DUST
+//
+// Very subtle particles falling from the top of the page.
+// No mouse interaction.
+// =========================================================
+
+(function initGoldDust() {
+
+    const container =
+        document.querySelector(".gold-dust");
+
+    if (!container) return;
 
 
+    // Respect reduced motion
+    if (
+        window.matchMedia(
+            "(prefers-reduced-motion: reduce)"
+        ).matches
+    ) {
+        return;
+    }
+
+
+    function createGoldParticle() {
+
+        const particle =
+            document.createElement("span");
+
+        particle.className =
+            "gold-dust-particle";
+
+
+        // Random horizontal position
+        particle.style.left =
+            `${Math.random() * 100}%`;
+
+
+        // Very subtle horizontal movement
+        const drift =
+            (Math.random() * 80) - 40;
+
+        particle.style.setProperty(
+            "--drift",
+            `${drift}px`
+        );
+
+
+        // Slight size variation
+        const size =
+            Math.random() < 0.8
+                ? 1.5
+                : 2;
+
+        particle.style.width =
+            `${size}px`;
+
+        particle.style.height =
+            `${size}px`;
+
+
+        // Different falling speeds
+        const duration =
+            7 + Math.random() * 6;
+
+        particle.style.animationDuration =
+            `${duration}s`;
+
+
+        // Small random delay
+        particle.style.animationDelay =
+            `${Math.random() * 0.5}s`;
+
+
+        container.appendChild(particle);
+
+
+        // Clean up after animation
+        setTimeout(
+            () => {
+                particle.remove();
+            },
+            (duration + 1) * 1000
+        );
+    }
+
+
+    // Create one particle occasionally.
+    // Keeping this low is what makes it feel premium.
+    setInterval(
+        () => {
+
+            createGoldParticle();
+
+        },
+        1100
+    );
+
+})();
