@@ -2535,17 +2535,48 @@ footer a:hover::after {
     }
 
     .hero-image {
-        right: -25%;
+        right: -18%;
         top: 42%;
 
-        width: 80vw;
-        height: 60vh;
+        width: 105vw;
+        height: 68vh;
 
-        opacity: 0.2 !important;
+        opacity: 0.22 !important;
+
+        /*
+        Let the image sit behind the headline
+        without becoming the main subject.
+        */
+        -webkit-mask-image: radial-gradient(
+            ellipse at center,
+            black 30%,
+            rgba(0, 0, 0, 0.85) 52%,
+            rgba(0, 0, 0, 0.4) 72%,
+            transparent 96%
+        );
+
+        mask-image: radial-gradient(
+            ellipse at center,
+            black 30%,
+            rgba(0, 0, 0, 0.85) 52%,
+            rgba(0, 0, 0, 0.4) 72%,
+            transparent 96%
+        );
+    }
+
+    .hero-image img {
+        object-position: center 55%;
+
+        filter:
+            grayscale(30%)
+            contrast(1.02)
+            brightness(0.55);
+
+        transform: scale(1.04);
     }
 
     .hero:hover .hero-image img {
-        transform: scale(1.03);
+        transform: scale(1.04);
     }
 
     .scroll-indicator {
