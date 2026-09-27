@@ -2535,48 +2535,37 @@ footer a:hover::after {
     }
 
     .hero-image {
-        right: -18%;
-        top: 42%;
+        right: -25%;
+        top: 47%;
 
-        width: 105vw;
-        height: 68vh;
+        width: 80vw;
+        height: 60vh;
 
-        opacity: 0.22 !important;
+        opacity: 0.2 !important;
 
         /*
-        Let the image sit behind the headline
-        without becoming the main subject.
+        Softly dissolve every edge into
+        the dark hero background.
         */
         -webkit-mask-image: radial-gradient(
             ellipse at center,
-            black 30%,
-            rgba(0, 0, 0, 0.85) 52%,
-            rgba(0, 0, 0, 0.4) 72%,
-            transparent 96%
+            black 35%,
+            rgba(0, 0, 0, 0.9) 52%,
+            rgba(0, 0, 0, 0.5) 72%,
+            transparent 100%
         );
 
         mask-image: radial-gradient(
             ellipse at center,
-            black 30%,
-            rgba(0, 0, 0, 0.85) 52%,
-            rgba(0, 0, 0, 0.4) 72%,
-            transparent 96%
+            black 35%,
+            rgba(0, 0, 0, 0.9) 52%,
+            rgba(0, 0, 0, 0.5) 72%,
+            transparent 100%
         );
     }
 
-    .hero-image img {
-        object-position: center 55%;
-
-        filter:
-            grayscale(30%)
-            contrast(1.02)
-            brightness(0.55);
-
-        transform: scale(1.04);
-    }
-
     .hero:hover .hero-image img {
-        transform: scale(1.04);
+        transform: scale(1.03);
     }
 
     .scroll-indicator {
