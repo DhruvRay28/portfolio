@@ -755,7 +755,7 @@ body.menu-open {
 
     width: 35vw;
     max-width: 500px;
-    height: 70vh;
+    height: 65vh;
 
     overflow: hidden;
     isolation: isolate;
@@ -775,7 +775,7 @@ body.menu-open {
 }
 
 .hero.hero-loaded .hero-image {
-    opacity: 0.65;
+    opacity: 0.48;
     transform: translateY(-50%) translateX(0);
 }
 
@@ -784,11 +784,12 @@ body.menu-open {
     height: 100%;
 
     object-fit: cover;
+    object-position: center 74%;
 
     filter:
-        grayscale(15%)
-        contrast(1.05)
-        brightness(0.8);
+        grayscale(20%)
+        contrast(1.02)
+        brightness(0.62);
 
     transform: scale(1.03);
 
@@ -838,26 +839,33 @@ body.menu-open {
 
 .hero-image::after {
     content: "";
-
     position: absolute;
     inset: 0;
 
     z-index: 3;
-
     pointer-events: none;
 
-    background:
-        linear-gradient(
-            to right,
-            var(--background) 0%,
-            transparent 60%
-        ),
-        linear-gradient(
-            to top,
-            var(--background) 0%,
-            transparent 40%
-        );
+    background: transparent;
 }
+
+.hero-image {
+    -webkit-mask-image: radial-gradient(
+        ellipse at center,
+        black 45%,
+        rgba(0, 0, 0, 0.85) 62%,
+        rgba(0, 0, 0, 0.35) 78%,
+        transparent 100%
+    );
+
+    mask-image: radial-gradient(
+        ellipse at center,
+        black 45%,
+        rgba(0, 0, 0, 0.85) 62%,
+        rgba(0, 0, 0, 0.35) 78%,
+        transparent 100%
+    );
+}
+
 
 .hero:hover .hero-image::before {
     opacity: 0.9;
@@ -3446,31 +3454,6 @@ footer a:hover::after {
 
 
 /* =========================================================
-   MOBILE GOLD EDGE BREATH
-========================================================= */
-
-@keyframes mobileGoldEdge {
-
-    0%,
-    100% {
-        border-color: rgba(199, 169, 121, 0.55);
-
-        box-shadow:
-            0 0 0 1px rgba(199, 169, 121, 0.025),
-            0 6px 22px rgba(0, 0, 0, 0.25);
-    }
-
-    50% {
-        border-color: rgba(218, 188, 137, 0.95);
-
-        box-shadow:
-            0 0 0 1px rgba(199, 169, 121, 0.08),
-            0 0 14px rgba(199, 169, 121, 0.14),
-            0 8px 26px rgba(0, 0, 0, 0.28);
-    }
-}
-
-/* =========================================================
    MOBILE — PREMIUM BUTTON SYSTEM
 ========================================================= */
 
@@ -3688,11 +3671,28 @@ footer a:hover::after {
     position: fixed;
     inset: 0;
 
+    width: 100%;
+    height: 100%;
+
     pointer-events: none;
     overflow: hidden;
 
-    /* Behind content/media */
     z-index: 0;
+}
+
+/* =========================================================
+   WEBSITE CONTENT ABOVE GOLD DUST
+========================================================= */
+
+main,
+footer {
+    position: relative;
+    z-index: 1;
+}
+
+.navbar {
+    position: fixed;
+    z-index: 110;
 }
 
 .gold-dust-particle {
@@ -3759,22 +3759,6 @@ footer a:hover::after {
         display: none;
     }
 
-}
-
-/* =========================================================
-   KEEP WEBSITE CONTENT ABOVE GOLD DUST
-========================================================= */
-
-main,
-.navbar,
-.hero,
-.section,
-.about,
-.business,
-.contact,
-.footer {
-    position: relative;
-    z-index: 1;
 }
 
 /* =========================================================

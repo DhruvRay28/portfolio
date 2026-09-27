@@ -175,6 +175,56 @@ function stopAllMedia(exceptVideo = null) {
 
 }
 
+// ========================================
+// PREMIUM VIDEO START
+// ========================================
+
+function playVideoPremium(video, card) {
+
+    if (!video || !card) return;
+
+    stopAllMedia(video);
+
+    video.currentTime = 0;
+
+    const startVideo = () => {
+
+        video.play()
+            .then(() => {
+
+                card.classList.add(
+                    "video-playing"
+                );
+
+            })
+            .catch(() => {
+
+                card.classList.remove(
+                    "video-playing"
+                );
+
+            });
+
+    };
+
+
+    if (video.readyState >= 3) {
+
+        startVideo();
+
+    } else {
+
+        video.addEventListener(
+            "canplay",
+            startVideo,
+            { once: true }
+        );
+
+        video.load();
+
+    }
+
+}
 
 // ========================================
 // BUSINESS VIDEOS
@@ -1160,7 +1210,7 @@ if (window.matchMedia("(max-width: 700px)").matches) {
 
                     if (
                         entry.isIntersecting &&
-                        entry.intersectionRatio >= 0.65
+                        entry.intersectionRatio >= 0.75
                     ) {
 
                         playMobileVideo(video);
