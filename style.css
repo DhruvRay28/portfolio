@@ -766,8 +766,7 @@ body.menu-open {
 
     z-index: 0;
 
-    box-shadow:
-        0 30px 80px rgba(0, 0, 0, 0.22);
+    box-shadow: none;
 
     transition:
         opacity 1.2s ease,
@@ -784,7 +783,7 @@ body.menu-open {
     height: 100%;
 
     object-fit: cover;
-    object-position: center 74%;
+    object-position: center 55%;
 
     filter:
         grayscale(20%)
@@ -851,18 +850,18 @@ body.menu-open {
 .hero-image {
     -webkit-mask-image: radial-gradient(
         ellipse at center,
-        black 45%,
-        rgba(0, 0, 0, 0.85) 62%,
-        rgba(0, 0, 0, 0.35) 78%,
-        transparent 100%
+        black 38%,
+        rgba(0, 0, 0, 0.85) 55%,
+        rgba(0, 0, 0, 0.35) 72%,
+        transparent 92%
     );
 
     mask-image: radial-gradient(
         ellipse at center,
-        black 45%,
-        rgba(0, 0, 0, 0.85) 62%,
-        rgba(0, 0, 0, 0.35) 78%,
-        transparent 100%
+        black 38%,
+        rgba(0, 0, 0, 0.85) 55%,
+        rgba(0, 0, 0, 0.35) 72%,
+        transparent 92%
     );
 }
 
