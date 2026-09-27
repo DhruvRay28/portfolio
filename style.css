@@ -786,9 +786,9 @@ body.menu-open {
     object-position: center 55%;
 
     filter:
-        grayscale(20%)
+        grayscale(25%)
         contrast(1.02)
-        brightness(0.62);
+        brightness(0.58);
 
     transform: scale(1.03);
 
@@ -2477,9 +2477,9 @@ footer a:hover::after {
     .hero {
         min-height: 100svh;
 
-        padding: 130px 6% 80px;
+        padding: 120px 6% 55px;
 
-        align-items: center;
+        align-items: flex-start;
     }
 
     .hero-content {
@@ -2536,12 +2536,12 @@ footer a:hover::after {
 
     .hero-image {
         right: -18%;
-        top: 47%;
+        top: 58%;
 
         width: 80vw;
-        height: 60vh;
+        height: 45vh;
 
-        opacity: 0.2 !important;
+        opacity: 0.24 !important;
 
         /*
         Softly dissolve every edge into
@@ -2549,17 +2549,17 @@ footer a:hover::after {
         */
         -webkit-mask-image: radial-gradient(
             ellipse at center,
-            black 35%,
-            rgba(0, 0, 0, 0.9) 52%,
-            rgba(0, 0, 0, 0.5) 72%,
+            black 30%,
+            rgba(0, 0, 0, 0.9) 50%,
+            rgba(0, 0, 0, 0.45) 72%,
             transparent 100%
         );
 
         mask-image: radial-gradient(
             ellipse at center,
-            black 35%,
-            rgba(0, 0, 0, 0.9) 52%,
-            rgba(0, 0, 0, 0.5) 72%,
+            black 30%,
+            rgba(0, 0, 0, 0.9) 50%,
+            rgba(0, 0, 0, 0.45) 72%,
             transparent 100%
         );
     }
