@@ -2484,6 +2484,8 @@ footer a:hover::after {
 
     .hero-content {
         width: 100%;
+        min-height: calc(100svh - 175px);
+        position: relative;
     }
 
     .eyebrow {
@@ -2513,8 +2515,8 @@ footer a:hover::after {
     }
 
     .hero-text {
-        width: 72%;
-        max-width: 300px;
+        width: 68%;
+        max-width: 285px;
 
         margin-top: 26px;
 
@@ -2525,15 +2527,11 @@ footer a:hover::after {
     .hero-buttons {
         position: absolute;
 
-        left: 6%;
-        right: 6%;
-        bottom: 38px;
+        left: 0;
+        bottom: 0;
 
         display: flex;
         align-items: center;
-        justify-content: flex-start;
-
-        flex-wrap: nowrap;
 
         gap: 20px;
 
